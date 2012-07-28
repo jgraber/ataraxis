@@ -30,6 +30,7 @@ import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ch.ethz.origo.ataraxis.TestingHelper;
 import ch.ethz.origo.ataraxis.misc.AtaraxisFileComparator;
 
 public class FileCopyTest 
@@ -63,13 +64,35 @@ public class FileCopyTest
 	}
 	
 	@Test
-	public void testCopyFiles() throws IOException
+	public void testCopyFiles_Strings() throws IOException
 	{
+		TestingHelper.removeFileIfExist(originalFile);
+		TestingHelper.removeFileIfExist(copyFile);
 		createFile();
+		
 		assertTrue("should not be empty", new File(originalFile).length() > 0);
 		
 		
 		FileCopy.copyFile(originalFile, copyFile);	
+		
+		AtaraxisFileComparator afc = new AtaraxisFileComparator();
+		
+		assertTrue("should not be empty", new File(originalFile).length() > 0);
+		
+		assertTrue("should be same", afc.areFilesEquals(new File(originalFile), new File(copyFile)));
+	}
+	
+	@Test
+	public void testCopyFiles_Files() throws IOException
+	{
+		TestingHelper.removeFileIfExist(originalFile);
+		TestingHelper.removeFileIfExist(copyFile);
+		createFile();
+		
+		assertTrue("should not be empty", new File(originalFile).length() > 0);
+		
+		
+		FileCopy.copyFile(new File(originalFile), new File(copyFile));	
 		
 		AtaraxisFileComparator afc = new AtaraxisFileComparator();
 		
@@ -86,10 +109,10 @@ public class FileCopyTest
 	}
 	
 	private static void createFile() throws IOException
-	{
+	{		
 		FileWriter fileWriter = new FileWriter(originalFile);
 		fileWriter.write("This is a simple file with some text inside");
 		fileWriter.flush();
 		fileWriter.close();
-	}
+	}	
 }

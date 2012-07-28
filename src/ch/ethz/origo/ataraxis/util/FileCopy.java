@@ -19,6 +19,7 @@
 
 package ch.ethz.origo.ataraxis.util;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -42,16 +43,37 @@ public class FileCopy
      */
     public static void copyFile(String orig, String copy) throws IOException
     {
-        InputStream fis   = new FileInputStream(orig);
+        InputStream fis = new FileInputStream(orig);
         OutputStream fout = new FileOutputStream(copy);
-        
-        byte[] buf = new byte[2048];
-        int len;
-        while ((len = fis.read(buf)) > 0)
-        {
-            fout.write(buf, 0, len);
-        }
-        fis.close();
-        fout.close();
+       
+        copyFile(fis, fout);       
+    }
+    
+    /**   
+     * copyFile is used to copy a file.
+     * 
+     * @throws IOException 
+     */
+    public static void copyFile(InputStream input, OutputStream output) throws IOException
+    {
+    	 byte[] buf = new byte[2048];
+         int len;
+         while ((len = input.read(buf)) > 0)
+         {
+        	 output.write(buf, 0, len);
+         }
+         input.close();
+         output.flush();
+         output.close();
+    }
+    
+    /**   
+     * copyFile is used to copy a file.
+     * 
+     * @throws IOException 
+     */
+    public static void copyFile(File orig, File copy) throws IOException
+    {
+    	copyFile(new FileInputStream(orig), new FileOutputStream(copy));
     }
 }

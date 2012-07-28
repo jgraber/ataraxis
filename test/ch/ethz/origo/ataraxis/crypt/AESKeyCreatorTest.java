@@ -19,10 +19,9 @@
 
 package ch.ethz.origo.ataraxis.crypt;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
-
-import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 
@@ -77,32 +76,6 @@ public class AESKeyCreatorTest
 			fail("NotImplementedException");
 		}
 		//fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link ch.ethz.origo.ataraxis.crypt.AESKeyCreator#createKeyPair()}.
-	 */
-	@Test
-	public void testCreateKeyPair() 
-	{
-	
-		try 
-		{
-			KeyPair keyPair = new AESKeyCreator().createKeyPair();
-			fail("Should not exist " + keyPair); // if no exception, then fail...
-		} 
-		catch (NoSuchAlgorithmException e) 
-		{
-			fail("NoSuchAlgorithmException");
-		} 
-		catch (NoSuchProviderException e) 
-		{
-			fail("NoSuchProviderException");
-		} 
-		catch (NotImplementedException e) 
-		{
-			//assertTrue(true); --> it is not implemented for AES
-		}
 	}
 
 }

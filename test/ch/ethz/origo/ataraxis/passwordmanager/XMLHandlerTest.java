@@ -513,9 +513,8 @@ public class XMLHandlerTest
 		accountFile.createNewFile();
 		Mockit.redefineMethods(XMLHandler.class, new Object() {
 			@SuppressWarnings("unused")
-			public void createAccountElement(Element parentElement, String ElementID,
-					String Name, String Password, String Link, String Comment) 
-			throws JDOMException
+			public void createAccountElement(AccountEntry entry) 
+			throws JDOMException, EntryDoesNotExistException
 			{
 				throw new JDOMException();
 			}
@@ -556,7 +555,7 @@ public class XMLHandlerTest
 		File accountFile = new File(PW_FILE);
 		accountFile.createNewFile();
 		Mockit.redefineMethods(XMLHandler.class, new Object() {
-			@SuppressWarnings({ "unused", "unchecked" })
+			@SuppressWarnings({ "unused", "rawtypes" })
 			public List getGroupList() throws JDOMException
 			{
 				throw new JDOMException();
@@ -573,7 +572,7 @@ public class XMLHandlerTest
 		File accountFile = new File(PW_FILE);
 		accountFile.createNewFile();
 		Mockit.redefineMethods(XMLHandler.class, new Object() {
-			@SuppressWarnings({ "unused", "unchecked" })
+			@SuppressWarnings({ "unused", "rawtypes" })
 			public List getAccountList() throws JDOMException
 			{
 				throw new JDOMException();

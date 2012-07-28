@@ -85,8 +85,8 @@ public class AtaraxisUpdateInfoTest
 	{
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo();
 		updateInfo.existNewerVersion("3.0.0");
-		assertEquals("1.1.1",updateInfo.getCurrentVersion());
-		assertEquals("http://projects.hti.bfh.ch/ataraxis/wiki/doku.php",updateInfo.getCurrentURL());
+		assertFalse("3.0.0".equals(updateInfo.getCurrentVersion()));
+		assertEquals("http://ataraxis.origo.ethz.ch/",updateInfo.getCurrentURL());
 	}
 	
 	@Test
@@ -97,8 +97,8 @@ public class AtaraxisUpdateInfoTest
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo(new NetworkUpdateCheck(configuration));
 		
 		updateInfo.existNewerVersion("3.0.0");
-		assertEquals("1.1.1",updateInfo.getCurrentVersion());
-		assertEquals("http://projects.hti.bfh.ch/ataraxis/wiki/doku.php",updateInfo.getCurrentURL());
+		assertEquals("1.2.0",updateInfo.getCurrentVersion());
+		assertEquals("http://ataraxis.origo.ethz.ch/",updateInfo.getCurrentURL());
 	}
 	
 	@Test(expected=IOException.class)
@@ -121,7 +121,7 @@ public class AtaraxisUpdateInfoTest
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo(new NetworkUpdateCheck(configuration));
 		
 		updateInfo.existNewerVersion("3.0.0");
-		assertEquals("1.1.1",updateInfo.getCurrentVersion());
+		assertEquals("1.2.0",updateInfo.getCurrentVersion());
 	}
 
 	@Test

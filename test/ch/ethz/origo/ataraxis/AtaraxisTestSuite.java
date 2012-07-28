@@ -22,12 +22,15 @@ package ch.ethz.origo.ataraxis;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+
+import ch.ethz.origo.ataraxis.i18n.ResourceBundleTest;
 import ch.ethz.origo.ataraxis.misc.*;
 import ch.ethz.origo.ataraxis.passwordmanager.AccountEntryTest;
 import ch.ethz.origo.ataraxis.passwordmanager.AtaraxisDiskAccessAdapterTest;
 import ch.ethz.origo.ataraxis.passwordmanager.GroupEntryTest;
 import ch.ethz.origo.ataraxis.passwordmanager.PasswordManagerTest;
 import ch.ethz.origo.ataraxis.passwordmanager.XMLHandlerTest;
+import ch.ethz.origo.ataraxis.util.AtaraxisHelperTest;
 import ch.ethz.origo.ataraxis.util.FileCopyTest;
 import ch.ethz.origo.ataraxis.util.FileListTest;
 import ch.ethz.origo.ataraxis.crypt.*;
@@ -45,7 +48,8 @@ import ch.ethz.origo.ataraxis.crypt.*;
 		ExceptionTest.class,AtaraxisDiskAccessAdapterTest.class,
 		GroupEntryTest.class,AccountEntryTest.class,AtaraxisHeaderParserTest.class,
 		FileCopyTest.class,FileListTest.class,ACEncryptOutputStreamTest.class,
-		ACDecryptInputStreamTest.class})
+		ACDecryptInputStreamTest.class, ResourceBundleTest.class, 
+		AtaraxisHelperTest.class, AtaraxisBackupTest.class})
 public class AtaraxisTestSuite {
 
 }

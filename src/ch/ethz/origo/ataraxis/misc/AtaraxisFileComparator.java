@@ -51,7 +51,7 @@ public class AtaraxisFileComparator
 		try 
 		{
 			LOGGER.debug("Start initialisation of the AtaraxisFileComparator()");
-			hashCreator = new AtaraxisHashCreator(AtaraxisHashCreator.HashingDigest.SHA_256);
+			hashCreator = new AtaraxisHashCreator(HashingDigest.SHA_256);
 			LOGGER.debug("AtaraxisFileComparator is ready, AtaraxisHashCreator works with "
 					+ hashCreator.getAlgorithm());
 		} 
@@ -60,41 +60,6 @@ public class AtaraxisFileComparator
 			LOGGER.fatal(e.getMessage());
 		}
 	}
-	
-	
-	/**
-	 * Simple interface to the AtaraxisFileComparator
-	 * @param args the 2 Files/Directories who should be compared
-	 * @throws IOException if one of the files can not be read
-	 */
-	/*
-	public static void main(String[] args) throws IOException 
-	{
-		
-		 // Write to the System.out and System.err. Do not user Log4J here!
-		 
-		if(args.length != 2) 
-		{
-			System.err.println("Usage: java AtaraxisFileComparator fileA fileB");
-			System.exit(1);
-		}
-		File firstFile = new File(args[0]);
-		File secondFile = new File(args[1]);
-		System.out.println("File A: "+ firstFile.getAbsolutePath());
-		System.out.println("File B: "+ secondFile.getAbsolutePath());
-		
-		AtaraxisFileComparator afc = new AtaraxisFileComparator();
-		if(afc.areFilesEquals(firstFile, secondFile))
-		{
-			System.out.println("Files are equal");
-		}
-		else
-		{
-			System.err.println("Files are NOT equal");
-		}
-		
-	}
-	*/
 	
 	/**
 	 * Compare 2 Files or Directories if their content is equal.

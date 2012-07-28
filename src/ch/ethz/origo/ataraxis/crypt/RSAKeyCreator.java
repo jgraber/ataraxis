@@ -19,16 +19,14 @@
 
 package ch.ethz.origo.ataraxis.crypt;
 
-import org.apache.log4j.Logger;
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Security;
 
-import javax.crypto.SecretKey;
+import org.apache.log4j.Logger;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 /**
  * RSAKeyCreator creates an RSA KeyPair.
@@ -37,7 +35,7 @@ import javax.crypto.SecretKey;
  * @version 1.0
  *
  */
-public final class RSAKeyCreator implements KeyCreator
+public final class RSAKeyCreator implements KeyPairCreator
 {
 	/**
 	 * Logger for this class
@@ -51,16 +49,15 @@ public final class RSAKeyCreator implements KeyCreator
 
 
     /**
-     * Create a asymetric KeyPair based on the RSA Algorithm.
+     * Create a asymmetric KeyPair based on the RSA Algorithm.
      * 
      * @return  the created SecretKey
      * @throws  NoSuchAlgorithmException  if the Algorithm does not exist
      * @throws  NoSuchProviderException  if the Provider does not exist
-     * @throws  NotImplementedException  if the method is not implementet
-     * @see     ch.ethz.origo.ataraxis.crypt.KeyCreator
+     * @see     ch.ethz.origo.ataraxis.crypt.SecretKeyCreator
      */
     public final KeyPair createKeyPair() throws NoSuchAlgorithmException,
-        NoSuchProviderException, NotImplementedException
+        NoSuchProviderException
     {
 		LOGGER.debug("createKeyPair() - start");
 		LOGGER.debug("Size of RSA-Key: " + KEY_SIZE);
@@ -72,22 +69,5 @@ public final class RSAKeyCreator implements KeyCreator
 		
 		LOGGER.debug("createKeyPair() - end");
         return returnKeyPair;
-    }
-
-    /**
-     * RSA does not support a SecretKey, therefore it will throw a
-     * NotImplementedException.
-     *
-     * @return  the created SecretKey
-     * @throws  NoSuchAlgorithmException  if the Algorithm does not exist
-     * @throws  NoSuchProviderException  if the Provider does not exist
-     * @throws  NotImplementedException  if the method is not implementet
-     * @see     ch.ethz.origo.ataraxis.crypt.KeyCreator
-     */
-    public final SecretKey createSecretKey() throws NoSuchAlgorithmException,
-        NoSuchProviderException, NotImplementedException
-    {
-		LOGGER.error("Methode not Implemented!");
-        throw new NotImplementedException("Methode not Implemented!");
     }
 }

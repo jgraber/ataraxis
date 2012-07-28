@@ -155,18 +155,4 @@ public class AtaraxisHashCreator
         
         return sb.toString();
 	}
-	
-	
-	/**
-	 * The HashingDigest enumeration contains a list of valid digest algorithms 
-	 * for the AtaraxisHashCreator.
-	 * 
-	 * @author J. Graber & A. Muedespacher
-	 * @version 1.0
-	 *
-	 */
-     public enum HashingDigest 
-     {
-		 MD5, SHA_1, SHA_256, SHA_384, SHA_512
-	 }
 }

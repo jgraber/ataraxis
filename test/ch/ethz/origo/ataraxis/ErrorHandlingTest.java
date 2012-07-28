@@ -128,14 +128,7 @@ public class ErrorHandlingTest
         System.setProperty("ATARAXIS.KEYSTORE_PATH",
                 DIR_TEMP +"/AtaraxiS_TestAlias.ks");
         
-        try
-        {
-            s_ac = new AtaraxisCrypter(new File(DIR_TEMP +"/AtaraxiS_TestAlias.ks"),STD_PWD, true);
-        }
-        catch (Exception e)
-        {
-            throw new Exception(e);
-        }
+        s_ac = new AtaraxisCrypter(new File(DIR_TEMP +"/AtaraxiS_TestAlias.ks"),STD_PWD, true);
      } 
     
     /**
@@ -151,14 +144,8 @@ public class ErrorHandlingTest
         System.setProperty("ATARAXIS.KEYSTORE_PATH",
                 DIR_TEMP +"/AtaraxiS_TestKeyPwd.ks");
         
-        try
-        {
-            s_ac = new AtaraxisCrypter(new File(DIR_TEMP +"/AtaraxiS_TestKeyPwd.ks"),STD_PWD, true);
-        }
-        catch (Exception e)
-        {
-            throw new Exception(e);
-        }
+        s_ac = new AtaraxisCrypter(new File(DIR_TEMP +"/AtaraxiS_TestKeyPwd.ks"),STD_PWD, true);
+        
      } 
     
     /**
@@ -178,7 +165,7 @@ public class ErrorHandlingTest
      } 
     
     /**
-     * checks if use of nonexistant KS throws the right exception 
+     * checks if use of nonexistent KS throws the right exception 
      * 
      * @throws Exception
      */
@@ -213,7 +200,7 @@ public class ErrorHandlingTest
     {
         s_ac = null;
         
-        File propertiesFile = new File(TEST_DIR+"/unsupportedKSType.properties");
+        File propertiesFile = new File(TEST_DIR+"/unsupportedKSType.property");
         
         Properties specialProps = new Properties();
         specialProps.setProperty("ATARAXIS.KEYSTORE_CLASS",
@@ -286,31 +273,8 @@ public class ErrorHandlingTest
             return;
         }
         
-     } 
-    
-    // Kann nur mit anderem KSType getestet werden
-/*    @Test
-    public void wrongKSType() throws Exception
-    {
-        s_ac = null;
-        System.setProperty("ATARAXIS.KEYSTORE_CLASS",
-            "ch.ethz.origo.ataraxis.crypt.MyKeyStoreHandler");
-        System.setProperty("ATARAXIS.KEYSTORE_PATH",
-                DIR_TEMP +"/AtaraxiS_Test.ks"); // use existing default KS
-        
-        try
-        {
-            s_ac = new AtaraxisCrypter(STD_PWD, true);
-
-        }
-        catch (Exception e)
-        {
-            assertTrue(e.getMessage().startsWith("Class for KeyStoreHandler not found!"));
-            return;
-        }
-        fail("Should have thrown a KeyStoreException");
-     } */
-    
+     }    
+ 
     /**
      * checks exception for wrong key alias
      * 
@@ -338,7 +302,7 @@ public class ErrorHandlingTest
      } 
     
     /**
-     * checks exception for encrypting an inexistant file
+     * checks exception for encrypting an inexistent file
      * 
      * @throws Exception
      */

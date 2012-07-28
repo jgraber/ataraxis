@@ -116,7 +116,7 @@ public final class AtaraxisCrypter {
 	 * @throws JurisdictionPolicyError if the PolicyFile ist not unrestricted enough
 	 */
 	public AtaraxisCrypter(File keyStoreFile, char[] keyStorePassword, boolean createKS)
-	throws IOException, KeyStoreException, JurisdictionPolicyError
+	throws IOException, KeyStoreException
 	{
 		LOGGER.debug("AtaraxisCrypter(String, String, boolean) - start"); 
 		LOGGER.debug("Create " + keyStoreFile.getAbsolutePath() + "? " + createKS);
@@ -163,9 +163,7 @@ public final class AtaraxisCrypter {
 		}
 
 		// Always use AES to encrypt/decrypt
-		final KeyCreator kh = new AESKeyCreator();
-
-		checkJurisdictionPolicy(kh);
+		final SecretKeyCreator kh = new AESKeyCreator();
 
 		if (keyStoreFile.exists() && keyStoreFile.canRead())
 		{
@@ -194,7 +192,7 @@ public final class AtaraxisCrypter {
 		LOGGER.debug("AtaraxisCrypter(String, boolean) - end");
 	}
 
-	private KeyStoreHandler getKeyStoreHandler(String kshClass, File keyStoreFile, char[] keyStorePassword, KeyCreator kh) throws KeyStoreException
+	private KeyStoreHandler getKeyStoreHandler(String kshClass, File keyStoreFile, char[] keyStorePassword, SecretKeyCreator kh) throws KeyStoreException
 	{
 		KeyStoreHandler ksh = null;
 
@@ -720,7 +718,7 @@ public final class AtaraxisCrypter {
 	 * @param keyCreator The KeyCreator for the Key
 	 * @throws JurisdictionPolicyError if the PolicyFile ist not unrestricted
 	 */
-	public static void checkJurisdictionPolicy(KeyCreator keyCreator) 
+	public static void checkJurisdictionPolicy(SecretKeyCreator keyCreator) 
 	throws JurisdictionPolicyError
 	{
 

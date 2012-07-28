@@ -25,7 +25,6 @@ import static org.junit.Assert.fail;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -74,31 +73,21 @@ public class UBERKeyStoreCreatorTest
 	}
 
 	@Test
-	public void testCreateKeyStore() throws CertificateException, FileNotFoundException, IOException 
+	public void testCreateKeyStore() throws Exception 
 	{
 		
 		UBERKeyStoreCreator ksCreator = new UBERKeyStoreCreator();
-		try 
+		ksCreator.createKeyStore(new File(ks_Path), ks_Password.toCharArray());
+		File ksFile = new File(ks_Path);
+		if(!ksFile.exists())
 		{
-			ksCreator.createKeyStore(new File(ks_Path), ks_Password.toCharArray());
-			File ksFile = new File(ks_Path);
-			if(!ksFile.exists())
-			{
-				fail("KS not created");
-			}
-			KeyStore javaKS = KeyStore.getInstance("UBER", "BC");
-			javaKS.load(new FileInputStream(ks_Path), ks_Password.toCharArray());
-			assertEquals(javaKS.getType(),"UBER");
-			//showKeyStore(javaKS);
-			
-			logger.info("ksCreator works");
-		} 
-		catch (Exception e) 
-		{
-			logger.fatal(e.getMessage());
-			fail(e.getMessage());
+			fail("KS not created");
 		}
-		
+		KeyStore javaKS = KeyStore.getInstance("UBER", "BC");
+		javaKS.load(new FileInputStream(ks_Path), ks_Password.toCharArray());
+		assertEquals(javaKS.getType(),"UBER");
+			
+		logger.info("ksCreator works");		
 	}
 	
 	@Test
@@ -137,8 +126,9 @@ public class UBERKeyStoreCreatorTest
 		
 		try
 		{
-		UBERKeyStoreCreator ksCreator = new UBERKeyStoreCreator();
-		ksCreator.createKeyStore(ksFile, "aaaaaa".toCharArray());
+			UBERKeyStoreCreator ksCreator = new UBERKeyStoreCreator();
+			ksCreator.createKeyStore(ksFile, "aaaaaa".toCharArray());
+			fail("Exception missing!");
 		}
 		catch (KeyStoreException e)
 		{
@@ -164,8 +154,9 @@ public class UBERKeyStoreCreatorTest
 		
 		try
 		{
-		UBERKeyStoreCreator ksCreator = new UBERKeyStoreCreator();
-		ksCreator.createKeyStore(ksFile, "aaaaaa".toCharArray());
+			UBERKeyStoreCreator ksCreator = new UBERKeyStoreCreator();
+			ksCreator.createKeyStore(ksFile, "aaaaaa".toCharArray());
+			fail("Exception missing!");
 		}
 		catch (KeyStoreException e)
 		{

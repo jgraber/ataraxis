@@ -32,7 +32,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import ch.ethz.origo.ataraxis.crypt.AESKeyCreatorTest;
-import ch.ethz.origo.ataraxis.misc.AtaraxisHashCreator.HashingDigest;
+import ch.ethz.origo.ataraxis.misc.HashingDigest;
 
 /**
  * The AtaraxisHashCreatorTest test AtaraxisHashCreator.

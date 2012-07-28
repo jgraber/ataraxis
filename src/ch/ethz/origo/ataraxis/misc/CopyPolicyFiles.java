@@ -21,17 +21,15 @@ package ch.ethz.origo.ataraxis.misc;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Date;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+
+import ch.ethz.origo.ataraxis.util.FileCopy;
 
 public class CopyPolicyFiles 
 {
@@ -50,6 +48,7 @@ public class CopyPolicyFiles
 	
 	private static String s_PatchedPolicyLoc_15 = APPL_DIR+"/jce_policy/";
 	private static String s_PatchedPolicyLoc_16 = APPL_DIR+"/jce_policy/java6/";
+	private static String s_PatchedPolicyLoc_17 = APPL_DIR+"/jce_policy/java7/";
 	
 	private static String s_local_policy = "local_policy.jar";
 	private static String s_usexport_policy = "US_export_policy.jar";
@@ -80,7 +79,7 @@ public class CopyPolicyFiles
 	}
 	
 	/**
-	 * Copy the Policy-Fils for Java 5 or Java 6 to the current JRE
+	 * Copy the Policy-Files for Java 5 or Java 6 to the current JRE
 	 * 
 	 * @return true if all was ok, false otherwise
 	 */
@@ -89,7 +88,7 @@ public class CopyPolicyFiles
 		boolean patchWasOk = false;
 		LOGGER.fatal("JRE path:    " + s_JreSecurityPlace);
 		LOGGER.fatal("JRE version: " + s_JreVersion);
-		if(s_JreVersion.startsWith("1.5") || s_JreVersion.startsWith("1.6"))
+		if(s_JreVersion.startsWith("1.5") || s_JreVersion.startsWith("1.6") || s_JreVersion.startsWith("1.7"))
 		{
 			if(s_JreVersion.startsWith("1.5"))
 			{
@@ -98,6 +97,10 @@ public class CopyPolicyFiles
 			else if(s_JreVersion.startsWith("1.6"))
 			{
 				s_PatchedPolicyLoc = s_PatchedPolicyLoc_16;
+			}
+			else if(s_JreVersion.startsWith("1.7"))
+			{
+				s_PatchedPolicyLoc = s_PatchedPolicyLoc_17;
 			}
 			else
 			{
@@ -135,8 +138,8 @@ public class CopyPolicyFiles
 						long sysLocalModified = SysLocalPolicyFile.lastModified();
 						long sysExportModified = SysExportPolicyFile.lastModified();
 						
-						copy(SysLocalPolicyFile,backupLocalPolicy);
-						copy(SysExportPolicyFile,backupUsExportPolicy);
+						FileCopy.copyFile(SysLocalPolicyFile,backupLocalPolicy);
+						FileCopy.copyFile(SysExportPolicyFile,backupUsExportPolicy);
 						backupLocalPolicy.setLastModified(sysLocalModified);
 						backupUsExportPolicy.setLastModified(sysExportModified);
 						
@@ -144,8 +147,8 @@ public class CopyPolicyFiles
 						SysLocalPolicyFile = new File (s_JreSecurityPlace+s_local_policy);
 						SysExportPolicyFile = new File (s_JreSecurityPlace+s_usexport_policy);
 						
-						copy(PatchLocalPolicyFile, SysLocalPolicyFile);
-						copy(PatchExportPolicyFile, SysExportPolicyFile);
+						FileCopy.copyFile(PatchLocalPolicyFile, SysLocalPolicyFile);
+						FileCopy.copyFile(PatchExportPolicyFile, SysExportPolicyFile);
 						
 						Date date = new Date();
 						patchedAtaraxis.createNewFile();
@@ -161,30 +164,13 @@ public class CopyPolicyFiles
 				{
 					LOGGER.error("IOException", ioe);
 				}
-			}
-				
+			}	
 		}
 		else
 		{
-			LOGGER.error("Can only patch Java JRE Version 1.5.x");		
+			LOGGER.error("Can only patch Java JRE Version 1.5.x to Java 7");		
 		}
 		
 		return patchWasOk;
 	}
-
-    private static void copy(File src, File dst) throws IOException
-    {
-        InputStream in = new FileInputStream(src);
-        OutputStream out = new FileOutputStream(dst);
-      
-        // Transfer bytes from in to out
-        byte[] buf = new byte[1024];
-        int len;
-        while ((len = in.read(buf)) > 0)
-        {
-            out.write(buf, 0, len);
-        }
-        in.close();
-        out.close();
-    }
 }

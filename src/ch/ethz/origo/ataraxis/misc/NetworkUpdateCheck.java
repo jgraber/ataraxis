@@ -87,21 +87,21 @@ public class NetworkUpdateCheck implements UpdateCheckable
 
 		Properties updateProps = null;
 		
-		if(useProxy)
-		{
-			System.setProperty("http.useProxy", "true"); 
-			System.setProperty("http.proxyHost", proxyHost);
-			System.setProperty("http.proxyPort", proxyPort);
-		}
-		else
-		{
-			System.setProperty("http.useProxy", "false"); 
-			System.setProperty("http.proxyHost", "");
-			System.setProperty("http.proxyPort", "");
-		}
-		
 		try 
 		{
+			if(useProxy)
+			{
+				System.setProperty("http.useProxy", "true"); 
+				System.setProperty("http.proxyHost", proxyHost);
+				System.setProperty("http.proxyPort", proxyPort);
+			}
+			else
+			{
+				System.setProperty("http.useProxy", "false"); 
+				System.setProperty("http.proxyHost", "");
+				System.setProperty("http.proxyPort", "");
+			}
+			
 			String tempURL = updateWebsite + "?version="+URLEncoder.encode(versionNumber.trim(), "UTF-8");
 			LOGGER.debug("Connecting to this url: " + tempURL);
 			
@@ -118,11 +118,6 @@ public class NetworkUpdateCheck implements UpdateCheckable
 			LOGGER.warn(e.getMessage());
 			throw new UpdateException(e);
 		} 
-		
-		if(updateProps == null)
-		{
-			updateProps = new Properties();
-		}
 		
 		return updateProps;
 	}

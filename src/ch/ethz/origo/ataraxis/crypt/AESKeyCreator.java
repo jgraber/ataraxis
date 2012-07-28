@@ -19,9 +19,6 @@
 
 package ch.ethz.origo.ataraxis.crypt;
 
-import org.apache.log4j.Logger;
-
-import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Security;
@@ -29,6 +26,7 @@ import java.security.Security;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
+import org.apache.log4j.Logger;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 /**
@@ -38,7 +36,7 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
  * @version 1.0
  *
  */
-public final class AESKeyCreator implements KeyCreator
+public final class AESKeyCreator implements SecretKeyCreator
 {
 	/**
 	 * Logger for this class
@@ -55,8 +53,8 @@ public final class AESKeyCreator implements KeyCreator
      * @return  the created SecretKey
      * @throws NoSuchAlgorithmException  if the Algorithm does not exist
      * @throws NoSuchProviderException  if the Provider does not exist
-     * @throws NotImplementedException  if the method is not implementet
-     * @see ch.ethz.origo.ataraxis.crypt.KeyCreator
+     * @throws NotImplementedException  if the method is not implemented
+     * @see ch.ethz.origo.ataraxis.crypt.SecretKeyCreator
      */
     public final SecretKey createSecretKey() throws NoSuchAlgorithmException,
         NoSuchProviderException, NotImplementedException
@@ -73,22 +71,5 @@ public final class AESKeyCreator implements KeyCreator
 		LOGGER.debug("createSecretKey() - end");
 		
         return returnSecretKey;
-    }
-
-    /**
-     * AES does not support a KeyPair, therefore it will throw a
-     * NotImplementedException.
-     *
-     * @return  the created SecretKey
-     * @throws NoSuchAlgorithmException  if the Algorithm does not exist
-     * @throws NoSuchProviderException  if the Provider does not exist
-     * @throws NotImplementedException  if the method is not implementet
-     * @see ch.ethz.origo.ataraxis.crypt.KeyCreator
-     */
-    public final KeyPair createKeyPair() throws NoSuchAlgorithmException,
-        NoSuchProviderException, NotImplementedException
-    {
-    	LOGGER.error("Methode not Implemented!");
-        throw new NotImplementedException("Methode not Implemented!");
     }
 }

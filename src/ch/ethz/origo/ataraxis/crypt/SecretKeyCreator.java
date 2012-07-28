@@ -19,7 +19,6 @@
 
 package ch.ethz.origo.ataraxis.crypt;
 
-import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 
@@ -32,33 +31,20 @@ import javax.crypto.SecretKey;
  * @author J. Graber & A. Muedespacher, HTI Biel
  * @version 1.0
  */
-public interface KeyCreator
+public interface SecretKeyCreator
 {
     /**
-     * Create a symetric SecretKey based on the implemented Algorithm
+     * Create a symmetric SecretKey based on the implemented Algorithm
      * or throws a NotImplementedException if this Algorithm
      * does not support a SecretKey.
      *
      * @return the created SecretKey
      * @throws NoSuchAlgorithmException if the Algorithm does not exist
      * @throws NoSuchProviderException if the Provider does not exist
-     * @throws NotImplementedException if the method is not implementet
+     * @throws NotImplementedException if the method is not implemented
      * @see javax.crypto.SecretKey
      */
     SecretKey createSecretKey() throws NoSuchAlgorithmException,
         NoSuchProviderException, NotImplementedException;
 
-    /**
-     * Create a asymetric KeyPair (Public and Private Key) based on the
-     * implemented Algorithm or throws a NotImplementedException
-     * if this Algorithm does not support a KeyPair.
-     *
-     * @return the created KeyPair
-     * @throws NoSuchAlgorithmException if the Algorithm does not exist
-     * @throws NoSuchProviderException if the Provider does not exist
-     * @throws NotImplementedException if the method is not implementet
-     * @see java.security.KeyPair
-     */
-    KeyPair createKeyPair() throws NoSuchAlgorithmException,
-        NoSuchProviderException, NotImplementedException;
 }

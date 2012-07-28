@@ -53,8 +53,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ch.ethz.origo.ataraxis.TestingHelper;
 import ch.ethz.origo.ataraxis.misc.AtaraxisHashCreator;
-import ch.ethz.origo.ataraxis.misc.AtaraxisHashCreator.HashingDigest;
+import ch.ethz.origo.ataraxis.misc.HashingDigest;
 
 
 /**
@@ -88,7 +89,7 @@ public class AtaraxisCrypterTest
 
 		PropertyConfigurator.configure(LOG_PROPS_FILE); 
 		
-		deleteDir(new File(TEST_DIR_DATA));
+		TestingHelper.deleteDir(new File(TEST_DIR_DATA));
 				
 		(new File(TEST_DIR_DATA)).mkdirs();
 		s_ksPath = TEST_DIR_DATA+"/main_ok.ks";
@@ -113,7 +114,7 @@ public class AtaraxisCrypterTest
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception 
 	{
-		deleteDir(new File (TEST_DIR_DATA));
+		TestingHelper.deleteDir(new File (TEST_DIR_DATA));
 	}
 
 	/**
@@ -151,13 +152,7 @@ public class AtaraxisCrypterTest
 			{
 				logger.fatal(e.getMessage());
 				fail(e.getMessage());
-			} 
-			catch (JurisdictionPolicyError e) 
-			{
-				logger.fatal(e.getMessage());
-				fail(e.getMessage());
-			}				
-
+			}
 		}
 	}
 
@@ -188,10 +183,6 @@ public class AtaraxisCrypterTest
 			catch (IOException e) 
 			{
 				fail("IOException");
-			} 
-			catch (JurisdictionPolicyError e) 
-			{
-				fail("JurisdictionPolicyError");
 			}				
 
 		}
@@ -230,12 +221,7 @@ public class AtaraxisCrypterTest
 			catch (IOException e) 
 			{
 				fail("IOException");
-			} 
-			catch (JurisdictionPolicyError e) 
-			{
-				fail("JurisdictionPolicyError");
-			}				
-
+			}
 		}
 	}
 
@@ -266,10 +252,6 @@ public class AtaraxisCrypterTest
 			catch (IOException e) 
 			{
 				fail("IOException");
-			} 
-			catch (JurisdictionPolicyError e) 
-			{
-				fail("JurisdictionPolicyError");
 			}				
 
 		}
@@ -316,12 +298,7 @@ public class AtaraxisCrypterTest
 			catch (IOException e) 
 			{
 				fail("IOException");
-			} 
-			catch (JurisdictionPolicyError e) 
-			{
-				fail("JurisdictionPolicyError");
-			}				
-
+			}
 		}
 	}
 
@@ -448,51 +425,6 @@ public class AtaraxisCrypterTest
 
 	/**
 	 * Test method for {@link 
-	 * ch.ethz.origo.ataraxis.crypt.AtaraxisCrypter#encryptStream(
-	 * java.io.InputStream, java.io.OutputStream)}.
-	 * Encrypt and Decrypt using the stream Methods.
-	 */
-	/*
-	@Test
-	public void testCryptStream() 
-	{
-		String fileEncrypted = TEST_DIR_DATA+"/smal_encryptedStream.ac";
-		String fileDecrypted = TEST_DIR_DATA+"/smal_decryptedStream.dec";
-
-
-		try 
-		{
-			FileInputStream fis = new FileInputStream(FILE_SMALL);
-
-        FileOutputStream fosEnc = new FileOutputStream(fileEncrypted);
-        FileOutputStream fosDec = new FileOutputStream(fileDecrypted);
-        s_ac.encryptStream(fis, fosEnc);
-
-        fis.close();
-        fosEnc.close();
-
-        InputStream fisc = new FileInputStream(fileEncrypted);
-        s_ac.decryptStream(fisc, fosDec);
-
-        fisc.close();
-        fosDec.close();
-
-        AtaraxisHashCreator ahc = new AtaraxisHashCreator(HashingDigest.MD5);
-		assertEquals(
-				ahc.prettyPrintHash(ahc.createHashForFile(new File(FILE_SMALL))), 
-				ahc.prettyPrintHash(ahc.createHashForFile(new File(fileDecrypted))));
-
-		} 
-		catch (Exception e) 
-		{
-			logger.fatal(e.getMessage());
-			fail(e.getMessage());
-		}      
-	}
-	 */
-
-	/**
-	 * Test method for {@link 
 	 * ch.ethz.origo.ataraxis.crypt.AtaraxisCrypter#changePassword(char[], 
 	 * char[])}.
 	 * Change password and try to open the KeyStore.
@@ -516,11 +448,6 @@ public class AtaraxisCrypterTest
 			fail(e.getMessage());
 		} 
 		catch (IOException e) 
-		{
-			logger.fatal(e.getMessage());
-			fail(e.getMessage());
-		}
-		catch (JurisdictionPolicyError e) 
 		{
 			logger.fatal(e.getMessage());
 			fail(e.getMessage());
@@ -550,10 +477,6 @@ public class AtaraxisCrypterTest
 			logger.info("Fail as expectet with "+e.getMessage());
 		} 
 		catch (IOException e) 
-		{
-			logger.info("Fail as expectet with "+e.getMessage());
-		}
-		catch (JurisdictionPolicyError e) 
 		{
 			logger.info("Fail as expectet with "+e.getMessage());
 		}
@@ -1164,28 +1087,5 @@ public class AtaraxisCrypterTest
 
 		
 		s_ac.decryptFile(outFile, outFileDecrypted);
-	}
-
-	
-	
-	/**   
-	 * Deletes all files and subdirectories under dir.
-	 * Returns true if all deletions were successful.
-	 * If a deletion fails, the method stops attempting to delete and returns false.
-	 * 
-	 * @param dir the directory (File) to delete
-	 */
-	private static void deleteDir(File dir)
-	{
-		if (dir.isDirectory())
-		{
-			String[] children = dir.list();
-			for (int i=0; i<children.length; i++)
-			{
-				deleteDir(new File(dir, children[i]));
-			}
-		}
-		// The directory is now empty so delete it
-		dir.delete();
 	}
 }

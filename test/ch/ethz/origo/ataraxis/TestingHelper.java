@@ -45,4 +45,16 @@ public class TestingHelper
     }
     
 
+    /**
+     * Remove file if it exist
+     * @param fileName
+     */
+    public static void removeFileIfExist(String fileName)
+	{
+		File origFile = new File(fileName);
+		if(origFile.exists())
+		{
+			origFile.delete();
+		}
+	}
 }

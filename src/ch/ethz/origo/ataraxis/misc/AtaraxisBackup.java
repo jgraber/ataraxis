@@ -95,7 +95,7 @@ public class AtaraxisBackup
 	 * Constructor for running it inside an application.
 	 *
 	 * @param ParentShell the parent shell
-	 * @param languageProperties the language porperties
+	 * @param languageProperties the language properties
 	 */
 	public AtaraxisBackup(Shell ParentShell, Properties languageProperties)
 	{
@@ -107,7 +107,7 @@ public class AtaraxisBackup
 
 
 	/**
-	 * Ask the user for the File, where the user_data-Backup shoul be stored.
+	 * Ask the user for the File, where the user_data-Backup should be stored.
 	 *
 	 * @return true if Backup was successful
 	 */
@@ -185,7 +185,7 @@ public class AtaraxisBackup
 
 		/* The File or Directory named by filePath is the top-Entry of the 
 		 * Zip-File. For the ZipFile-Entry (the Name of the File/Directory
-		 * in the Zip-File) will allways the Path of the filePath-Parent
+		 * in the Zip-File) will allays the Path of the filePath-Parent
 		 * removed from the path of the entry.
 		 */        
 		String pathSubstract = startFile.getParentFile().getAbsolutePath()+File.separator;

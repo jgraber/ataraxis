@@ -149,6 +149,11 @@
             <classpath refid="ataraxis.classpath"/>
         	<exclude name="*.png,*.xml"/>
         </javac>
+    	<copy todir="${bin.dir}">
+    		<fileset dir="${src.dir}">
+    		   	<include name="*.properties"/>
+    		</fileset>
+    	</copy>
     </target>
 	
 	<target name="build-test" depends="clean-test" description="builds test classes" >
@@ -162,6 +167,11 @@
 	    	<classpath location="${test.dependent.jars}"/>
 	        <exclude name="*.png,*.xml"/>
 	    </javac>
+		<copy todir="${bin.dir}">
+		   <fileset dir="${test.src.dir}">
+		   	<include name="*.properties"/>
+		   </fileset>
+		</copy>
 	</target>
 	
 
@@ -241,7 +251,7 @@
             	<attribute name="Class-Path" value="${classpath.mani} "/>
             	<section name="AtaraxiS">
               		<attribute name="Built-By" value="J. Graber + A. Muedespacher, HTI Biel"/>
-              		<attribute name="Implementation-Version" value="1.0"/>
+              		<attribute name="Implementation-Version" value="1.3"/>
               		<attribute name="Built-Date" value="${TODAY}"/>
             	</section>
        		</manifest>  
@@ -266,7 +276,7 @@
             	<attribute name="Class-Path" value="${classpath.mani} "/>
             	<section name="AtaraxiS">
               		<attribute name="Built-By" value="J. Graber + A. Muedespacher, HTI Biel"/>
-              		<attribute name="Implementation-Version" value="1.0"/>
+              		<attribute name="Implementation-Version" value="1.3"/>
               		<attribute name="Built-Date" value="${TODAY}"/>
             	</section>
        		</manifest>  
@@ -318,7 +328,8 @@
 		<copy todir="distGeneric" file="distribution_data/Backup_Linux_64bit.sh"/>
 		<copy todir="distGeneric/application_data" file="distribution_data/ataraxis.log"/>
 		<copy todir="distGeneric" file="distribution_data/startMac.command"/>
-    	<copy todir="distGeneric" file="LICENCE.pdf"/>
+    	<copy todir="distGeneric" file="distribution_data/startMac_64bit.command"/>
+		<copy todir="distGeneric" file="LICENCE.pdf"/>
     	<copy todir="distGeneric" file="LICENCE.txt"/>
 		<attrib readonly="true">
   			<fileset dir="distGeneric">

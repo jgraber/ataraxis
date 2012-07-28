@@ -20,14 +20,13 @@
 package ch.ethz.origo.ataraxis.gui;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FilenameFilter;
 import java.io.IOException;
 import java.security.KeyStoreException;
-import java.util.Date;
 import java.util.Properties;
+import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
@@ -43,28 +42,24 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
-import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import ch.ethz.origo.ataraxis.crypt.AtaraxisCrypter;
 import ch.ethz.origo.ataraxis.crypt.CryptoMethodError;
-import ch.ethz.origo.ataraxis.crypt.JurisdictionPolicyError;
 import ch.ethz.origo.ataraxis.misc.AtaraxisBackup;
-import ch.ethz.origo.ataraxis.misc.CopyPolicyFiles;
 
 /**
  * AtaraxisLoginGUI is used to instance the AtaraxisCrypter object.
  * The object is returned to AtaraxisStarter which passes it to AtaraxisMainGUI.
  * 
  * @author J. Graber & A. Muedespacher, HTI Biel
- * @version 1.0
+ * @version 1.2
  */
 class AtaraxisLoginGUI {
 
@@ -74,50 +69,9 @@ class AtaraxisLoginGUI {
 	private static final Logger LOGGER = Logger.getLogger(AtaraxisLoginGUI.class);
 
 	private static AtaraxisCrypter s_ac = null;
-	protected static Properties s_langProps = null;
 	
 	private static int s_attempt= 0;
 	private static int s_lang = 0;
-	
-	// language dependent Strings
-	private static String s_windowTitle;
-	private static String s_ok;
-	private static String s_cancel;
-	private static String s_newUser;
-	private static String s_german;
-	private static String s_french;
-	private static String s_english;
-	private static String s_user;
-	private static String s_password;
-	private static String s_passwordNew;
-	private static String s_passwordNewRep;
-	private static String s_language;
-	private static String s_attemptText1;
-	private static String s_attemptText2;
-	
-	private static String s_messageExitQuest;
-	private static String s_messageCloseOnPwd1;
-	private static String s_messageCloseOnPwd2;
-	private static String s_messageCloseTitle;// used any time the application closes (title)
-	private static String s_messageClose; // used any time the application closes (last sentence of message)
-	private static String s_messagePolicy;
-	private static String s_messageUnknownUserTitle;
-	private static String s_messageUnknownUser;
-	private static String s_messageIOETitle;
-	private static String s_messageIOE;
-	private static String s_messageNoUsernameTitle;
-	private static String s_messageNoUsername;
-	private static String s_messageNoPasswordTitle;
-	private static String s_messageNoPasswordLogin;
-	private static String s_messageNoPasswordAddUser;
-	private static String s_messageExistentUsername;
-	private static String s_messageInvalidUsernameTitle;
-	private static String s_messageInvalidUsername;
-	private static String s_messageInvalidPasswordTitle;
-	private static String s_messageInvalidPassword;
-	private static String s_messageAlreadyLoggedInTitle;
-	private static String s_messageAlreadyLoggedIn;
-	
 	
 	//	component constants:
 	private static final int COMPOSITE_WIDTH = 240;
@@ -156,23 +110,29 @@ class AtaraxisLoginGUI {
 	private static Button s_loginLoginButton = null;
 	private static Button s_useraddLoginButton = null;
 	private static StackLayout s_stackLayout;
-	private static Date s_date;
-	private static Label s_attemptsL = null;
-    //private static Text s_loginUserText;
+	private Label s_attemptsL = null;
     private static Combo s_loginUserList;
 	private static Text s_loginPwdText;
 	private static Text s_userAddUserText;
 	private static Text s_userAddPwdText;
 	private static Text s_userAddPwdTextRep;
 
+	private ResourceBundle s_translations;
+
+	private GUIHelper guiHelper;
+
+	public AtaraxisLoginGUI(ResourceBundle translations)
+	{
+		s_translations = translations;
+	}
+	
 	/**
 	 * Open the window
 	 */
 	public AtaraxisCrypter open() {
-		loadProperties();
 		s_display = Display.getDefault();
 		createContents();
-		changeBackgroundColor(s_shell, AtaraxisStarter.COLOR);
+		guiHelper.changeBackgroundColor(s_shell, AtaraxisStarter.COLOR);
 		s_shell.open();
 		s_shell.layout();
 		while (!s_shell.isDisposed())
@@ -190,6 +150,7 @@ class AtaraxisLoginGUI {
 	{
 		s_shell = new Shell(SWT.CLOSE | SWT.TITLE | SWT.MIN);
 
+		guiHelper = new GUIHelper(s_shell);
 		// Use only primary Monitor - important if 2 Displays
 		Monitor primary = s_display.getPrimaryMonitor();
 		final Rectangle displayRect = primary.getBounds();
@@ -198,12 +159,12 @@ class AtaraxisLoginGUI {
         final int y = (displayRect.height - COMPOSITE_HEIGHT) / 2;
         s_shell.setSize(COMPOSITE_WIDTH, COMPOSITE_HEIGHT);
         s_shell.setLocation(x, y);
-		s_shell.setText(s_windowTitle + " - Login");
+		s_shell.setText(s_translations.getString("WINDOW.TITLE") + " - Login");
 		s_icon = new Image(s_display, ICON_DIR + "/Ataraxis_Title.png");
 		s_shell.setImage(s_icon);
 		s_shell.setLayout(new FillLayout());
 		
-		// Composit for Stack functionality
+		// Composite for Stack functionality
 		s_composite = new Composite(s_shell, SWT.NONE);
 		s_composite.setLocation(0, 0);
 		//s_composite.setSize(234, 198);
@@ -226,7 +187,7 @@ class AtaraxisLoginGUI {
 		
 		final Label loginUserLabel = new Label(s_loginComp, SWT.BOTTOM);
 		loginUserLabel.setLayoutData(new GridData(LABEL_WIDTH, SWT.DEFAULT));
-        loginUserLabel.setText(s_user + ":");
+        loginUserLabel.setText(s_translations.getString("USER") + ":");
         s_loginUserList = new Combo(s_loginComp, SWT.BORDER);
         File userDir = new File(USER_DATA_DIR);
         FilenameFilter userFilter = new FilenameFilter() {
@@ -248,7 +209,7 @@ class AtaraxisLoginGUI {
         final Label loginPwdLabel = new Label(s_loginComp, SWT.BOTTOM);
         final GridData gridData_3 = new GridData(LABEL_WIDTH, SWT.DEFAULT);
         loginPwdLabel.setLayoutData(gridData_3);
-        loginPwdLabel.setText(s_password + ":");
+        loginPwdLabel.setText(s_translations.getString("PASSWORD") + ":");
         s_loginPwdText = new Text(s_loginComp, SWT.BORDER);
         final GridData gridData_5 = new GridData(SWT.FILL, SWT.CENTER, true, false);
         s_loginPwdText.setLayoutData(gridData_5);
@@ -280,7 +241,7 @@ class AtaraxisLoginGUI {
 		final GridData gridData = new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1);
 		gridData.widthHint = BUTTON_BIG_WIDTH;
 		loginUseraddButton.setLayoutData(gridData);
-		loginUseraddButton.setText(s_newUser);
+		loginUseraddButton.setText(s_translations.getString("NEW.USER"));
 		loginUseraddButton.addSelectionListener(new SelectionAdapter()
 		{
 		    public void widgetSelected(SelectionEvent e)
@@ -295,13 +256,13 @@ class AtaraxisLoginGUI {
 		
 		final Button loginExitButton = new Button(loginButtonComposite, SWT.NONE);
 		loginExitButton.setLayoutData(new GridData(BUTTON_WIDTH, SWT.DEFAULT));
-		loginExitButton.setText(s_cancel);
+		loginExitButton.setText(s_translations.getString("CANCEL"));
 		loginExitButton.addSelectionListener(new SelectionAdapter()
 		{
 		    public void widgetSelected(SelectionEvent e)
 		    {
 		        LOGGER.debug("cancel button pressed (exit application)");
-		        if(questMessage(s_messageCloseTitle, s_messageExitQuest))
+		        if(guiHelper.displayQuestionMessage(s_translations.getString("MESSAGE.EXITING.TITLE"), s_translations.getString("MESSAGE.EXITING")))
 		        	s_shell.dispose();
 		    }
 		});
@@ -310,7 +271,7 @@ class AtaraxisLoginGUI {
 		final GridData loginGridData_2 = new GridData(SWT.RIGHT, SWT.CENTER, false, false);
 		loginGridData_2.widthHint = BUTTON_WIDTH;
 		s_loginLoginButton.setLayoutData(loginGridData_2);
-		s_loginLoginButton.setText(s_ok);
+		s_loginLoginButton.setText(s_translations.getString("OK"));
 		s_loginLoginButton.addSelectionListener(new PasswordLoginButton());
 		
         
@@ -330,14 +291,14 @@ class AtaraxisLoginGUI {
 		
 		final Label useraddUserLabel = new Label(s_useraddComp, SWT.BOTTOM);
 		useraddUserLabel.setLayoutData(new GridData(LABEL_WIDTH, SWT.DEFAULT));
-        useraddUserLabel.setText(s_user + ":");
+        useraddUserLabel.setText(s_translations.getString("USER") + ":");
         s_userAddUserText = new Text(s_useraddComp, SWT.BORDER);
         final GridData gridData_7 = new GridData(SWT.FILL, SWT.CENTER, true, false);
         s_userAddUserText.setLayoutData(gridData_7);
 		
         final Label useraddPwdLabel = new Label(s_useraddComp, SWT.BOTTOM);
         useraddPwdLabel.setLayoutData(new GridData(LABEL_WIDTH, SWT.DEFAULT));
-        useraddPwdLabel.setText(s_passwordNew + ":");
+        useraddPwdLabel.setText(s_translations.getString("PASSWORD") + " (1)" + ":");
         s_userAddPwdText = new Text(s_useraddComp, SWT.BORDER);
         final GridData gridData_9 = new GridData(SWT.FILL, SWT.CENTER, true, false);
         s_userAddPwdText.setLayoutData(gridData_9);
@@ -345,7 +306,7 @@ class AtaraxisLoginGUI {
         
         final Label useraddPwdLabelRep = new Label(s_useraddComp, SWT.BOTTOM);
         useraddPwdLabelRep.setLayoutData(new GridData(LABEL_WIDTH, SWT.DEFAULT));
-        useraddPwdLabelRep.setText(s_passwordNewRep + ":");
+        useraddPwdLabelRep.setText(s_translations.getString("PASSWORD") + " (2)" + ":");
         s_userAddPwdTextRep = new Text(s_useraddComp, SWT.BORDER);
         final GridData gridData_8 = new GridData(SWT.FILL, SWT.CENTER, true, false);
         s_userAddPwdTextRep.setLayoutData(gridData_8);
@@ -353,12 +314,12 @@ class AtaraxisLoginGUI {
 
 		final Label useraddLangLabel = new Label(s_useraddComp, SWT.NONE);
 		useraddLangLabel.setLayoutData(new GridData(LABEL_WIDTH, SWT.DEFAULT));
-		useraddLangLabel.setText(s_language + ":");
+		useraddLangLabel.setText(s_translations.getString("LANGUAGE") + ":");
 
 		s_useraddLangCombo = new Combo(s_useraddComp, SWT.NONE);
 		final GridData useraddGridData = new GridData(SWT.FILL, SWT.CENTER, true, false);
 		s_useraddLangCombo.setLayoutData(useraddGridData);
-		s_useraddLangCombo.setItems(new String [] {s_german, s_french, s_english});
+		s_useraddLangCombo.setItems(new String [] {s_translations.getString("GERMAN"), s_translations.getString("FRENCH"), s_translations.getString("ENGLISH")});
 		s_useraddLangCombo.select(s_lang);
 		s_useraddLangCombo.addSelectionListener(new SelectionAdapter()
 		{
@@ -402,12 +363,12 @@ class AtaraxisLoginGUI {
 		        s_composite.layout();
 		    }
 		});
-		useraddExitButton.setText(s_cancel);
+		useraddExitButton.setText(s_translations.getString("CANCEL"));
 		
 		s_useraddLoginButton = new Button(useraddButtonComposite, SWT.PUSH);
 		final GridData gridData_1 = new GridData(BUTTON_WIDTH, SWT.DEFAULT);
 		s_useraddLoginButton.setLayoutData(gridData_1);
-		s_useraddLoginButton.setText(s_ok);
+		s_useraddLoginButton.setText(s_translations.getString("OK"));
 		s_useraddLoginButton.addSelectionListener(new AddUserButton());
 		
 		// if in 'add user mode' change to 'login mode' else ask to exit application
@@ -419,7 +380,7 @@ class AtaraxisLoginGUI {
 					if(s_stackLayout.topControl == s_loginComp)
 					{
 						LOGGER.debug("ESC pressed in 'user login' - exit application?");
-				        if(questMessage(s_messageCloseTitle, s_messageExitQuest))
+				        if(guiHelper.displayQuestionMessage(s_translations.getString("MESSAGE.EXITING.TITLE"), s_translations.getString("MESSAGE.EXITING")))
 				        	s_shell.dispose();
 					}
 					else
@@ -438,110 +399,6 @@ class AtaraxisLoginGUI {
         s_composite.layout();
     }
 	
-    /**
-     * method which opens a window to ask if user really wants to exit 
-     * the application.
-     * @return true if user really wants to exit
-     */
-    private static boolean questMessage(String title, String message)
-    {
-        final MessageBox messageBox = new MessageBox(s_shell, SWT.ICON_QUESTION | SWT.YES | SWT.NO);
-        messageBox.setMessage(message);
-        messageBox.setText(title);
-        return (messageBox.open() == SWT.YES);
-    }
-	
-	/**
-	 * method to load the content of the properties file and save the properties.
-	 */
-	private static void loadProperties()
-	{
-		// Get System Language of User:
-		String systemLang = System.getProperty("user.language");
-		if(systemLang == null)
-		{
-			LOGGER.warn("System Language could not be retrieved");
-			systemLang = "en";
-		}
-			
-		if(systemLang.equalsIgnoreCase("de"))
-			systemLang = "langDE.props";
-		else if(systemLang.equalsIgnoreCase("fr"))
-			systemLang = "langFR.props";
-		else if (systemLang.equalsIgnoreCase("en"))
-			systemLang = "langEN.props";
-		else
-		{
-			systemLang = "langEn.props";
-			LOGGER.warn("System Language is not supported by application: use english");
-		}
-
-		s_langProps = new Properties();
-		try
-		{
-			LOGGER.debug("trying to load language file: " + systemLang);
-			s_langProps.load(new FileInputStream(APPL_DATA_DIR + "/lang/" + systemLang));
-		}
-		catch (FileNotFoundException fnfe)
-		{
-			LOGGER.error("File not found: " + systemLang);
-		}
-		catch (IOException ioe)
-		{
-			LOGGER.error("IOException during loading of: " + systemLang);
-		}
-		
-		s_windowTitle = s_langProps.getProperty("WINDOW_TITLE", "AtaraxiS");
-		s_ok = s_langProps.getProperty("OK", "OK");
-		s_cancel = s_langProps.getProperty("CANCEL", "Cancel");
-		s_newUser = s_langProps.getProperty("NEW.USER", "New user");
-		s_german = s_langProps.getProperty("GERMAN", "German");
-		s_french = s_langProps.getProperty("FRENCH", "French");
-		s_english = s_langProps.getProperty("ENGLISH", "English");
-		s_password = s_langProps.getProperty("PASSWORD", "Password") ;
-		s_user = s_langProps.getProperty("USER", "User");
-		s_language = s_langProps.getProperty("LANGUAGE", "Language");
-		s_attemptText1 = s_langProps.getProperty("LOGIN.ATTEMPT.TEXT.1", "Number of attempts:");
-		s_attemptText2 = s_langProps.getProperty("LOGIN.ATTEMPT.TEXT.2", "of");
-		
-		s_messageExitQuest = s_langProps.getProperty("MESSAGE.EXITING", "Do you really want " +
-		"to quit this application?");
-		s_messageCloseTitle = s_langProps.getProperty("MESSAGE.EXITING.TITLE", "Exiting application");
-		s_messageClose = s_langProps.getProperty("LOGIN.MESSAGE.CLOSE", "The application will close down now.");
-		s_messageCloseOnPwd1 = s_langProps.getProperty("LOGIN.MESSAGE.CLOSE.ON.PWD.1", "You have typed ");
-		s_messageCloseOnPwd2 = s_langProps.getProperty("LOGIN.MESSAGE.CLOSE.ON.PWD.2", " times a wrong password.");
-		s_messagePolicy = s_langProps.getProperty("LOGIN.MESSAGE.POLICY", "You have to change your java policy files to use this application.\nCopy the unrerstricted files now?\nRestart is required.");
-		s_messageUnknownUserTitle = s_langProps.getProperty("LOGIN.MESSAGE.UNKNOWN.USER.TITLE", "Unknown user name");
-		s_messageUnknownUser = s_langProps.getProperty("LOGIN.MESSAGE.UNKNOWN.USER", "No user with this name is registered.\nCheck if user name is correct or create a new user account.");
-		s_messageIOETitle = s_langProps.getProperty("LOGIN.MESSAGE.IOE.TITLE", "I/O-Problem");
-		s_messageIOE = s_langProps.getProperty("LOGIN.MESSAGE.IOE", "An i/o problem has occured. Please, try again.");
-		s_messageNoUsernameTitle = s_langProps.getProperty("LOGIN.MESSAGE.NO.USERNAME.TITLE", "Enter a username");
-		s_messageNoUsername = s_langProps.getProperty("LOGIN.MESSAGE.NO.USERNAME", "Please, enter a username.");
-		s_messageNoPasswordTitle = s_langProps.getProperty("LOGIN.MESSAGE.NO.PASSWORD.TITLE", "Enter a password");
-		s_messageNoPasswordLogin = s_langProps.getProperty("LOGIN.MESSAGE.NO.PASSWORD.LOGIN", "Please, enter the password.");
-		s_messageNoPasswordAddUser = s_langProps.getProperty("LOGIN.MESSAGE.NO.PASSWORD.ADD.USER", "Please, enter the password two times.");
-		s_messageExistentUsername = s_langProps.getProperty("LOGIN.MESSAGE.EXISTENT.USERNAME", "There already exists a user with this name.\nPlease, chose another name.");
-		s_messageInvalidUsernameTitle = s_langProps.getProperty("LOGIN.MESSAGE.INVALID.USERNAME.TITLE", "Invalid user name");
-		s_messageInvalidUsername = s_langProps.getProperty("LOGIN.MESSAGE.INVALID.USERNAME", "Please, use a name with a minimum length of 2 characters or digits.");
-		s_messageInvalidPasswordTitle = s_langProps.getProperty("LOGIN.MESSAGE.INVALID.PASSWROD.TITLE", "Invalid password");
-		s_messageInvalidPassword = s_langProps.getProperty("LOGIN.MESSAGE.INVALID.PASSWORD", "Please, type two times the same password with a minimum length of 4 characters.\nFurthermore, the password must diverse from the user name.");
-		s_messageAlreadyLoggedInTitle = s_langProps.getProperty("LOGIN.MESSAGE.ALREADY.LOGGEDIN.TITLE", "Attention!");
-		s_messageAlreadyLoggedIn = s_langProps.getProperty("LOGIN.MESSAGE.ALREADY.LOGGEDIN", "You are already logged in. Do you realy want to proceed?");
-				
-		if (systemLang.equals("langFR.props"))
-		{
-			// On Linux, the LoginGUI is too small to show string 'mot de passe (1)'
-			s_passwordNew = s_password;
-			s_passwordNewRep = s_password;
-		}
-		else
-		{
-			s_passwordNew = s_password + " (1)";
-			s_passwordNewRep = s_password + " (2)";
-		}
-
-	}
-
 
     /**
      * @param name the name of the user
@@ -549,7 +406,7 @@ class AtaraxisLoginGUI {
      * @return true if password is correct
      * @throws IllegalPasswordException when MAX_ATTEMPTS reached
      */
-    private static boolean checkPwd(String name, String pwd)
+    private boolean checkPwd(String name, String pwd)
         throws IllegalPasswordException
     {
     	boolean ok = false;
@@ -567,7 +424,7 @@ class AtaraxisLoginGUI {
       
             	LOGGER.warn("User allready logged in!");
             	
-            	boolean procedeAllreadyLoggedIn = questMessage(s_messageAlreadyLoggedInTitle, s_messageAlreadyLoggedIn);
+            	boolean procedeAllreadyLoggedIn = guiHelper.displayQuestionMessage(s_translations.getString("LOGIN.MESSAGE.ALREADY.LOGGEDIN.TITLE"), s_translations.getString("LOGIN.MESSAGE.ALREADY.LOGGEDIN"));
             	
             	if(procedeAllreadyLoggedIn)
             	{
@@ -598,27 +455,15 @@ class AtaraxisLoginGUI {
                 throw new IllegalPasswordException("password has been wrongly typed "
                         + MAX_ATTEMPTS + " times.");
             else if (kse.getMessage().startsWith("KeyStore does not exist"))
-            	warningMessage(s_messageUnknownUserTitle, s_messageUnknownUser);
+            	guiHelper.displayWarningMessage(s_translations.getString("LOGIN.MESSAGE.UNKNOWN.USER.TITLE"), s_translations.getString("LOGIN.MESSAGE.UNKNOWN.USER"));
 
             s_attempt++;
             LOGGER.error("login failed - " + s_attempt  + " attempts of " + MAX_ATTEMPTS);
         }
         catch (IOException ioe)
         {
-        	warningMessage(s_messageIOETitle, s_messageIOE);
+        	guiHelper.displayWarningMessage(s_translations.getString("LOGIN.MESSAGE.IOE.TITLE"), s_translations.getString("LOGIN.MESSAGE.IOE"));
         }
-        catch (JurisdictionPolicyError jpe)
-        {
-        	LOGGER.debug("policy files are restricted (default JRE files)");
-        	if(questMessage(s_messageCloseTitle, s_messagePolicy + " " + s_messageClose))
-        	{
-        		LOGGER.debug("copy unrestricted policy files now");
-        		(new CopyPolicyFiles()).copyFiles();
-        	}
-        	s_date = new Date();
-    		LOGGER.debug("##### Application close down at: " + s_date.toString() + " #####");
-        	System.exit(0); // zero indicates a normal termination
-		}
         return ok;
     }
 
@@ -628,7 +473,7 @@ class AtaraxisLoginGUI {
      * @param pwd the password of the new user
      * @return true if keystore could be created
      */
-    private static boolean addUser(String name, String pwd)
+    private boolean addUser(String name, String pwd)
         throws IllegalPasswordException
     {
     	boolean worked = false;
@@ -654,66 +499,16 @@ class AtaraxisLoginGUI {
         {
         	LOGGER.error(cme.getMessage());
 		}
-        catch (JurisdictionPolicyError jpe)
-        {
-        	LOGGER.debug("policy files are restricted (default JRE files)");
-        	if(questMessage(s_messageCloseTitle, s_messagePolicy + " " + s_messageClose))
-        	{
-        		LOGGER.debug("copy unrestricted policy files now");
-        		(new CopyPolicyFiles()).copyFiles();
-        	}
-        	s_date = new Date();
-    		LOGGER.debug("##### Application close down at: " + s_date.toString() + " #####");
-        	System.exit(0); // zero indicates a normal termination
-		}
+        
         return worked;
     }
-    
-    /**
-     * Method which shows an exit message, after MAX_ATTEMPTS of incorrect
-     * password entries is reached.
-     */
-    private static void errorMessage(String title, String message)
-    {
-        final MessageBox messageBox = new MessageBox(s_shell, SWT.ICON_ERROR | SWT.OK);
-        messageBox.setMessage(message);
-        messageBox.setText(title);
-        messageBox.open();
-    }
-    
-    /**
-     * Method which shows an exit message, after MAX_ATTEMPTS of incorrect
-     * password entries is reached.
-     */
-    private static void warningMessage(String title, String message)
-    {
-        final MessageBox messageBox = new MessageBox(s_shell, SWT.ICON_WARNING | SWT.OK);
-        messageBox.setMessage(message);
-        messageBox.setText(title);
-        messageBox.open();
-    }
-	
-	/**
-	 *  method to change the background color recursivly
-	 */
-	private void changeBackgroundColor(Composite parent, Color newColor){
-		parent.setBackground(newColor);
-		final Control [] children = parent.getChildren ();
-		for (int i=0; i<children.length; i++)
-		{
-			//children[i].setBackground(newColor);
-			if (children[i] instanceof Composite)
-				changeBackgroundColor((Composite) children[i], newColor);
-			else if (!(children[i] instanceof Text) && !(children[i] instanceof Combo))
-				children[i].setBackground(newColor);	
-		}
-	}
+   
 	
     /**
      * This class is used to check if the password ist correct,
      * when the user selects the OK button.
      */
-    private static final class PasswordLoginButton extends SelectionAdapter
+    private final class PasswordLoginButton extends SelectionAdapter
     {
         private PasswordLoginButton()
         { }
@@ -724,11 +519,11 @@ class AtaraxisLoginGUI {
             {
             	if (s_loginUserList.getText().equals(""))
             	{
-            		warningMessage(s_messageNoUsernameTitle, s_messageNoUsername);
+            		guiHelper.displayWarningMessage(s_translations.getString("LOGIN.MESSAGE.NO.USERNAME.TITLE"), s_translations.getString("LOGIN.MESSAGE.NO.USERNAME"));
             	}
             	else if(s_loginPwdText.getText().equals(""))
             	{
-            		warningMessage(s_messageNoPasswordTitle, s_messageNoPasswordLogin);
+            		guiHelper.displayWarningMessage(s_translations.getString("LOGIN.MESSAGE.NO.PASSWORD.TITLE"), s_translations.getString("LOGIN.MESSAGE.NO.PASSWORD.LOGIN"));
             	}
             	else
             	{
@@ -739,8 +534,8 @@ class AtaraxisLoginGUI {
                     else
                     {
                         s_attemptsL.setFocus();
-                        s_attemptsL.setText(s_attemptText1 + " " + s_attempt +
-                                " " + s_attemptText2 + " " + MAX_ATTEMPTS);
+                        s_attemptsL.setText(s_translations.getString("LOGIN.ATTEMPT.TEXT.1") + " " + s_attempt +
+                                " " + s_translations.getString("LOGIN.ATTEMPT.TEXT.2") + " " + MAX_ATTEMPTS);
                         s_attemptsL.redraw();
                         s_loginPwdText.setFocus();
                         s_loginPwdText.selectAll();
@@ -752,8 +547,8 @@ class AtaraxisLoginGUI {
             catch (IllegalPasswordException ipe)
             {
             	LOGGER.warn(MAX_ATTEMPTS + " failed logins - application shut down for security reasons");
-                errorMessage(s_messageCloseTitle, s_messageCloseOnPwd1 + MAX_ATTEMPTS 
-                		+ s_messageCloseOnPwd2 + "\n" + s_messageClose);
+            	guiHelper.displayErrorMessage(s_translations.getString("MESSAGE.EXITING.TITLE"), s_translations.getString("LOGIN.MESSAGE.CLOSE.ON.PWD.1") + " " + MAX_ATTEMPTS 
+                		+ " " + s_translations.getString("LOGIN.MESSAGE.CLOSE.ON.PWD.2") + "\n" + s_translations.getString("LOGIN.MESSAGE.CLOSE"));
                 System.exit(0); // zero indicates a normal termination
             }
         }
@@ -763,7 +558,7 @@ class AtaraxisLoginGUI {
      * This class is used to check if the password ist correct,
      * when the user selects the OK button.
      */
-    private static final class AddUserButton extends SelectionAdapter
+    private final class AddUserButton extends SelectionAdapter
     {
         private AddUserButton()
         { }
@@ -779,12 +574,12 @@ class AtaraxisLoginGUI {
         	if (user.equals(""))
         	{
         		notNull = false;
-        		warningMessage(s_messageNoUsernameTitle, s_messageNoUsername);
+        		guiHelper.displayWarningMessage(s_translations.getString("LOGIN.MESSAGE.NO.USERNAME.TITLE"), s_translations.getString("LOGIN.MESSAGE.NO.USERNAME"));
         	}
         	else if (pwd.equals("") || pwdRep.equals(""))
         	{
         		notNull = false;
-        		warningMessage(s_messageNoPasswordTitle, s_messageNoPasswordAddUser);
+        		guiHelper.displayWarningMessage(s_translations.getString("LOGIN.MESSAGE.NO.PASSWORD.TITLE"), s_translations.getString("LOGIN.MESSAGE.NO.PASSWORD.ADD.USER"));
         	}
         	
         	if(notNull)
@@ -821,7 +616,7 @@ class AtaraxisLoginGUI {
 	                    }
 	                    else
 	                    {
-	                        warningMessage(s_messageInvalidUsernameTitle, s_messageExistentUsername);
+	                    	guiHelper.displayWarningMessage(s_translations.getString("LOGIN.MESSAGE.INVALID.USERNAME.TITLE"), s_translations.getString("LOGIN.MESSAGE.EXISTENT.USERNAME"));
 	                    }
 	                }
 	                catch (FileNotFoundException fnfe)
@@ -840,14 +635,14 @@ class AtaraxisLoginGUI {
 	        	} // if - all entries are valid
 	        	else if(!validUser)
 	        	{
-	        		warningMessage(s_messageInvalidUsernameTitle, s_messageInvalidUsername);
+	        		guiHelper.displayWarningMessage(s_translations.getString("LOGIN.MESSAGE.INVALID.USERNAME.TITLE"), s_translations.getString("LOGIN.MESSAGE.INVALID.USERNAME"));
 	        		s_userAddPwdText.setText("");
 	        		s_userAddPwdTextRep.setText("");
 	        		s_userAddPwdText.setFocus();
 	        	}
 	        	else
 	        	{
-	        		warningMessage(s_messageInvalidPasswordTitle, s_messageInvalidPassword);
+	        		guiHelper.displayWarningMessage(s_translations.getString("LOGIN.MESSAGE.INVALID.PASSWROD.TITLE"), s_translations.getString("LOGIN.MESSAGE.INVALID.PASSWORD"));
 	        		s_userAddPwdText.setText("");
 	        		s_userAddPwdTextRep.setText("");
 	        		s_userAddPwdText.setFocus();

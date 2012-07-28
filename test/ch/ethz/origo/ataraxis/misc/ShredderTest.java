@@ -19,6 +19,7 @@
 
 package ch.ethz.origo.ataraxis.misc;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.File;
@@ -34,6 +35,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import ch.ethz.origo.ataraxis.TestingHelper;
 
 
 /**
@@ -65,6 +68,10 @@ public class ShredderTest {
     private static File s_file21 = new File (FILE_GENERATED_21);
     private static File s_file22 = new File (FILE_GENERATED_22);
     
+    private static File s_LeaveDir1 = new File (DIR_TEST + "/LeaveDir1");
+    private static File s_LeaveDir2InDir1 = new File (DIR_TEST + "/LeaveDir1/LeaveDir2");
+    private static File s_LeaveFileInDir2InDir1 = new File (DIR_TEST + "/LeaveDir1/LeaveDir2/file.txt");
+    
     private static final long FILE_SIZE = 1024 * 128; //   * 10    = 10MB
     private static long s_startTime = 0;
     private static long s_tempTime = 0;
@@ -80,7 +87,7 @@ public class ShredderTest {
     {        
     	PropertyConfigurator.configure(LOG_PROPS_FILE); 
 
-    	deleteDir(new File(DIR_TEST));
+    	TestingHelper.deleteDir(new File(DIR_TEST));
     	
         s_startTime = System.currentTimeMillis();
         s_shredder = new AtaraxisShredder(); 
@@ -101,7 +108,11 @@ public class ShredderTest {
     	fillFile(s_file12, FILE_SIZE);
     	fillFile(s_file21, FILE_SIZE);
     	fillFile(s_file22, FILE_SIZE);
-    	//Thread.sleep(1000);
+    	
+    	// Data for LeaveDir
+    	s_LeaveDir1.mkdir();
+    	s_LeaveDir2InDir1.mkdir();
+    	fillFile(s_LeaveFileInDir2InDir1, FILE_SIZE);
     }
     
     
@@ -172,6 +183,20 @@ public class ShredderTest {
 		logger.debug("shredGutmann(dir) - end; time for test [ms]: " + s_tempTime);
      } 
     
+    @Test
+    public void shredGutmann_LeaveDir() throws Exception
+    {
+		logger.debug("shredGutmann() - start");
+		assertTrue("Dir does not exist in the beginning!", s_LeaveDir2InDir1.exists());
+		assertTrue("File in dir does not exist in the beginning!", s_LeaveFileInDir2InDir1.exists());
+		
+    	s_shredder.wipeGutmann(s_LeaveDir1.getAbsolutePath(), true, false);
+    	
+		assertTrue("Dir must exist when leafe=true!", s_LeaveDir1.exists());
+		assertFalse("Dir in dir must be removed!", s_LeaveDir2InDir1.exists());
+		assertFalse("File in dir must be removed!", s_LeaveFileInDir2InDir1.exists());		
+    } 
+    
     /**
      * Tests encryption and decryption of a FileInputStream 
      * @throws Exception 
@@ -199,6 +224,20 @@ public class ShredderTest {
      } 
     
     @Test
+    public void shredVSITR_LeaveDir() throws Exception
+    {
+		logger.debug("shredVSITR_LeaveDir() - start");
+		assertTrue("Dir does not exist in the beginning!", s_LeaveDir2InDir1.exists());
+		assertTrue("File in dir does not exist in the beginning!", s_LeaveFileInDir2InDir1.exists());
+		
+    	s_shredder.wipeVSITR(s_LeaveDir1.getAbsolutePath(), true);
+    	
+		assertTrue("Dir must exist when leafe=true!", s_LeaveDir1.exists());
+		assertFalse("Dir in dir must be removed!", s_LeaveDir2InDir1.exists());
+		assertFalse("File in dir must be removed!", s_LeaveFileInDir2InDir1.exists());		
+    }
+    
+    @Test
     public void shredDoD() throws Exception
     {
 		logger.debug("shredDoD() - start");
@@ -217,6 +256,20 @@ public class ShredderTest {
     	s_tempTime = System.currentTimeMillis() - s_tempTime;
 		logger.debug("shredDoD(dir) - end; time for test [ms]: " + s_tempTime);
      } 
+    
+    @Test
+    public void shredDoD_LeaveDir() throws Exception
+    {
+		logger.debug("shredDoD_LeaveDir() - start");
+		assertTrue("Dir does not exist in the beginning!", s_LeaveDir2InDir1.exists());
+		assertTrue("File in dir does not exist in the beginning!", s_LeaveFileInDir2InDir1.exists());
+		
+    	s_shredder.wipeDoD(s_LeaveDir1.getAbsolutePath(), true, true);
+    	
+		assertTrue("Dir must exist when leafe=true!", s_LeaveDir1.exists());
+		assertFalse("Dir in dir must be removed!", s_LeaveDir2InDir1.exists());
+		assertFalse("File in dir must be removed!", s_LeaveFileInDir2InDir1.exists());		
+    }
     
     @Test
     public void shredDoDExt() throws Exception
@@ -239,6 +292,20 @@ public class ShredderTest {
      } 
     
     @Test
+    public void shredDoDExt_LeaveDir() throws Exception
+    {
+		logger.debug("shredDoDExt_LeaveDir() - start");
+		assertTrue("Dir does not exist in the beginning!", s_LeaveDir2InDir1.exists());
+		assertTrue("File in dir does not exist in the beginning!", s_LeaveFileInDir2InDir1.exists());
+		
+    	s_shredder.wipeDoD(s_LeaveDir1.getAbsolutePath(), true, false);
+    	
+		assertTrue("Dir must exist when leafe=true!", s_LeaveDir1.exists());
+		assertFalse("Dir in dir must be removed!", s_LeaveDir2InDir1.exists());
+		assertFalse("File in dir must be removed!", s_LeaveFileInDir2InDir1.exists());		
+    } 
+    
+    @Test
     public void shredSchneier() throws Exception
     {
 		logger.debug("shredSchneier() - start");
@@ -257,6 +324,20 @@ public class ShredderTest {
     	s_tempTime = System.currentTimeMillis() - s_tempTime;
 		logger.debug("shredSchneier(dir) - end; time for test [ms]: " + s_tempTime);
      } 
+    
+    @Test
+    public void shredSchneier_LeaveDir() throws Exception
+    {
+		logger.debug("shredSchneier_LeaveDir() - start");
+		assertTrue("Dir does not exist in the beginning!", s_LeaveDir2InDir1.exists());
+		assertTrue("File in dir does not exist in the beginning!", s_LeaveFileInDir2InDir1.exists());
+		
+    	s_shredder.wipeSchneier(s_LeaveDir1.getAbsolutePath(), true);
+    	
+		assertTrue("Dir must exist when leafe=true!", s_LeaveDir1.exists());
+		assertFalse("Dir in dir must be removed!", s_LeaveDir2InDir1.exists());
+		assertFalse("File in dir must be removed!", s_LeaveFileInDir2InDir1.exists());		
+    } 
     
     @Test
     public void shredWithByte() throws Exception
@@ -278,6 +359,20 @@ public class ShredderTest {
     	s_tempTime = System.currentTimeMillis() - s_tempTime;
 		logger.debug("shredWithByte(dir) - end; time for test [ms]: " + s_tempTime);
      } 
+    
+    @Test
+    public void shredWithByte_LeaveDir() throws Exception
+    {
+		logger.debug("shredWithByte_LeaveDir() - start");
+		assertTrue("Dir does not exist in the beginning!", s_LeaveDir2InDir1.exists());
+		assertTrue("File in dir does not exist in the beginning!", s_LeaveFileInDir2InDir1.exists());
+		
+    	s_shredder.wipeWithByte(s_LeaveDir1.getAbsolutePath(), true, (byte)0x00);
+    	
+		assertTrue("Dir must exist when leafe=true!", s_LeaveDir1.exists());
+		assertFalse("Dir in dir must be removed!", s_LeaveDir2InDir1.exists());
+		assertFalse("File in dir must be removed!", s_LeaveFileInDir2InDir1.exists());		
+    } 
     
     /**
      * Tests encryption and decryption of a FileInputStream 
@@ -324,6 +419,48 @@ public class ShredderTest {
     	s_tempTime = System.currentTimeMillis() - s_tempTime;
 		logger.debug("shredRandom(dir) - end; time for test [ms]: " + s_tempTime);
      } 
+    
+    @Test
+    public void shredRandomPattern_LeaveDir() throws Exception
+    {
+		logger.debug("shredRandomPattern_LeaveDir() - start");
+		assertTrue("Dir does not exist in the beginning!", s_LeaveDir2InDir1.exists());
+		assertTrue("File in dir does not exist in the beginning!", s_LeaveFileInDir2InDir1.exists());
+		
+    	s_shredder.wipeRandom(s_LeaveDir1.getAbsolutePath(), true, AtaraxisShredder.RANDOM, 10);
+    	
+		assertTrue("Dir must exist when leafe=true!", s_LeaveDir1.exists());
+		assertFalse("Dir in dir must be removed!", s_LeaveDir2InDir1.exists());
+		assertFalse("File in dir must be removed!", s_LeaveFileInDir2InDir1.exists());		
+    } 
+    
+    @Test
+    public void shredRandom_LeaveDir() throws Exception
+    {
+		logger.debug("shredRandom_LeaveDir() - start");
+		assertTrue("Dir does not exist in the beginning!", s_LeaveDir2InDir1.exists());
+		assertTrue("File in dir does not exist in the beginning!", s_LeaveFileInDir2InDir1.exists());
+		
+    	s_shredder.wipeRandom(s_LeaveDir1.getAbsolutePath(), true);
+    	
+		assertTrue("Dir must exist when leafe=true!", s_LeaveDir1.exists());
+		assertFalse("Dir in dir must be removed!", s_LeaveDir2InDir1.exists());
+		assertFalse("File in dir must be removed!", s_LeaveFileInDir2InDir1.exists());		
+    } 
+    
+    @Test
+    public void shredRandom_WrongId_LeaveDir() throws Exception
+    {
+		logger.debug("shredRandom_LeaveDir() - start");
+		assertTrue("Dir does not exist in the beginning!", s_LeaveDir2InDir1.exists());
+		assertTrue("File in dir does not exist in the beginning!", s_LeaveFileInDir2InDir1.exists());
+		
+    	s_shredder.wipeRandom(s_LeaveDir1.getAbsolutePath(), true, -1, 10);
+    	
+		assertTrue("Dir must exist when leafe=true!", s_LeaveDir1.exists());
+		assertFalse("Dir in dir must be removed!", s_LeaveDir2InDir1.exists());
+		assertFalse("File in dir must be removed!", s_LeaveFileInDir2InDir1.exists());		
+    } 
     
     @Test
     public void shredRandomStringBoolean() throws Exception
@@ -536,25 +673,4 @@ public class ShredderTest {
         }        
         os.close();
 	}
-	
-    /**   
-     * Deletes all files and subdirectories under dir.
-     * Returns true if all deletions were successful.
-     * If a deletion fails, the method stops attempting to delete and returns false.
-     * 
-     * @param dir the directory (File) to delete
-     */
-    private static void deleteDir(File dir)
-    {
-        if (dir.isDirectory())
-        {
-            String[] children = dir.list();
-            for (int i=0; i<children.length; i++)
-            {
-                deleteDir(new File(dir, children[i]));
-            }
-        }
-        // The directory is now empty so delete it
-        dir.delete();
-    }
 }

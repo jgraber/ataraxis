@@ -206,26 +206,11 @@ public class XMLHandler implements PasswordStore
 		}
 		else if(entry.getType().equals("account"))
 		{
-			AccountEntry accountEntry = (AccountEntry) entry;
-			Element parrent = null;
-			
-			if(entry.getParentEntry() != null)
-			{
-				String parentId = entry.getParentEntry().getId(); 
-				try {
-					parrent = getElement(parentId);
-				} catch (JDOMException e) {
-					logger.fatal(e);
-					throw new EntryDoesNotExistException("No such parent");
-				}
-				
-			}
-			
 			try {
-				createAccountElement(parrent, accountEntry.getId(), 
-						accountEntry.getName(), accountEntry.getPassword(),
-						accountEntry.getLink(), accountEntry.getComment());
-			} catch (JDOMException e) {
+				AccountEntry accountEntry = (AccountEntry) entry;
+				createAccountElement(accountEntry);
+			} 
+			catch (JDOMException e) {
 				logger.fatal(e);
 				throw new EntryDoesNotExistException("No such parent");
 			}
@@ -241,37 +226,31 @@ public class XMLHandler implements PasswordStore
 		
 	}
 	
-	
 	/**
 	 * Create a new account-Element
 	 * 
-	 * @param parentElement the parent Element (null if parent == root)
-	 * @param ElementID the ID
-	 * @param Name the name or null
-	 * @param Password the passwort or null
-	 * @param Link the link or null
-	 * @param Comment the comment or null
+	 * @param entry the AccountEntry
 	 * @throws JDOMException by Errors with JDOM
+	 * @throws EntryDoesNotExistException 
 	 */
-	private void createAccountElement(Element parentElement, String ElementID,
-			String Name, String Password, String Link, String Comment) 
-	throws JDOMException
+	private void createAccountElement(AccountEntry entry) 
+	throws JDOMException, EntryDoesNotExistException
 	{
-		// create Element sub-sturcture
+		// create Element sub-structure
 		Element newAccountElement = new Element("account");
-		newAccountElement.setAttribute("id", ElementID);
+		newAccountElement.setAttribute("id", entry.getId());
 		
 		Element newName = new Element("name");
-		newName.setText(Name);
+		newName.setText(entry.getName());
 		
 		Element newPass = new Element("password");
-		newPass.setText(Password);
+		newPass.setText(entry.getPassword());
 		
 		Element newLink = new Element("link");
-		newLink.setText(Link);
+		newLink.setText(entry.getLink());
 		
 		Element newComment = new Element("comment");
-		newComment.setText(Comment);
+		newComment.setText(entry.getComment());
 		
 		// put newPWElement together
 		newAccountElement.addContent(newName);
@@ -280,16 +259,21 @@ public class XMLHandler implements PasswordStore
 		newAccountElement.addContent(newComment);
 		
 		// add parent
-		if (parentElement == null)
+		if (entry.getParentEntry() == null)
 		{
 			s_rootElement.addContent(newAccountElement);
 		}
 		else
 		{
-			parentElement.addContent(newAccountElement);
+			try {
+				Element parrent = getElement(entry.getParentEntry().getId());
+				parrent.addContent(newAccountElement);
+			} catch (JDOMException e) {
+				logger.fatal(e);
+				throw new EntryDoesNotExistException("No such parent");
+			}
 		}
 	}
-	
 	
 	/**
 	 * Create a group-Element
@@ -408,11 +392,6 @@ public class XMLHandler implements PasswordStore
 					groupEntry = new GroupEntry(entryId);
 				}
 			}
-			/* TODO: Check if bug
-			 * else
-			{
-				throw new EntryDoesNotExistException("entry not found");
-			}*/
 		} 
 		catch (JDOMException e) 
 		{
@@ -556,7 +535,7 @@ public class XMLHandler implements PasswordStore
 	 *
 	 * @return the GroupList
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List<GroupEntry> getGroupEntryList()
 	{
 		List<GroupEntry> groupList = new ArrayList<GroupEntry>();
@@ -584,7 +563,7 @@ public class XMLHandler implements PasswordStore
 	 * @return the GroupList
 	 * @throws JDOMException by problems with JDOM 
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private List getGroupList() throws JDOMException
 	{
 		XPath x = XPath.newInstance("//group");
@@ -597,7 +576,7 @@ public class XMLHandler implements PasswordStore
 	 *
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public List<AccountEntry> getAccountEntryList()
 	{
 		List<AccountEntry> accountList = new ArrayList<AccountEntry>();
@@ -630,7 +609,7 @@ public class XMLHandler implements PasswordStore
 	 * @return the GroupList
 	 * @throws JDOMException by problems with JDOM 
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private List getAccountList() throws JDOMException
 	{
 		XPath y = XPath.newInstance("//account");
@@ -642,9 +621,9 @@ public class XMLHandler implements PasswordStore
 	 * Check if the ElementId has Child-Elements.
 	 * 
 	 * @param ElementID
-	 * @return true if Childs exist, false otherwise
+	 * @return true if Child's exist, false otherwise
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public boolean hasChilds(String ElementID) 
 	{
 		boolean hasChilds = false;
@@ -808,11 +787,11 @@ public class XMLHandler implements PasswordStore
 	
 	
 	/**
-	 * Sort Child-Elements of the parent with the Comperator comp 
+	 * Sort Child-Elements of the parent with the Comparator comp 
 	 * @param parent the parent Element
-	 * @param comp the Comperator
+	 * @param comp the Comparator
 	 */
-	@SuppressWarnings({ "unchecked" })	// Compiler-Errors with Generics are suppressed
+	@SuppressWarnings({ "unchecked", "rawtypes" })	// Compiler-Errors with Generics are suppressed
 	private void sortElements(Element parent, Comparator comp) 
 	{
 		logger.debug("sortElements(Element, Comparator) - start");

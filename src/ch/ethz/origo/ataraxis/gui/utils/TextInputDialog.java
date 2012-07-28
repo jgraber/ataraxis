@@ -17,9 +17,9 @@
  * limitations under the Licence. 
  */
 
-package ch.ethz.origo.ataraxis.gui;
+package ch.ethz.origo.ataraxis.gui.utils;
 
-import java.util.Properties;
+import java.util.ResourceBundle;
 
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
@@ -37,6 +37,12 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+/**
+ * TextInputDialog prompt the user to insert a string.
+ * 
+ * @author J. Graber
+ * @version 1.2
+ */
 public class TextInputDialog {
 	
 	private static final Logger LOGGER = Logger.getLogger(TextInputDialog.class);
@@ -44,56 +50,37 @@ public class TextInputDialog {
 	// GUI Basic components
 	private static Display display = Display.getDefault();
 	private static Shell s_shell = new Shell(SWT.TITLE | SWT.CLOSE | SWT.ON_TOP);
-	
-	private static Properties s_langProps;
-
-	// all Strings needed by the dialog
-	private String returnString;
-	private static String s_shellTitle;
-	private static String s_OkButton;
-	private static String s_CancelButton;
-	private static String s_labelText;
-	private static String s_warnText;
-	private static String s_warnMessage;
-	
-	private String displayText = "";
-	
 	private int s_width = 374;
 	private int s_height = 73;
 	
+	private static ResourceBundle s_translations;	
+	private String returnString;	
+	private String displayText = "";
+	
+	
 	/**
-	 * Empty Constructor, open TextInputDialog in a new Shell
-	 *
+	 * Constructor with ResourceBundle to open TextInputDialog in a new Shell
+	 * 
+	 * @param translations the translation for the GUI
 	 */
-	public TextInputDialog ()
+	public TextInputDialog(ResourceBundle translations)
 	{
 		// empty constructor
-		this(new Shell(SWT.TITLE | SWT.CLOSE | SWT.ON_TOP));
+		this(new Shell(SWT.TITLE | SWT.CLOSE | SWT.ON_TOP), translations);
 	}
 
 	/**
-	 * Open TextInputDialog as child of parentShell
+	 * Open TextInputDialog as child of parentShell with a
+	 * ResourceBundle for the translations.
 	 * 
 	 * @param parentShell the parent Shell
+	 * @param translations the translations for the GUI
 	 */
-	public TextInputDialog(Shell parentShell)
+	public TextInputDialog(Shell parentShell, ResourceBundle translations)
 	{
 		s_shell = new Shell(parentShell);
+		s_translations = translations;
 	}
-
-	/**
-	 * Open TextInputDialog as child of parentShell with language Properties
-	 * 
-	 * @param parentShell the parent Shell
-	 * @param languageProperties the language porperties
-	 */
-	public TextInputDialog(Shell parentShell, Properties languageProperties)
-	{
-		s_shell = new Shell(parentShell);
-		s_langProps = languageProperties;
-	}
-
-	
 	
 	/**
 	 * Get current width of Dialog
@@ -151,31 +138,28 @@ public class TextInputDialog {
 	public String open() 
 	{
 		LOGGER.debug("Open Display of TextInputDialog");
-		loadProperties();
 		returnString = null;
-		//final Display display = Display.getDefault();
-		//final Shell shell = new Shell();
+		
 		final GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 4;
 
 		Rectangle displayRect = display.getActiveShell().getBounds();
-        //s_width = displayRect.width / 3 * 2;
-        //s_height = displayRect.height / 3 * 2;
-        int s_x = displayRect.x + (displayRect.width - s_width) / 2;
+        
+		int s_x = displayRect.x + (displayRect.width - s_width) / 2;
         int s_y = displayRect.y + (displayRect.height - s_height) / 2;
 
-         s_shell.setLocation(s_x, s_y);
+        s_shell.setLocation(s_x, s_y);
         
 		// Layout the Shell
 		s_shell.setLayout(gridLayout);
 		s_shell.setSize(s_width, s_height);
-		s_shell.setText(s_shellTitle);
+		s_shell.setText(s_translations.getString("PWM.TID_Title"));
 		s_shell.open();
 
 		// make all the components
 		final Label groupLabel = new Label(s_shell, SWT.NONE);
 		groupLabel.setLayoutData(new GridData(SWT.DEFAULT, 19));
-		groupLabel.setText(s_labelText+":");
+		groupLabel.setText(s_translations.getString("PWM.TID_labelText")+":");
 
 		final Text textField = new Text(s_shell, SWT.BORDER);
 		textField.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false));
@@ -195,7 +179,7 @@ public class TextInputDialog {
 				s_shell.dispose();
 			}
 		});
-		cancelButton.setText(s_CancelButton);
+		cancelButton.setText(s_translations.getString("CANCEL"));
 
 		final Button createButton = new Button(s_shell, SWT.NONE);
 		createButton.addSelectionListener(new SelectionAdapter() 
@@ -206,8 +190,8 @@ public class TextInputDialog {
 				if(textField.getText().equals(""))
 				{
 					MessageBox mb = new MessageBox(s_shell, SWT.OK | SWT.ICON_WARNING);
-					mb.setText(s_warnText);
-					mb.setMessage(s_warnMessage);
+					mb.setText(s_translations.getString("PWM.TID_warnText"));
+					mb.setMessage(s_translations.getString("PWM.TID_warnMessage"));
 					mb.open();
 				}
 				else 
@@ -217,7 +201,7 @@ public class TextInputDialog {
 				}
 			}
 		});
-		createButton.setText(s_OkButton);
+		createButton.setText(s_translations.getString("PWM.TID_OkButton"));
 		s_shell.addListener (SWT.Traverse, new Listener () 
 		{
 			public void handleEvent (Event event) 
@@ -227,8 +211,9 @@ public class TextInputDialog {
 			}
 		});
 		s_shell.setDefaultButton(createButton);
-		// wait until the user quit or accept 
 		s_shell.layout();
+
+		// wait until the user quit or accept 
 		while (!s_shell.isDisposed()) {
 			if (!display.readAndDispatch())
 				display.sleep();
@@ -236,27 +221,4 @@ public class TextInputDialog {
 		LOGGER.debug("Display of TextInputDialog closed");
 		return returnString;
 	}
-	
-	/**
-	 * Load the language properties.
-	 */
-	private void loadProperties() 
-	{
-
-		// Load the language file
-		
-		if(s_langProps == null)
-		{
-			s_langProps = new Properties();
-			LOGGER.debug("Language: default values are used");
-		}
-
-		// set the strings
-		s_shellTitle = s_langProps.getProperty("PWM.TID_Title", "TextInput Dialog");
-		s_OkButton  = s_langProps.getProperty("PWM.TID_OkButton", "OK");
-		s_CancelButton  = s_langProps.getProperty("CANCEL", "CANCEL");
-		s_labelText  = s_langProps.getProperty("PWM.TID_labelText", "Text:");
-		s_warnText  = s_langProps.getProperty("PWM.TID_warnText", "Warning");
-		s_warnMessage  = s_langProps.getProperty("PWM.TID_warnMessage", "Text can not be empty!");	
-	} 
 }

@@ -19,13 +19,11 @@
 
 package ch.ethz.origo.ataraxis.crypt;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.security.KeyPair;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-
-import javax.crypto.SecretKey;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -56,54 +54,16 @@ public class RSAKeyCreatorTest
 	/**
 	 * Test method for 
 	 * {@link ch.ethz.origo.ataraxis.crypt.RSAKeyCreator#createKeyPair()}.
+	 * @throws Exception 
+	 * @throws NoSuchProviderException 
+	 * @throws NoSuchAlgorithmException 
 	 */
 	@Test
-	public void testCreateKeyPair() 
+	public void testCreateKeyPair() throws NoSuchAlgorithmException, NoSuchProviderException, Exception 
 	{
-		try 
-		{
-			KeyPair rsaPair = new RSAKeyCreator().createKeyPair();
-			assertEquals(rsaPair.getPrivate().getAlgorithm(),"RSA");
-			//System.out.println(rsaPair.getPublic().getFormat());
-		} 
-		catch (NoSuchAlgorithmException e) 
-		{
-			fail("NoSuchAlgorithmException");
-		} 
-		catch (NoSuchProviderException e) 
-		{
-			fail("NoSuchProviderException");
-		} 
-		catch (NotImplementedException e) 
-		{
-			fail("NotImplementedException");
-		}
-	}
-
-	/**
-	 * Test method for 
-	 * {@link ch.ethz.origo.ataraxis.crypt.RSAKeyCreator#createSecretKey()}.
-	 */
-	@Test
-	public void testCreateSecretKey() 
-	{
-		try 
-		{
-			SecretKey rsaKey = new RSAKeyCreator().createSecretKey();
-			fail(rsaKey + " should not exist as SecretKey. It have Public & Private Keys");
-		} 
-		catch (NoSuchAlgorithmException e) 
-		{
-			fail("NoSuchAlgorithmException");
-		} 
-		catch (NoSuchProviderException e) 
-		{
-			fail("NoSuchProviderException");
-		} 
-		catch (NotImplementedException e) 
-		{
-			// assertTrue(true); --> it is not implemented for RSA
-		}
+		KeyPair rsaPair = new RSAKeyCreator().createKeyPair();
+		assertEquals(rsaPair.getPrivate().getAlgorithm(),"RSA");
+		
 	}
 
 }

@@ -17,9 +17,14 @@
  * limitations under the Licence. 
  */
 
-package ch.ethz.origo.ataraxis.gui;
+package ch.ethz.origo.ataraxis.gui.utils;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.util.Properties;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
@@ -57,16 +62,12 @@ import ch.ethz.origo.ataraxis.misc.PasswordGenerator;
  */
 public class PWGeneratorGUI 
 {
-
 	// vars for the basic gui
-	private static Properties langProps = null;
-	
 	private static final String APPL_DIR = System.getProperty("user.dir");
 	private static final String APPL_DATA_DIR = APPL_DIR + "/application_data";
 	private static final int SHELL_WIDTH = 242;
 	private static final int SHELL_HEIGHT = 210;
 	protected static final Color BACKGROUND_COLOR = new Color(Display.getDefault(), 220, 220, 255);
-	
 	
 	private static Display s_display = Display.getDefault();
 	private static Shell s_shell = new Shell(SWT.TITLE | SWT.CLOSE | SWT.ON_TOP);
@@ -74,18 +75,7 @@ public class PWGeneratorGUI
 
 	private String generatedPassword;
 	
-	// i18n strings
-	private static String s_PWGeneratorTitle;
-	private static String s_PWSymbols;
-	private static String s_generateButton;
-	private static String s_PWLength;
-	private static String s_Cancel;
-	private static String s_OK;
-	private static String s_PWGenErrorTitle;
-	private static String s_PWGenErrorMessage;
-	private static String s_PWtoShortErrorTitle;
-	private static String s_PWtoShortErrorMessage;
-	
+	private static ResourceBundle s_translations;
 
 
 	/**
@@ -97,8 +87,9 @@ public class PWGeneratorGUI
 	 * Launch the application
 	 *
 	 * @param args
+	 * @throws Exception 
 	 */
-	public static void main(String[] args) 
+	public static void main(String[] args) throws Exception 
 	{
 		BasicConfigurator.configure();
 		Logger.getRootLogger().setLevel(Level.WARN);
@@ -109,50 +100,58 @@ public class PWGeneratorGUI
 
 	/**
 	 * Constructor for stand-alone GUI
+	 * @throws Exception 
 	 */
-	public PWGeneratorGUI()
+	public PWGeneratorGUI() throws Exception
 	{
+		// create default ResourceBundle
+		Properties translationProps = new Properties();
+		translationProps.setProperty("PWG.Title", "Password Generator");
+		translationProps.setProperty("PWG.Symbols", "Password symbols");
+		translationProps.setProperty("PWG.Generate", "Generate");
+		translationProps.setProperty("PWG.PWLength", "Password length:");
+		translationProps.setProperty("CANCEL", "Cancel");
+		translationProps.setProperty("OK", "OK");	
+		translationProps.setProperty("PWG.PWGenErrorTitle", "Error");	
+		translationProps.setProperty("PWG.PWGenErrorMessage", "Not enough symbols to generate a secure password.");
+		translationProps.setProperty("PWG.PWtoShortErrorTitle", "Error");	
+		translationProps.setProperty("PWG.PWtoShortErrorMessage", "Passwords with less than 8 chars are not secure. Procceed anyway?");		
+		
+		ByteArrayOutputStream outPropsStream = new ByteArrayOutputStream();
+		translationProps.store(outPropsStream, "Properties for rename dialog");
+		ResourceBundle renameBundle = new PropertyResourceBundle(
+				(InputStream)new ByteArrayInputStream(outPropsStream.toByteArray()));
+		
+		
+		s_translations = renameBundle;
 		s_pg = new PasswordGenerator();
 	}
-
 	
 	/**
 	 * Constructor for stand-alone GUI that allow to set a specific 
-	 * language-properties.
+	 * ResourceBundle.
 	 *
-	 * @param languageProperties user defined language-properties
+	 * @param translations user defined language bundle
 	 */
-	public PWGeneratorGUI(Properties languageProperties)
+	public PWGeneratorGUI(ResourceBundle translations)
 	{
 	
 		s_pg = new PasswordGenerator();
-		langProps = languageProperties;
+		s_translations = translations;
 	}
-	
-	/**
-	 * Constructor for running the PWGenerator inside an application.
-	 *
-	 * @param shell the parent sthell
-	 */
-	public PWGeneratorGUI(Shell shell)
-	{
-		s_shell = new Shell(shell);
-		s_pg = new PasswordGenerator();
-	}
-
-	
+		
 	/**
 	 * Constructor for running the PWGenerator inside an application
-	 * and allow to set a specific language-properties.
+	 * and allow to set a specific ResourceBundle.
 	 *
-	 * @param shell the parent sthell
-	 * @param languageProperties user defined language-properties
+	 * @param shell the parent shell
+	 * @param translations user defined ResourceBundle
 	 */
-	public PWGeneratorGUI(Shell shell, Properties languageProperties)
+	public PWGeneratorGUI(Shell shell, ResourceBundle translations)
 	{
 		s_shell = new Shell(shell);
 		s_pg = new PasswordGenerator();
-		langProps = languageProperties;
+		s_translations = translations;
 	}
 	
 	
@@ -161,10 +160,8 @@ public class PWGeneratorGUI
 	 */
 	public String open() 
 	{
-		loadProperties();
 		generatedPassword = "";
-		//final Display display = Display.getCurrent();//.getDefault();
-		//final Shell s_shell = new Shell(SWT.TITLE | SWT.CLOSE | SWT.ON_TOP);
+		
 		final Image icon = new Image(s_display, APPL_DATA_DIR + "/icons/Tray_Ataraxis.png");
 		final GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 2;
@@ -177,7 +174,7 @@ public class PWGeneratorGUI
 		s_shell.setImage(icon);
 		s_shell.setLayout(gridLayout);
 		s_shell.setSize(SHELL_WIDTH, SHELL_HEIGHT);
-		s_shell.setText("AtaraxiS - " + s_PWGeneratorTitle);
+		s_shell.setText("AtaraxiS - " + s_translations.getString("PWG.Title"));
 		s_shell.setBackground(BACKGROUND_COLOR);
 		s_shell.setBackgroundMode(SWT.INHERIT_FORCE);
 		s_shell.addListener (SWT.Traverse, new Listener () {
@@ -195,7 +192,7 @@ public class PWGeneratorGUI
 		gridLayout_1.numColumns = 2;
 		passwordSymbolsGroup.setLayout(gridLayout_1);
 		passwordSymbolsGroup.setLayoutData(gdGroup);
-		passwordSymbolsGroup.setText(s_PWSymbols);
+		passwordSymbolsGroup.setText(s_translations.getString("PWG.Symbols"));
 
 		final Button aZButton = new Button(passwordSymbolsGroup, SWT.CHECK);
 		aZButton.setLayoutData(new GridData(94, SWT.DEFAULT));
@@ -221,7 +218,7 @@ public class PWGeneratorGUI
 
 		final Label lengthLabel = new Label(s_shell, SWT.NONE);
 		lengthLabel.setLayoutData(new GridData());
-		lengthLabel.setText(s_PWLength);
+		lengthLabel.setText(s_translations.getString("PWG.PWLength"));
 
 		final Spinner pwLengthSpinner = new Spinner(s_shell, SWT.BORDER);
 		pwLengthSpinner.setLayoutData(new GridData());
@@ -241,7 +238,7 @@ public class PWGeneratorGUI
 		composite.setLayoutData(gridData);
 
 		final Button cancelButton = new Button(composite, SWT.FLAT);
-		cancelButton.setText(s_Cancel);
+		cancelButton.setText(s_translations.getString("CANCEL"));
 		cancelButton.setBackground(BACKGROUND_COLOR);
 		cancelButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
@@ -250,7 +247,7 @@ public class PWGeneratorGUI
 		});
 
 		final Button generateButton = new Button(composite, SWT.FLAT);
-		generateButton.setText(s_generateButton);
+		generateButton.setText(s_translations.getString("PWG.Generate"));
 		generateButton.setBackground(BACKGROUND_COLOR);
 		generateButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
@@ -264,8 +261,8 @@ public class PWGeneratorGUI
 					LOGGER.error("Not enugh Data to generate Password");
 					MessageBox messageBox = new MessageBox(s_shell,
 							SWT.ICON_ERROR | SWT.OK);
-					messageBox.setText(s_PWGenErrorTitle);
-					messageBox.setMessage(s_PWGenErrorMessage);
+					messageBox.setText(s_translations.getString("PWG.PWGenErrorTitle"));
+					messageBox.setMessage(s_translations.getString("PWG.PWGenErrorMessage"));
 					messageBox.open();
 				}
 				else 
@@ -276,8 +273,8 @@ public class PWGeneratorGUI
 						LOGGER.debug("PW size to short");
 						MessageBox messageBox = new MessageBox(s_shell,
 								SWT.ICON_WARNING | SWT.NO| SWT.YES);
-						messageBox.setText(s_PWtoShortErrorTitle);
-						messageBox.setMessage(s_PWtoShortErrorMessage);
+						messageBox.setText(s_translations.getString("PWG.PWtoShortErrorTitle"));
+						messageBox.setMessage(s_translations.getString("PWG.PWtoShortErrorMessage"));
 						if(messageBox.open() == SWT.YES)
 						{
 							ignoreToShort = true;
@@ -300,7 +297,7 @@ public class PWGeneratorGUI
 		});
 
 		final Button okButton = new Button(composite, SWT.FLAT);
-		okButton.setText(s_OK);
+		okButton.setText(s_translations.getString("OK"));
 		okButton.setBackground(BACKGROUND_COLOR);
 		okButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
@@ -329,30 +326,5 @@ public class PWGeneratorGUI
 
 		LOGGER.debug("PasswordGenerator shell is closed");
 		return generatedPassword;
-	}
-
-	/**
-	 * method to load the content of the properties file (for i18n).
-	 */
-	private static void loadProperties() 
-	{
-
-		// Use default values if no Properties object received
-		if(langProps == null){
-			langProps = new Properties();
-			LOGGER.debug("Language: default values are used");
-		}
-
-		// set the strings
-		s_PWGeneratorTitle = langProps.getProperty("PWG.Title", "Password Generator");
-		s_PWSymbols  = langProps.getProperty("PWG.Symbols", "Password symbols");
-		s_generateButton  = langProps.getProperty("PWG.Generate", "Generate");
-		s_PWLength  = langProps.getProperty("PWG.PWLength", "Password length:");
-		s_Cancel  = langProps.getProperty("CANCEL", "Cancel");
-		s_OK  = langProps.getProperty("OK", "OK");	
-		s_PWGenErrorTitle = langProps.getProperty("PWG.PWGenErrorTitle", "Error");	
-		s_PWGenErrorMessage = langProps.getProperty("PWG.PWGenErrorMessage", "Not enough symbols to generate a secure password.");
-		s_PWtoShortErrorTitle = langProps.getProperty("PWG.PWtoShortErrorTitle", "Error");	
-		s_PWtoShortErrorMessage = langProps.getProperty("PWG.PWtoShortErrorMessage", "Passwords with less than 8 chars are not secure. Procceed anyway?");		
 	}
 }

@@ -68,6 +68,7 @@ import ch.ethz.origo.ataraxis.util.FileCopy;
  * @author Johnny Graber
  *
  */
+@SuppressWarnings("deprecation") // until BC sorts out X509V3CertificateGenerator
 public class UBERKeyStoreHandlerTest 
 {
 
@@ -148,7 +149,7 @@ public class UBERKeyStoreHandlerTest
 	{
 		try 
 		{
-			KeyCreator createAESKey = new AESKeyCreator();
+			SecretKeyCreator createAESKey = new AESKeyCreator();
 			SecretKey aesKey = createAESKey.createSecretKey();
 			s_ksh.setEntry("MyAliasISThis",
 					new KeyStore.SecretKeyEntry(aesKey),
@@ -170,7 +171,7 @@ public class UBERKeyStoreHandlerTest
 	{
 		try 
 		{
-			KeyCreator createRSAKey = new RSAKeyCreator();
+			KeyPairCreator createRSAKey = new RSAKeyCreator();
 			KeyPair RSAKeys = createRSAKey.createKeyPair();
 
 			java.security.cert.Certificate[] myCerts = new java.security.cert.Certificate[1];
@@ -208,7 +209,7 @@ public class UBERKeyStoreHandlerTest
 	{
 		try 
 		{
-			KeyCreator createAESKey = new AESKeyCreator();
+			SecretKeyCreator createAESKey = new AESKeyCreator();
 			SecretKey aesKey = createAESKey.createSecretKey();
 			s_ksh.setEntry("MyAliasToDelete",
 					new KeyStore.SecretKeyEntry(aesKey),
@@ -312,7 +313,7 @@ public class UBERKeyStoreHandlerTest
 		} 	
 	}
 
-	@SuppressWarnings("deprecation")
+
 	private static X509Certificate generateX509V3Cert(KeyPair pair)
 	throws InvalidKeyException, NoSuchProviderException, SignatureException
 	{
