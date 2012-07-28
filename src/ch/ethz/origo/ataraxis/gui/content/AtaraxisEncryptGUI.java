@@ -87,13 +87,8 @@ public class AtaraxisEncryptGUI
 	
 	
 	// settings for encryption
-	private static final int FILE = 1;
-	private static final int FOLDER = 2;
-	@SuppressWarnings("unused")
-	private static int s_encryptFiletype = 0;
-	
-	private static final int ENCRYPT_SOURCE = 1;
-	private static final int ENCRYPT_TARGET = 2;
+	private static boolean opearateOnFolder;
+	private static SelectionAdapter openDialogAdapter;
 	
 	//private static final String SUFFIX_FOLDER = ".acz";
 	private static final String SUFFIX_ZIP = ".zip";
@@ -112,6 +107,8 @@ public class AtaraxisEncryptGUI
 	private Button buttonEncrypt;
 
 	private Composite s_compositeEncrypt;
+
+	protected Button buttonEncryptSource;
 	
 	
 	
@@ -185,17 +182,7 @@ public class AtaraxisEncryptGUI
 		buttonEncryptSourceFile.setImage(ICON_FILE);
 		buttonEncryptSourceFile.setToolTipText(s_translations.getString("FILE"));
 		buttonEncryptSourceFile.setSelection(true);
-		buttonEncryptSourceFile.addSelectionListener(new SelectionAdapter()
-		{
-			public void widgetSelected(SelectionEvent e)
-			{
-				if(buttonEncryptSourceFile.getSelection())
-				{
-					LOGGER.debug("buttonEncryptSourceFile is selected");	
-					s_encryptFiletype = FILE;
-				}
-			}
-		});
+		
 
 		final Button buttonEncryptSourceFolder = new Button(groupEncryptSource, SWT.RADIO);
 		final GridData gridDataEncryptSource_3 = new GridData(SWT.RIGHT, SWT.CENTER, false, false);
@@ -204,26 +191,17 @@ public class AtaraxisEncryptGUI
 		buttonEncryptSourceFolder.setLayoutData(gridDataEncryptSource_3);
 		buttonEncryptSourceFolder.setImage(ICON_FOLDER);
 		buttonEncryptSourceFolder.setToolTipText(s_translations.getString("FOLDER"));
-		buttonEncryptSourceFolder.addSelectionListener(new SelectionAdapter()
-		{
-			public void widgetSelected(SelectionEvent e)
-			{
-				if(buttonEncryptSourceFolder.getSelection())
-				{
-					LOGGER.debug("buttonEncryptSourceFolder is selected");	
-					s_encryptFiletype = FOLDER;
-				}
-			}
-		});
+		
 
 
-		final Button buttonEncryptSource = new Button(groupEncryptSource, SWT.NONE);
+		buttonEncryptSource = new Button(groupEncryptSource, SWT.NONE);
 		final GridData gridDataEncryptSource_4 = new GridData(SWT.RIGHT, SWT.CENTER, false, false);
 		gridDataEncryptSource_4.heightHint = GUIHelper.BUTTON_HEIGHT;
 		gridDataEncryptSource_4.widthHint = GUIHelper.BUTTON_WIDTH;
 		buttonEncryptSource.setLayoutData(gridDataEncryptSource_4);
 		buttonEncryptSource.setImage(ICON_BROWSE);
 		buttonEncryptSource.setToolTipText(s_translations.getString("BROWSE"));
+		
 		
 
 
@@ -258,10 +236,45 @@ public class AtaraxisEncryptGUI
 		buttonEncryptTargetFile.setLayoutData(gridDataEncryptTarget_2);
 		buttonEncryptTargetFile.setImage(ICON_BROWSE);
 		buttonEncryptTargetFile.setToolTipText(s_translations.getString("BROWSE"));
-		buttonEncryptTargetFile.addSelectionListener(new Browse(ENCRYPT_TARGET, s_textEncryptTarget, guiHelper, s_translations));
+		buttonEncryptTargetFile.addSelectionListener(new Browse(GUIHelper.ENCRYPT_TARGET, s_textEncryptTarget, guiHelper, s_translations));
 		new Label(s_compositeEncrypt, SWT.NONE);
 
-		buttonEncryptSource.addSelectionListener(new Browse(ENCRYPT_SOURCE, s_textEncryptSource, s_textEncryptTarget, guiHelper, s_translations));
+		
+		// Set Dialog by selectionListener
+		openDialogAdapter = new Browse(GUIHelper.ENCRYPT_SOURCE, opearateOnFolder, s_textEncryptSource, s_textEncryptTarget, guiHelper, s_translations);
+		buttonEncryptSource.addSelectionListener(openDialogAdapter);
+		buttonEncryptSourceFolder.addSelectionListener(new SelectionAdapter()
+		{
+			public void widgetSelected(SelectionEvent e)
+			{
+				if(buttonEncryptSourceFolder.getSelection())
+				{
+					LOGGER.debug("buttonEncryptSourceFolder is selected");	
+					opearateOnFolder = true;
+					
+					buttonEncryptSource.removeSelectionListener(openDialogAdapter);
+					openDialogAdapter = new Browse(GUIHelper.ENCRYPT_SOURCE, opearateOnFolder, s_textEncryptSource, s_textEncryptTarget, guiHelper, s_translations);
+					buttonEncryptSource.addSelectionListener(openDialogAdapter);
+					
+				}
+			}
+		});
+		buttonEncryptSourceFile.addSelectionListener(new SelectionAdapter()
+		{
+			public void widgetSelected(SelectionEvent e)
+			{
+				if(buttonEncryptSourceFile.getSelection())
+				{
+					LOGGER.debug("buttonEncryptSourceFile is selected");	
+					opearateOnFolder = false;
+					
+					buttonEncryptSource.removeSelectionListener(openDialogAdapter);
+					openDialogAdapter = new Browse(GUIHelper.ENCRYPT_SOURCE, opearateOnFolder, s_textEncryptSource, s_textEncryptTarget, guiHelper, s_translations);
+					buttonEncryptSource.addSelectionListener(openDialogAdapter);
+				}
+			}
+		});
+		
 		dtEncryptSource.addDropListener(new DropTargetAdapterSource(s_textEncryptSource, s_textEncryptTarget, true));
 		// ##################### Composite Encrypt, Buttons ####################
 

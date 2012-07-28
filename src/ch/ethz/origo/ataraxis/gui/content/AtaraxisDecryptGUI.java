@@ -270,7 +270,7 @@ public class AtaraxisDecryptGUI
 		});
 		new Label(s_compositeDecrypt, SWT.NONE);
 
-		buttonDecryptSourceFile.addSelectionListener(new Browse(DECRYPT_SOURCE, s_textDecryptSource,s_textDecryptTarget, guiHelper, s_translations));
+		buttonDecryptSourceFile.addSelectionListener(new Browse(DECRYPT_SOURCE, false, s_textDecryptSource,s_textDecryptTarget, guiHelper, s_translations));
 		dtDecryptSource.addDropListener(new DropTargetAdapterSource(s_textDecryptSource, s_textDecryptTarget, false));		
 		s_buttonDecryptDelete = new Button(s_compositeDecrypt, SWT.CHECK);
 		s_buttonDecryptDelete.setText(s_translations.getString("BUTTON.DELETE.SRC"));

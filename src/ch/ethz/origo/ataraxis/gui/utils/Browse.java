@@ -39,25 +39,14 @@ public final class Browse extends SelectionAdapter
 	 */
 	private static final Logger LOGGER = Logger.getLogger(AtaraxisEncryptGUI.class);
 
+	private boolean opearateOnFolder = false;
 	
-	private static final int FILE = 1;
-	private static final int FOLDER = 2;
-	
-	private static int s_encryptFiletype = 0;
-	private static int s_shredFiletype = 0;
-	
-	int action;
-	int filetype = FILE;
-	Text sourceText;
-	Text targetText;
+	private int action;
+	private Text sourceText;
+	private Text targetText;
 
 	private GUIHelper guiHelper;
 	private ResourceBundle s_translations;
-
-	private static final int ENCRYPT_SOURCE = 1;
-	private static final int ENCRYPT_TARGET = 2;
-	private static final int DECRYPT_TARGET = 4;
-	private static final int SHRED_SOURCE = 5;
 	
 	public Browse(int action, Text source, GUIHelper guiHelper, ResourceBundle s_translations)
 	{
@@ -67,31 +56,19 @@ public final class Browse extends SelectionAdapter
 		this.s_translations = s_translations;
 	}
 	
-	public Browse(int action, Text source, Text target, GUIHelper guiHelper, ResourceBundle s_translations)
+	public Browse(int action, boolean opearateOnFolder, Text source, Text target, GUIHelper guiHelper, ResourceBundle s_translations)
 	{
 		this.action = action;
 		sourceText = source;
 		targetText = target;
 		this.guiHelper = guiHelper;
 		this.s_translations = s_translations;
+		this.opearateOnFolder = opearateOnFolder;
 	}
 
 	public void widgetSelected(SelectionEvent e)
 	{
-		// if called from shred source, then set filetype (file/folder)
-		if (action == SHRED_SOURCE)
-		{
-			this.filetype = s_shredFiletype;
-			LOGGER.debug("Browse in SHRED_SOURCE");
-		}
-		// if called from encrypt source, then set filetype (file/folder)
-		else if(action == ENCRYPT_SOURCE)
-		{
-			this.filetype = s_encryptFiletype;
-			LOGGER.debug("Browse in ENCRYPT_SOURCE");
-		}
-
-		if (filetype == FOLDER)
+		if (opearateOnFolder)
 		{
 			guiHelper.browseOpenFolder(action, sourceText, targetText, s_translations);
 			LOGGER.debug("FOLDER (open)");
@@ -99,7 +76,7 @@ public final class Browse extends SelectionAdapter
 		else
 		{
 			LOGGER.debug("FILE (open or save)");
-			if(action == ENCRYPT_TARGET || action == DECRYPT_TARGET)
+			if(action == GUIHelper.ENCRYPT_TARGET || action == GUIHelper.DECRYPT_TARGET)
 				guiHelper.browseSave(action, sourceText, s_translations);
 			else
 				guiHelper.browseOpenFile(action, sourceText, targetText, s_translations);

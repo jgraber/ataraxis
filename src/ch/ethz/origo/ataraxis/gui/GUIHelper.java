@@ -69,10 +69,11 @@ public class GUIHelper
 
 	
 	// Actions for browse
-	private static final int ENCRYPT_SOURCE = 1;
-	private static final int ENCRYPT_TARGET = 2;
-	private static final int DECRYPT_SOURCE = 3;
-	private static final int SHRED_SOURCE = 5;
+	public static final int ENCRYPT_SOURCE = 1;
+	public static final int ENCRYPT_TARGET = 2;
+	public static final int DECRYPT_SOURCE = 3;
+	public static final int DECRYPT_TARGET = 4;
+	public static final int SHRED_SOURCE = 5;
 	
 	// Paths
 	private static final String APPL_DIR = System.getProperty("user.dir");

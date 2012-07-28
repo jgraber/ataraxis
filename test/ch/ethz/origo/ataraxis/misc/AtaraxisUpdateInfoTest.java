@@ -97,7 +97,7 @@ public class AtaraxisUpdateInfoTest
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo(new NetworkUpdateCheck(configuration));
 		
 		updateInfo.existNewerVersion("3.0.0");
-		assertEquals("1.2.0",updateInfo.getCurrentVersion());
+		assertEquals("1.3.1",updateInfo.getCurrentVersion());
 		assertEquals("http://ataraxis.origo.ethz.ch/",updateInfo.getCurrentURL());
 	}
 	
@@ -121,7 +121,7 @@ public class AtaraxisUpdateInfoTest
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo(new NetworkUpdateCheck(configuration));
 		
 		updateInfo.existNewerVersion("3.0.0");
-		assertEquals("1.2.0",updateInfo.getCurrentVersion());
+		assertEquals("1.3.1",updateInfo.getCurrentVersion());
 	}
 
 	@Test

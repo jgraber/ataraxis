@@ -60,13 +60,10 @@ public class AtaraxisShrederGUI
 	
 
 	// settings for shred
-	private static final int FILE = 1;
-	private static final int FOLDER = 2;
-	private static final int SHRED_SOURCE = 5;
+	private static boolean opearateOnFolder = false;
 	private int s_deleteDefault;
-	@SuppressWarnings("unused")
-	private static int s_shredFiletype = 0;
 	private Text s_textShredSource;
+	private static SelectionAdapter openDialogAdapter;
 
 	private Label s_labelDeletion;
 	private Button buttonShred;
@@ -149,17 +146,7 @@ public class AtaraxisShrederGUI
 		buttonShredFile.setImage(ICON_FILE);
 		buttonShredFile.setToolTipText(s_translations.getString("FILE"));
 		buttonShredFile.setSelection(true);
-		buttonShredFile.addSelectionListener(new SelectionAdapter()
-		{
-			public void widgetSelected(SelectionEvent e)
-			{
-				if(buttonShredFile.getSelection())
-				{
-					LOGGER.debug("buttonShredFile is selected");	
-					s_shredFiletype = FILE;
-				}
-			}
-		});
+		
 
 		final Button buttonShredFolder = new Button(groupShred, SWT.RADIO);
 		final GridData gridDataShred_3 = new GridData(SWT.RIGHT, SWT.CENTER, false, false);
@@ -168,17 +155,7 @@ public class AtaraxisShrederGUI
 		buttonShredFolder.setLayoutData(gridDataShred_3);
 		buttonShredFolder.setImage(ICON_FOLDER);
 		buttonShredFolder.setToolTipText(s_translations.getString("FOLDER"));
-		buttonShredFolder.addSelectionListener(new SelectionAdapter()
-		{
-			public void widgetSelected(SelectionEvent e)
-			{
-				if(buttonShredFolder.getSelection())
-				{
-					LOGGER.debug("buttonShredFolder is selected");	
-					s_shredFiletype = FOLDER;
-				}
-			}
-		});
+		
 
 		final Button buttonShredBrowse = new Button(groupShred, SWT.NONE);
 		final GridData gridDataShred_4 = new GridData(SWT.RIGHT, SWT.CENTER, false, false);
@@ -187,7 +164,45 @@ public class AtaraxisShrederGUI
 		buttonShredBrowse.setLayoutData(gridDataShred_4);
 		buttonShredBrowse.setImage(ICON_BROWSE);
 		buttonShredBrowse.setToolTipText(s_translations.getString("BROWSE"));
-		buttonShredBrowse.addSelectionListener(new Browse(SHRED_SOURCE,s_textShredSource, null,guiHelper, s_translations));
+		
+		
+		
+		openDialogAdapter = new Browse(GUIHelper.SHRED_SOURCE,opearateOnFolder, s_textShredSource, null,guiHelper, s_translations);
+		buttonShredBrowse.addSelectionListener(openDialogAdapter);
+		
+		buttonShredFolder.addSelectionListener(new SelectionAdapter()
+		{
+			public void widgetSelected(SelectionEvent e)
+			{
+				if(buttonShredFolder.getSelection())
+				{
+					LOGGER.debug("buttonShredFolder is selected");	
+					opearateOnFolder = true;
+					
+					buttonShredBrowse.removeSelectionListener(openDialogAdapter);
+					openDialogAdapter = new Browse(GUIHelper.SHRED_SOURCE,opearateOnFolder, s_textShredSource, null,guiHelper, s_translations);
+					buttonShredBrowse.addSelectionListener(openDialogAdapter);
+				}
+			}
+		});
+		
+		buttonShredFile.addSelectionListener(new SelectionAdapter()
+		{
+			public void widgetSelected(SelectionEvent e)
+			{
+				if(buttonShredFile.getSelection())
+				{
+					LOGGER.debug("buttonShredFile is selected");	
+					opearateOnFolder = false;
+					
+					buttonShredBrowse.removeSelectionListener(openDialogAdapter);
+					openDialogAdapter = new Browse(GUIHelper.SHRED_SOURCE,opearateOnFolder, s_textShredSource, null,guiHelper, s_translations);
+					buttonShredBrowse.addSelectionListener(openDialogAdapter);
+				}
+			}
+		});
+		
+		
 		new Label(s_compositeShred, SWT.NONE);
 		new Label(s_compositeShred, SWT.NONE);
 
