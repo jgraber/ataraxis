@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<!DOCTYPE ataraxis SYSTEM "./application_data/config/ataraxis.dtd">
+<ataraxis>
+ <group id="E-Mail"/>
+
+</ataraxis>

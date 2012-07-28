@@ -1,0 +1,5 @@
+[Autorun]
+Open=AtaraxiS\autostart.bat
+Action=Start AtaraxiS
+Icon=AtaraxiS\application_data\icons\AtaraxiS.ico
+Label=AtaraxiS

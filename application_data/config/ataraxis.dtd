@@ -1,0 +1,9 @@
+<!ELEMENT ataraxis (group|account)*>
+<!ELEMENT group (account)*>
+<!ATTLIST group id ID #REQUIRED>
+<!ELEMENT account (name?,password?,link?,comment?)>
+<!ATTLIST account id ID #REQUIRED>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT password (#PCDATA)>
+<!ELEMENT link (#PCDATA)>
+<!ELEMENT comment (#PCDATA)>

@@ -1,0 +1,410 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/* ============================================================================
+ * Copyright 2006 - 2010 Johnny Graber & Andreas Muedespacher
+/* ============================================================================
+ * 
+ * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
+ * licensed under the European Public License, Version 1.1 only (the "Licence").
+ * You may not use this work except in compliance with the Licence. 
+ * 
+ * You may obtain a copy of the Licence at: 
+ * http://ec.europa.eu/idabc/eupl5
+ * 
+ * Unless required by applicable law or agreed to in writing, software 
+ * distributed under the Licence is distributed on an "AS IS" basis, 
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * 
+ * See the Licence for the specific language governing permissions and 
+ * limitations under the Licence. 
+ */
+-->
+
+<project basedir="." default="usage" name="AtaraxiS">
+    <description>
+    ### Ant file for the AtaraxiS project by J. Graber + A. Muedespacher, 2006 - 2010 ###
+    </description>
+   	
+	<!-- build-specific properties -->
+	<property file="build.properties"/>
+	
+	<!-- ditribution file, a zip of everything -->
+	<property name="dist.file" location="${basedir}/AtaraxiS.zip" />
+	
+	<property name="jar.file" location="${basedir}/AtaraxiS.jar" />
+	
+	<property name="src.dir" location="${basedir}/src" />
+	
+	<property name="bin.dir" location="${basedir}/bin" />
+	
+	<property name="test.src.dir" location="${basedir}/test" />
+	
+	<property name="test.report.dir" location="${test.src.dir}/report" />
+		
+    <path id="org.eclipse.swt.classpath">
+        <pathelement location="${org.eclipse.swt.location}/."/>
+        <pathelement location="${org.eclipse.swt.location}/swt.jar"/>
+    </path>
+		
+    <path id="ataraxis.classpath">
+        <pathelement location="${bc.jar}"/>
+		<pathelement location="${log.jar}"/>
+		<pathelement location="${bc.jar}"/>
+		<pathelement location="${swt.jar}"/>
+		<pathelement location="${jdom.jar}"/>
+	    <pathelement location="${jaxen.jar}"/>
+		<pathelement location="."/>
+    </path>
+
+	<path id="ataraxisLinux.classpath">
+        <pathelement location="${bc.jar}"/>
+		<pathelement location="${log.jar}"/>
+		<pathelement location="${swtLinux.jar}"/>
+		<pathelement location="${jdom.jar}"/>
+	    <pathelement location="${jaxen.jar}"/>
+		<pathelement location="."/>
+    </path>
+
+    <path id="jar.classpath">
+        <pathelement location="${bc.jar}"/>
+		<pathelement location="${log.jar}"/>
+		<pathelement location="${swt.jar}"/>
+		<pathelement location="${jdom.jar}"/>
+	    <pathelement location="${jaxen.jar}"/>
+    </path>
+	
+    <path id="jarGeneric.classpath">
+        <pathelement location="${bc.jar}"/>
+		<pathelement location="${log.jar}"/>
+		<pathelement location="${jdom.jar}"/>
+	    <pathelement location="${jaxen.jar}"/>
+    </path>
+
+	<path id="test.classpath">
+		<pathelement location="${junit.jar}/."/>
+		<pathelement location="${bc.jar}"/>
+    	<pathelement location="${jmockit.jar}"/>
+	</path>
+	
+	<!-- Usage -->
+	<target name="usage">
+		<echo message="Available targets" />
+		<echo message="   usage: shows this explanation" />
+		<echo message="   init: creates all required directories" />
+		<echo message="   build: compiles all java files" />
+		<echo message="   test: runs JUnit Tests" />
+		<echo message="   javadoc: create javadoc-files" />
+		<echo message="   jar: create an executable jar" />
+		<echo message="   clean-all: removes all the files in build" />
+		<echo message="   " />
+		<echo message="   run: show SWT-GUI on Windows" />
+		<echo message="   runLinux: show SWT-GUI on the LINUX Operatingsystem" />
+		<echo message="   " />
+		<echo message="   distGeneric: generate Distribution for Windows and Linux" />
+		<echo message="   " />
+		<echo message="   testsuite: run all Tests in AtaraxisTestSuite" />
+		<echo message="   testsuiteLinux: run all Tests in AtaraxisTestSuite" />
+	</target>
+
+	<!-- directory that contains emma.jar and emma_ant.jar: -->
+	<property name="emma.dir" value="${basedir}/lib/emma" />
+
+	<path id="emma.lib" >
+		<pathelement location="${emma.dir}/emma.jar" />
+		<pathelement location="${emma.dir}/emma_ant.jar" />
+	</path>
+
+	<taskdef resource="emma_ant.properties" classpathref="emma.lib" />
+		
+    <target name="clean-bin" description="deletes everything in /bin and the jar-file">
+        <delete dir="${bin.dir}"/> 
+    	
+    </target>
+	
+	<target name="clean-test" description="deletes test classes in /bin">
+		<available file="${jar.file}" property="jar.notexists"/>
+        <delete dir="${test.report.dir}"/> 
+		<mkdir dir="${bin.dir}"/>
+    	<delete>
+    		<fileset dir="${bin.dir}" includes="**/*Test*.*"/>
+    	</delete>
+	</target>
+	
+    <target name="clean-all" depends="clean-test, clean-bin" 
+    	description="deletes everything in /bin and /doc /dist and the jar-file">
+    	<delete dir="doc"/>
+    	<delete dir="dist"/>
+    	<delete dir="${test.dir}"/>
+    	<delete dir="${test.repoort.dir}"/>
+    	<delete file="${jar.file}"/>
+    	<delete file="${dist.file}"/> 
+		<delete file="${basedir}/AtaraxiS_Generic.tar.gz"/>
+    </target>
+
+    <target name="build" depends="clean-bin" description="builds classes">
+		<mkdir dir="${bin.dir}"/>
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" destdir="${bin.dir}" target="1.6">
+            <src path="${src.dir}"/>
+            <classpath refid="ataraxis.classpath"/>
+        	<exclude name="*.png,*.xml"/>
+        </javac>
+    </target>
+	
+	<target name="build-test" depends="clean-test" description="builds test classes" >
+		<echo message="[AtaraxiS] Building test classes"/>
+		<mkdir dir="${bin.dir}"/>
+	    <echo message="${ant.project.name}: ${ant.file}"/>
+	    <javac debug="true" destdir="${bin.dir}">
+	    	<src path="${test.src.dir}"/>
+	    	<classpath refid="ataraxis.classpath"/>
+	        <classpath refid="test.classpath"/>
+	    	<classpath location="${test.dependent.jars}"/>
+	        <exclude name="*.png,*.xml"/>
+	    </javac>
+	</target>
+	
+
+
+
+	<!--===========================================-->
+	<!-- test: All JUnit Test cases                -->
+	<!--===========================================-->
+	<target name="test" depends="build, build-test" description="runs JUnit tests">		
+		<mkdir dir="${test.report.dir}" />
+		<junit printsummary="withOutAndErr">
+			<classpath location="bin/"/>
+	    	<classpath refid="ataraxis.classpath"/>
+	        <classpath refid="test.classpath"/>
+			<formatter type="plain"/>
+			<batchtest fork="yes" todir="${test.report.dir}">
+			    <fileset dir="${test.src.dir}">
+			    	<include name="**/*Test.java"/>
+			    </fileset>
+			</batchtest>
+		</junit>
+	</target>
+   
+
+	<!--===========================================-->
+	<!-- test: JUnit Test suite                    -->
+	<!--===========================================-->
+	<target name="testsuite" depends="build, build-test" description="runs JUnit testsuite">		
+		<mkdir dir="${test.report.dir}" />
+		<junit printsummary="withOutAndErr">
+			<classpath location="bin/"/>
+	    	<classpath refid="ataraxis.classpath"/>
+	        <classpath refid="test.classpath"/>
+			<jvmarg value="-javaagent:lib/jmockit.jar"/>
+			<formatter type="xml"/>
+			<batchtest fork="yes" todir="${test.report.dir}">
+			    <fileset dir="${test.src.dir}">
+			    	<include name="**/AtaraxisTestSuite.java"/>
+			    </fileset>
+			</batchtest>
+		</junit>
+	</target>
+	
+	<!--===========================================-->
+	<!-- test: JUnit Test suite (Linux)            -->
+	<!--===========================================-->
+	<target name="testsuiteLinux" depends="build, build-test" description="runs JUnit testsuite (Linux)">		
+		<mkdir dir="${test.report.dir}" />
+		<junit printsummary="withOutAndErr">
+			<classpath location="bin/"/>
+	    	<classpath refid="ataraxisLinux.classpath"/>
+	        <classpath refid="test.classpath"/>
+			<jvmarg value="-javaagent:lib/jmockit.jar"/>
+			<formatter type="xml"/>
+			<batchtest fork="yes" todir="${test.report.dir}">
+			    <fileset dir="${test.src.dir}">
+			    	<include name="**/AtaraxisTestSuite.java"/>
+			    </fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<!--===========================================-->
+	<!-- Jar: create the Application as a jar-file -->
+	<!--===========================================-->
+	<target name="jar" depends="clean-bin, build" description="generates a JAR-file">
+		<tstamp>
+        	<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
+        </tstamp>
+		<pathconvert pathsep=" " property="classpath.mani" refid="jar.classpath">
+        	<map from="${basedir}${file.separator}" to="" />
+	    </pathconvert>
+		
+	  	<jar destfile="${jar.file}" basedir="bin">
+        	<manifest>
+		    	<attribute name="Main-Class" value="ch.ethz.origo.ataraxis.gui.AtaraxisStarter"/>
+            	<attribute name="Class-Path" value="${classpath.mani} "/>
+            	<section name="AtaraxiS">
+              		<attribute name="Built-By" value="J. Graber + A. Muedespacher, HTI Biel"/>
+              		<attribute name="Implementation-Version" value="1.0"/>
+              		<attribute name="Built-Date" value="${TODAY}"/>
+            	</section>
+       		</manifest>  
+		</jar>	
+	</target>
+
+
+	<!--===========================================-->
+	<!-- jarGeneric: create a generic jar-file     -->
+	<!--===========================================-->
+	<target name="jarGeneric" depends="clean-bin, build" description="generates a JAR-file">
+		<tstamp>
+        	<format property="TODAY" pattern="yyyy-MM-dd HH:mm:ss" />
+        </tstamp>
+		<pathconvert pathsep=" " property="classpath.mani" refid="jarGeneric.classpath">
+        	<map from="${basedir}${file.separator}" to="" />
+	    </pathconvert>
+		
+	  	<jar destfile="${jar.file}" basedir="bin">
+        	<manifest>
+		    	<attribute name="Main-Class" value="ch.ethz.origo.ataraxis.gui.AtaraxisStarter"/>
+            	<attribute name="Class-Path" value="${classpath.mani} "/>
+            	<section name="AtaraxiS">
+              		<attribute name="Built-By" value="J. Graber + A. Muedespacher, HTI Biel"/>
+              		<attribute name="Implementation-Version" value="1.0"/>
+              		<attribute name="Built-Date" value="${TODAY}"/>
+            	</section>
+       		</manifest>  
+		</jar>	
+	</target>
+	
+	<!-- only for testing the build.xml file!!!! -->
+	<target name="cleanbuild" depends="clean-bin, build" />
+	
+
+	<!--===========================================-->
+	<!-- distGeneric: create a generic Distribution-->
+	<!--===========================================-->
+    <target name="distGeneric" depends="jarGeneric" description="distribution for Windows and Linux">
+		<delete dir="distGeneric"/>	
+		<mkdir dir="distGeneric"/>
+    	<copy todir="distGeneric/lib">
+    	    <fileset dir="lib">
+				<exclude name="junit-4.4.jar"/>
+				<exclude name="**/swt/**"/>
+				<exclude name="commons-cli-1.0.jar"/>
+				<exclude name="**/emma/**"/>
+				<exclude name="jmockit*"/>
+				<exclude name="tools.jar"/>
+    	    </fileset>
+    	</copy>
+    	<copy todir="distGeneric/application_data">
+			<fileset dir="application_data">
+				<exclude name="ataraxis.log"/>
+				<exclude name="userBackup.zip"/>
+			</fileset>
+		</copy>
+    	<copy todir="distGeneric/application_data/user_data_template">
+        	<fileset dir="application_data/user_data_template"/>
+        </copy>
+    	<copy todir="distGeneric" file="${jar.file}"/>
+		<copy todir="distGeneric" file="distribution_data/autostart.bat"/>
+		<copy todir="distGeneric" file="distribution_data/startWin_LocalJava.bat"/>
+		<copy todir="distGeneric" file="distribution_data/startWin.bat"/>
+		<copy todir="distGeneric" file="distribution_data/Backup_Windows.bat"/>
+		<copy todir="distGeneric" file="distribution_data/startLinux.sh"/>
+		<copy todir="distGeneric" file="distribution_data/startLinux_LocalJava.sh"/>
+		<copy todir="distGeneric" file="distribution_data/Backup_Linux.sh"/>
+		<copy todir="distGeneric" file="distribution_data/startWin_LocalJava_64bit.bat"/>
+		<copy todir="distGeneric" file="distribution_data/startWin_64bit.bat"/>
+		<copy todir="distGeneric" file="distribution_data/Backup_Windows_64bit.bat"/>
+		<copy todir="distGeneric" file="distribution_data/startLinux_64bit.sh"/>
+		<copy todir="distGeneric" file="distribution_data/startLinux_LocalJava_64bit.sh"/>
+		<copy todir="distGeneric" file="distribution_data/Backup_Linux_64bit.sh"/>
+		<copy todir="distGeneric/application_data" file="distribution_data/ataraxis.log"/>
+		<copy todir="distGeneric" file="distribution_data/startMac.command"/>
+    	<copy todir="distGeneric" file="LICENCE.pdf"/>
+    	<copy todir="distGeneric" file="LICENCE.txt"/>
+		<attrib readonly="true">
+  			<fileset dir="distGeneric">
+    			<exclude name="distGeneric/user_data/"/>
+				<exclude name="distGeneric/application_data/ataraxis.log"/>
+				<exclude name="distGeneric/application_data/config/log4j.properties"/>
+  			</fileset>
+		</attrib>
+
+		<attrib file="distGeneric/application_data/ataraxis.log" readonly="false"/>
+		<attrib file="distGeneric/application_data/config/log4j.properties" readonly="false"/>
+		<attrib file="distGeneric/application_data/config/network.properties" readonly="false"/>
+		
+    	<mkdir dir="distGeneric/user_data"/>
+    	
+  		<zip destfile="./AtaraxiS_Generic.zip">
+    		<zipfileset dir="distGeneric/" prefix="AtaraxiS/" />
+   			<zipfileset dir="." includes="distribution_data/autorun.inf" fullpath="Autorun.inf" />
+			<zipfileset dir="." includes="distribution_data/usbagent.inf" fullpath="usbagent.inf"/>
+  		</zip>
+		
+		<tar longfile="gnu"
+	     destfile="./AtaraxiS_Generic.tar.gz" excludes="**" compression="gzip" basedir="distGeneric">
+			<tarfileset dir="distGeneric" prefix="AtaraxiS">
+	           <include name="**"/>
+	           <exclude name="*.command"/>
+	           <exclude name="*sh"/>
+			</tarfileset>
+			<tarfileset dir="distGeneric" filemode="755" prefix="AtaraxiS" >
+	           <include name="*.command"/>
+	           <include name="*.sh"/>
+			</tarfileset>
+		</tar>
+    </target>
+	
+	
+	<!--===========================================-->
+	<!-- javadoc: generate Javadoc files           -->
+	<!--===========================================-->
+    <target name="javadoc" description="generate JavaDoc">
+    	<javadoc access="private" author="true" 
+    		classpath="${ataraxis.classpath}"
+    		destdir="doc" 
+            windowtitle="AtaraxiS"               
+    		nodeprecated="false" 
+    		nodeprecatedlist="false" 
+    		noindex="false" 
+    		nonavbar="false" 
+    		notree="false" 
+    		packagenames="ch.ethz.origo.ataraxis.*" 
+    		source="1.6" sourcepath="src" 
+    		splitindex="true" 
+    		use="true" 
+    		version="true">
+            <link href="http://download-llnw.oracle.com/javase/6/docs/api/" />
+    		<link href="http://jdom.org/docs/apidocs/" />
+    		<link href="http://help.eclipse.org/help31/nftopic/org.eclipse.platform.doc.isv/reference/api/" />
+		<link href="http://logging.apache.org/log4j/docs/api/" />
+    	</javadoc>
+    </target>
+
+	
+	<!--===========================================-->
+	<!-- run: start AtaraxiS (Windows)             -->
+	<!--===========================================-->
+    <target name="run" depends="build" description="Starts the GUI-Version">
+        <java classname="ch.ethz.origo.ataraxis.gui.AtaraxisStarter" failonerror="true" fork="yes">
+        	<!--<jvmarg line="-Djava.library.path=${swt.home}"/>-->
+        	<classpath location="bin/"/>
+            <classpath refid="ataraxis.classpath"/>
+        </java>
+    </target>
+	
+	
+	<!--===========================================-->
+	<!-- runLinux: start AtaraxiS (Linux)          -->
+	<!--===========================================-->
+    <target name="runLinux" depends="build" description="Starts the GUI-Version (Linux)">
+        <emmajava enabled="true" libclasspathref="emma.lib"  fullmetadata="yes" classname="ch.ethz.origo.ataraxis.gui.AtaraxisStarter" failonerror="true" fork="yes">
+        	<!--<jvmarg line="-Djava.library.path=${swt.home}"/>-->
+        	<classpath location="bin/"/>
+            <classpath refid="ataraxisLinux.classpath"/>
+	 <html outfile="emma/coverage.html"  />
+	<filter includes="Main, ch.ethz.origo.*" />
+        </emmajava>
+    </target>
+
+	<target name="run-clean" depends="clean-bin, build, run"/>
+</project>
