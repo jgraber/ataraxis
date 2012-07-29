@@ -8,9 +8,9 @@ java -d64 -version
 
 REM if it had no error we use the 64Bit SWT library
 IF %errorlevel% == 0 (
-	start javaw.exe -classpath lib\swt_64.jar;AtaraxiS.jar ch.ethz.origo.ataraxis.gui.AtaraxisStarter
+	start javaw.exe -classpath lib\swt_64.jar;AtaraxiS.jar ataraxis.gui.AtaraxisStarter
 	goto :eof
 )
 
 REM otherwise we use the 32Bit SWT library
-start javaw.exe -classpath lib\swt.jar;AtaraxiS.jar ch.ethz.origo.ataraxis.gui.AtaraxisStarter
+start javaw.exe -classpath lib\swt.jar;AtaraxiS.jar ataraxis.gui.AtaraxisStarter

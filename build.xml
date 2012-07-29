@@ -247,7 +247,7 @@
 		
 	  	<jar destfile="${jar.file}" basedir="bin">
         	<manifest>
-		    	<attribute name="Main-Class" value="ch.ethz.origo.ataraxis.gui.AtaraxisStarter"/>
+		    	<attribute name="Main-Class" value="ataraxis.gui.AtaraxisStarter"/>
             	<attribute name="Class-Path" value="${classpath.mani} "/>
             	<section name="AtaraxiS">
               		<attribute name="Built-By" value="J. Graber + A. Muedespacher, HTI Biel"/>
@@ -272,7 +272,7 @@
 		
 	  	<jar destfile="${jar.file}" basedir="bin">
         	<manifest>
-		    	<attribute name="Main-Class" value="ch.ethz.origo.ataraxis.gui.AtaraxisStarter"/>
+		    	<attribute name="Main-Class" value="ataraxis.gui.AtaraxisStarter"/>
             	<attribute name="Class-Path" value="${classpath.mani} "/>
             	<section name="AtaraxiS">
               		<attribute name="Built-By" value="J. Graber + A. Muedespacher, HTI Biel"/>
@@ -379,7 +379,7 @@
     		noindex="false" 
     		nonavbar="false" 
     		notree="false" 
-    		packagenames="ch.ethz.origo.ataraxis.*" 
+    		packagenames="ataraxis.*" 
     		source="1.6" sourcepath="src" 
     		splitindex="true" 
     		use="true" 
@@ -396,7 +396,7 @@
 	<!-- run: start AtaraxiS (Windows)             -->
 	<!--===========================================-->
     <target name="run" depends="build" description="Starts the GUI-Version">
-        <java classname="ch.ethz.origo.ataraxis.gui.AtaraxisStarter" failonerror="true" fork="yes">
+        <java classname="ataraxis.gui.AtaraxisStarter" failonerror="true" fork="yes">
         	<!--<jvmarg line="-Djava.library.path=${swt.home}"/>-->
         	<classpath location="bin/"/>
             <classpath refid="ataraxis.classpath"/>
@@ -408,7 +408,7 @@
 	<!-- runLinux: start AtaraxiS (Linux)          -->
 	<!--===========================================-->
     <target name="runLinux" depends="build" description="Starts the GUI-Version (Linux)">
-        <emmajava enabled="true" libclasspathref="emma.lib"  fullmetadata="yes" classname="ch.ethz.origo.ataraxis.gui.AtaraxisStarter" failonerror="true" fork="yes">
+        <emmajava enabled="true" libclasspathref="emma.lib"  fullmetadata="yes" classname="ataraxis.gui.AtaraxisStarter" failonerror="true" fork="yes">
         	<!--<jvmarg line="-Djava.library.path=${swt.home}"/>-->
         	<classpath location="bin/"/>
             <classpath refid="ataraxisLinux.classpath"/>
