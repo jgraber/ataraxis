@@ -151,6 +151,7 @@ public class AtaraxisBackupTest
 	        	}
 	        }
 		}		
+		zippedFile.close();
 
 		Assert.assertTrue("Did not find HomeDirectory", foundHome);
 		Assert.assertTrue("Did not find UserA", foundUser);
