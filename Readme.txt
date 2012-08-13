@@ -1,7 +1,7 @@
 AtaraxiS
 ========
 
-This application is copyrighted © 2006 - 2010 Johnny Graber & Andreas Muedespacher
+This application is copyrighted © 2006 - 2012 Johnny Graber & Andreas Muedespacher
 
 
 Please consider also all other copyright mentions that are present in all used 
