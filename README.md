@@ -26,7 +26,7 @@ ist unter der EUPL v1.1 lizenziert und auf [GitHub](https://github.com/jgraber/a
 
 * AtaraxiS v1.2.0 (16. Oktober 2010) [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_120.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_120.tar.gz) 
 
-* AtaraxiS v1.1.1 (1. August 2008) [(http://jgraber.ch/AtaraxiS/AtaraxiS_111.zip *.zip]) / [(http://jgraber.ch/AtaraxiS/AtaraxiS_111.tar.gz *.tar.gz]) 
+* AtaraxiS v1.1.1 (1. August 2008) [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_111.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_111.tar.gz) 
 
 * AtaraxiS v1.1.0 (16. Juni 2008) [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_110.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_110.tar.gz) 
 
@@ -51,9 +51,9 @@ Um AtaraxiS selber weiterzuentwickeln gibt es diese Voraussetzungen
 `ant testsuite`
 
 ### Verwendete Komponenten
-* Bouncy Castle: Copyright © 2000-2006 The Legion Of The Bouncy Castle
-* JDom: Copyright © 2000-2004 Jason Hunter & Brett McLaughlin. All rights reserved.
-* Jaxen: Copyright 2003-2006 The Werken Company. All Rights Reserved.
-* The JMockit Testing Toolkit: Copyright © 2006-2009 Rogério Liesenfeld
-* Log4J: Copyright © 2007 Apache Software Foundation is licensed under Apache 2.0
-* SWT: Copyright © The Eclipse Foundation licensed under Eclipse Public License - Version 1.0
+* [Bouncy Castle](http://www.bouncycastle.org/): Copyright (c) 2000-2006 The Legion Of The Bouncy Castle
+* [JDom](http://www.jdom.org/): Copyright (c) 2000-2004 Jason Hunter & Brett McLaughlin. All rights reserved.
+* [Jaxen](http://jaxen.codehaus.org/releases.html): Copyright 2003-2006 The Werken Company. All Rights Reserved.
+* [The JMockit Testing Toolkit](http://code.google.com/p/jmockit/): Copyright (c) 2006-2009 Rogério Liesenfeld
+* [Log4J](http://logging.apache.org/log4j/): Copyright (c) 2007 Apache Software Foundation is licensed under Apache 2.0
+* [SWT](http://eclipse.org/swt/): Copyright (c) The Eclipse Foundation licensed under Eclipse Public License - Version 1.0
