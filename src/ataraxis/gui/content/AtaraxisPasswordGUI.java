@@ -125,7 +125,6 @@ public class AtaraxisPasswordGUI {
 	private Button saveButton;
 
 	// vars to control program flow
-	protected String s_pErrorElementChange;
 	protected boolean s_changedByEdit;
 	protected boolean s_allowAccountchange = true;
 	protected AccountEntry s_pLastSelectedAccount;
@@ -852,7 +851,7 @@ public class AtaraxisPasswordGUI {
 								}
 								else 
 								{
-									guiHelper.displayErrorMessage(s_translations.getString("ERROR"), s_pErrorElementChange);
+									guiHelper.displayErrorMessage(s_translations.getString("ERROR"), s_translations.getString("PWM.ERROR_ELEMENT_CHANGE"));
 									allSaveOK = false;
 								}
 							}
