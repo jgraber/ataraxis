@@ -331,6 +331,8 @@
     	<copy todir="distGeneric" file="distribution_data/startMac_64bit.command"/>
 		<copy todir="distGeneric" file="LICENCE.pdf"/>
     	<copy todir="distGeneric" file="LICENCE.txt"/>
+		<copy todir="distGeneric" file="README.md"/>
+		<copy todir="distGeneric" file="changelog.md"/>
 		<attrib readonly="true">
   			<fileset dir="distGeneric">
     			<exclude name="distGeneric/user_data/"/>

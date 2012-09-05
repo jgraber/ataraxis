@@ -1,5 +1,21 @@
 # Changelog
 
+## AtaraxiS 1.4.0 (05. 09. 2012)
+Aktualisierungen:
+* Passwort-Manager: Umbenennen eines Eintrages auf einen bestehenden Namen führte zu Absturz
+* Kleinere Anpassungen am GUI
+* Kleinere Übersetzungskorrekturen
+* Diverse interne Umbauten (vereinfachte Namensgebung für package-Struktur)
+
+Aktualisierte Hilfsbibliotheken:
+* SWT auf 4.2 
+* Bouncycastle auf 1.47
+* Log4J auf 1.2.17
+* Jaxen auf 1.1.4
+* JUnit auf 4.10
+
+
+
 ## AtaraxiS 1.3.1 (30. 11. 2011)
 Korrigierte Fehler
 * Beim Verschlüsseln konnten nur noch Dateien, aber keine Ordner mehr ausgewählt werden.

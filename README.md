@@ -2,27 +2,26 @@
 
 AtaraxiS dient zum sicheren Speichern von Passwörtern und dem Verschlüsseln von Dateien (mittels AES 256).
 AtaraxiS entstand als Diplomarbeit von Johnny Graber und Andreas Müdespacher an der 
-FH Biel und wird seit 2007 weiterentwickelt. 
+FH Biel und wird seit 2007 [weiterentwickelt](https://github.com/jgraber/ataraxis/blob/master/changelog.md). 
 
 ## Download
-Download kompilierter Version bieten wir als [Zip]() (für Windows) und als [Tar]() (für Linux/Mac) an. Der Source Code 
+Download kompilierter Version bieten wir als [Zip](http://jgraber.ch/AtaraxiS/AtaraxiS_140.zip) (für Windows) 
+und als [Tar](http://jgraber.ch/AtaraxiS/AtaraxiS_140.tar.gz) (für Linux/Mac) an. Der Source Code 
 ist unter der EUPL v1.1 lizenziert und auf [GitHub](https://github.com/jgraber/ataraxis) zu finden.
 
 
 ## Update auf neuste Version
- Um die neue Version von AtaraxiS einzusetzen, können Sie so vorgehen:
- * Benennen Sie den Ordner um, in dem die AtaraxiS Software liegt (Als Beispiel: AtaraxiS nach AtaraxiS_alt)
+Um die neue Version von AtaraxiS einzusetzen, können Sie so vorgehen:
+ * Benennen Sie den Ordner um, in dem die AtaraxiS Software liegt (als Beispiel: AtaraxiS nach AtaraxiS_alt)
  * Entpacken Sie die neue Version von AtaraxiS
  * Kopieren Sie den Inhalt des Ordners ''AtaraxiS_alt\user_data\'' in den Ordner ''AtaraxiS\user_data\''.
 
 
 
 ## Ältere Versionen
-* AtaraxiS v1.3.1 (30. November 2011)
-[*.zip](http://download.origo.ethz.ch/ataraxis/3336/AtaraxiS_131.zip) / 
-[*.tar.gz](http://download.origo.ethz.ch/ataraxis/3336/AtaraxiS_131.tar.gz)
+* AtaraxiS v1.3.1 (30. November 2011) [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_131.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_131.tar.gz)
 
-* AtaraxiS v1.3.0 (29. Oktober 2011)  [*.zip](http://download.origo.ethz.ch/ataraxis/3336/AtaraxiS_130.zip) / [*.tar.gz](http://download.origo.ethz.ch/ataraxis/3336/AtaraxiS_130.tar.gz)
+* AtaraxiS v1.3.0 (29. Oktober 2011)  [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_130.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_130.tar.gz)
 
 * AtaraxiS v1.2.0 (16. Oktober 2010) [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_120.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_120.tar.gz) 
 
@@ -51,9 +50,9 @@ Um AtaraxiS selber weiterzuentwickeln gibt es diese Voraussetzungen
 `ant testsuite`
 
 ### Verwendete Komponenten
-* [Bouncy Castle](http://www.bouncycastle.org/): Copyright (c) 2000-2006 The Legion Of The Bouncy Castle
-* [JDom](http://www.jdom.org/): Copyright (c) 2000-2004 Jason Hunter & Brett McLaughlin. All rights reserved.
-* [Jaxen](http://jaxen.codehaus.org/releases.html): Copyright 2003-2006 The Werken Company. All Rights Reserved.
-* [The JMockit Testing Toolkit](http://code.google.com/p/jmockit/): Copyright (c) 2006-2009 Rogério Liesenfeld
-* [Log4J](http://logging.apache.org/log4j/): Copyright (c) 2007 Apache Software Foundation is licensed under Apache 2.0
+* [Bouncy Castle](http://www.bouncycastle.org/): Copyright (c) The Legion Of The Bouncy Castle
+* [JDom](http://www.jdom.org/): Copyright (c) Jason Hunter & Brett McLaughlin. All rights reserved.
+* [Jaxen](http://jaxen.codehaus.org/releases.html): Copyright (c) The Werken Company. All Rights Reserved.
+* [The JMockit Testing Toolkit](http://code.google.com/p/jmockit/): Copyright (c) Rogério Liesenfeld
+* [Log4J](http://logging.apache.org/log4j/): Copyright (c) Apache Software Foundation is licensed under Apache 2.0
 * [SWT](http://eclipse.org/swt/): Copyright (c) The Eclipse Foundation licensed under Eclipse Public License - Version 1.0
