@@ -89,7 +89,7 @@ public class CopyPolicyFiles
 		boolean patchWasOk = false;
 		LOGGER.fatal("JRE path:    " + s_JreSecurityPlace);
 		LOGGER.fatal("JRE version: " + s_JreVersion);
-		if(s_JreVersion.startsWith("1.5") || s_JreVersion.startsWith("1.6") || s_JreVersion.startsWith("1.7"))
+		if(s_JreVersion.startsWith("1.5") || s_JreVersion.startsWith("1.6") || s_JreVersion.startsWith("1.7") || s_JreVersion.startsWith("1.8"))
 		{
 			if(s_JreVersion.startsWith("1.5"))
 			{
@@ -100,6 +100,10 @@ public class CopyPolicyFiles
 				s_PatchedPolicyLoc = s_PatchedPolicyLoc_16;
 			}
 			else if(s_JreVersion.startsWith("1.7"))
+			{
+				s_PatchedPolicyLoc = s_PatchedPolicyLoc_17;
+			}
+			else if(s_JreVersion.startsWith("1.8"))
 			{
 				s_PatchedPolicyLoc = s_PatchedPolicyLoc_17;
 			}
@@ -169,7 +173,7 @@ public class CopyPolicyFiles
 		}
 		else
 		{
-			LOGGER.error("Can only patch Java JRE Version 1.5.x to Java 7");		
+			LOGGER.error("Can only patch Java JRE Version 1.5.x to Java 8");		
 		}
 		
 		return patchWasOk;
