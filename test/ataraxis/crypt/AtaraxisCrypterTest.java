@@ -64,6 +64,7 @@ import ataraxis.crypt.NotImplementedException;
 import ataraxis.crypt.UBERKeyStoreCreator;
 import ataraxis.misc.AtaraxisHashCreator;
 import ataraxis.misc.HashingDigest;
+import ataraxis.util.FileCopy;
 
 
 
@@ -392,16 +393,19 @@ public class AtaraxisCrypterTest
 	{
 		try 
 		{
+			String sourceFolder = TEST_DIR_DATA+"/testCryptDirectory/";
 			String fileEncrypted = TEST_DIR_DATA+"/b.acz";
 			String fileDecrypted = TEST_DIR_DATA+"/C/";
+			String fileName = new File(FILE_SMALL).getName();
+			
+			(new File(sourceFolder)).mkdirs();
+			FileCopy.copyFile(FILE_SMALL, sourceFolder+File.separator + fileName);
 
-			s_ac.encryptFile(new File(TEST_DIR_DATA+"/B/"), new File(fileEncrypted), true);
+			s_ac.encryptFile(new File(sourceFolder), new File(fileEncrypted), true);
 			s_ac.decryptFile(new File(fileEncrypted), new File(fileDecrypted), true);
 
-			String newName = TEST_DIR_DATA+"/C/B/"+(new File(FILE_SMALL).getName());
-			assertTrue(
-					new File(newName).exists()
-			);
+			String newName = TEST_DIR_DATA+"/C/testCryptDirectory/"+fileName;
+			assertTrue("Test file should exist after decription of zipped folder", new File(newName).exists());
 		} 
 		catch (Exception e) 
 		{
