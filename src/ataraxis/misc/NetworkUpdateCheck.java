@@ -21,6 +21,7 @@ package ataraxis.misc;
 
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Properties;
 
@@ -106,7 +107,10 @@ public class NetworkUpdateCheck implements UpdateCheckable
 			LOGGER.debug("Connecting to this url: " + tempURL);
 			
 			URL url = new URL(tempURL);
-			InputStream webInStream = url.openStream();
+			URLConnection conn = url.openConnection();
+			conn.setRequestProperty("Accept", "text/html");
+			conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.154 Safari/537.36");
+			InputStream webInStream = conn.getInputStream();
 		 		 
 			updateProps = new Properties();
 			updateProps.load(webInStream);
