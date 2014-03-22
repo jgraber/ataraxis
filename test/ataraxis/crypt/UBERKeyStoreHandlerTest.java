@@ -80,12 +80,12 @@ public class UBERKeyStoreHandlerTest
 {
 
 	private static final Logger logger = Logger.getLogger(UBERKeyStoreHandler.class);
-	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
-	private static final String TEST_DIR_DATA = TEST_DIR + "/ueberHandler";
+	private static final String TEST_DIR = System.getProperty("user.dir") + File.separator + "test";
+	private static final String TEST_DIR_DATA = TEST_DIR + File.separator + "ueberHandler";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 
 	private static String ks_Password = "thisisA";
-	private static String ks_Path = TEST_DIR_DATA + "/ueber.ubr";
+	private static String ks_Path = TEST_DIR_DATA + File.separator + "ueber.ubr";
 	private static String ks_PathClean = TEST_DIR_DATA + "/ueber_Clean.ubr";
 	private static UBERKeyStoreHandler s_ksh = null;
 

@@ -398,9 +398,9 @@ public class AtaraxisCrypterTest
 			s_ac.encryptFile(new File(TEST_DIR_DATA+"/B/"), new File(fileEncrypted), true);
 			s_ac.decryptFile(new File(fileEncrypted), new File(fileDecrypted), true);
 
-
+			String newName = TEST_DIR_DATA+"/C/B/"+(new File(FILE_SMALL).getName());
 			assertTrue(
-					new File(TEST_DIR_DATA+"/C/B/"+(new File(FILE_SMALL).getName())).exists()
+					new File(newName).exists()
 			);
 		} 
 		catch (Exception e) 
