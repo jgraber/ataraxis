@@ -49,6 +49,8 @@ Um AtaraxiS selber weiterzuentwickeln gibt es diese Voraussetzungen
 ### Wie testen?
 `ant testsuite`
 
+**Achtung:** In Eclipse muss dem JUnit Test Runner als VM Argument `-javaagent:./lib/jmockit.jar` mitgegeben werden.
+
 ### Verwendete Komponenten
 * [Bouncy Castle](http://www.bouncycastle.org/): Copyright (c) The Legion Of The Bouncy Castle
 * [JDom](http://www.jdom.org/): Copyright (c) Jason Hunter & Brett McLaughlin. All rights reserved.
