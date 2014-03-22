@@ -89,7 +89,7 @@ public class AtaraxisUpdateInfoTest
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo();
 		updateInfo.existNewerVersion("3.0.0");
 		assertFalse("3.0.0".equals(updateInfo.getCurrentVersion()));
-		assertEquals("http://ataraxis.origo.ethz.ch/",updateInfo.getCurrentURL());
+		assertEquals("http://github.com/jgraber/ataraxis/",updateInfo.getCurrentURL());
 	}
 	
 	@Test
@@ -100,8 +100,8 @@ public class AtaraxisUpdateInfoTest
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo(new NetworkUpdateCheck(configuration));
 		
 		updateInfo.existNewerVersion("3.0.0");
-		assertEquals("1.3.1",updateInfo.getCurrentVersion());
-		assertEquals("http://ataraxis.origo.ethz.ch/",updateInfo.getCurrentURL());
+		assertEquals("1.4.0",updateInfo.getCurrentVersion());
+		assertEquals("http://github.com/jgraber/ataraxis/",updateInfo.getCurrentURL());
 	}
 	
 	@Test(expected=IOException.class)
@@ -124,7 +124,7 @@ public class AtaraxisUpdateInfoTest
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo(new NetworkUpdateCheck(configuration));
 		
 		updateInfo.existNewerVersion("3.0.0");
-		assertEquals("1.3.1",updateInfo.getCurrentVersion());
+		assertEquals("1.4.0",updateInfo.getCurrentVersion());
 	}
 
 	@Test
