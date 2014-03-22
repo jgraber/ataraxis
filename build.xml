@@ -43,7 +43,7 @@
 		
     <path id="org.eclipse.swt.classpath">
         <pathelement location="${org.eclipse.swt.location}/."/>
-        <pathelement location="${org.eclipse.swt.location}/swt.jar"/>
+        <pathelement location="${org.eclipse.swt.location}/swt_64.jar"/>
     </path>
 		
     <path id="ataraxis.classpath">
