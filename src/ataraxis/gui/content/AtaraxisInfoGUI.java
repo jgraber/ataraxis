@@ -63,9 +63,9 @@ public class AtaraxisInfoGUI
 	private GUIHelper guiHelper;
 	
 	// Information strings
-	private static final String VERSION = "1.4.0";
+	private static final String VERSION = "1.5.0";
 	private static final String AUTHOR = "Johnny Graber + Andreas Muedespacher";
-	private static final String DATE = "05.09.2012";
+	private static final String DATE = "04.04.2014";
 	private static final String WEBSITE = "http://github.com/jgraber/ataraxis/";
 	
 	// mapping of languages
