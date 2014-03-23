@@ -1,4 +1,19 @@
 #################
+## AtaraxiS
+#################
+
+AtaraxiS.jar
+AtaraxiS_Generic.tar.gz
+AtaraxiS_Generic.zip
+/application_data/ataraxis.log
+/application_data/userBackup.zip
+/test/testrun/*
+/test/ataraxis_test.log
+/distGeneric/*
+/user_data/*
+
+
+#################
 ## Eclipse
 #################
 
