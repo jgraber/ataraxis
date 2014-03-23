@@ -65,7 +65,6 @@ public class RSAKeyCreatorTest
 	{
 		KeyPair rsaPair = new RSAKeyCreator().createKeyPair();
 		assertEquals(rsaPair.getPrivate().getAlgorithm(),"RSA");
-		
 	}
 
 }

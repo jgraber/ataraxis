@@ -65,7 +65,7 @@ public class PasswordGeneratorTest
 	{
 		PasswordGenerator pwg = new PasswordGenerator();
 		String alphabet = pwg.getAlphabet();
-		//System.out.println(alphabet);
+
 		assertTrue(alphabet.matches(".*\\d*.*"));
 		assertTrue(alphabet.matches(".*[a-z].*"));
 		assertTrue(alphabet.matches(".*[A-Z].*"));
@@ -81,9 +81,6 @@ public class PasswordGeneratorTest
 		assertTrue(nr.matches(".*\\d*.*"));
 		assertTrue(nr.matches(".*[a-zA-Z].*"));
 		assertFalse(nr.matches(".*[A-Z].*"));
-		//assertFalse("3".matches(".*\\d*.*"));
-		//assertTrue(nrAndChars.matches("\\d[0-9]"));
-		//assertTrue(nrAndChars.matches("\\d*"));
 		
 		String text = "onlyText";
 		assertTrue(text.matches("[a-zA-Z]*"));
@@ -101,8 +98,10 @@ public class PasswordGeneratorTest
 		PasswordGenerator pwg = new PasswordGenerator();
 		pwg.setInclude_09(true);
 		assertTrue(pwg.isIncluded_09());
+		
 		String password = pwg.generatePW(200);
 		logger.info("testInclude_09 Password is: " + password);
+		
 		assertTrue(pwg.getAlphabet().matches(".*\\d+.*"));
 		assertTrue(password.matches(".*\\d+.*"));
 	}
@@ -110,11 +109,14 @@ public class PasswordGeneratorTest
 	public void testNotInclude_09()
 	{
 		PasswordGenerator pwg = new PasswordGenerator();
+		
 		assertTrue(pwg.isIncluded_09());
 		pwg.setInclude_09(false);
 		assertFalse(pwg.isIncluded_09());
+		
 		String password = pwg.generatePW(200);
 		logger.info("testNotInclude_09 Password is: " + password);
+		
 		assertFalse(pwg.getAlphabet().matches(".*\\d+.*"));
 		assertFalse(password.matches(".*\\d+.*"));
 		
@@ -124,10 +126,13 @@ public class PasswordGeneratorTest
 	public void testInclude_az()
 	{
 		PasswordGenerator pwg = new PasswordGenerator();
+		
 		pwg.setInclude_az(true);
 		assertTrue(pwg.isIncluded_az());
+		
 		String password = pwg.generatePW(200);
 		logger.info("testInclude_az Password is: " + password);
+		
 		assertTrue(pwg.getAlphabet().matches(".*[a-z].*"));
 		assertTrue(password.matches(".*[a-z].*"));
 	}
@@ -135,11 +140,14 @@ public class PasswordGeneratorTest
 	public void testNotInclude_az()
 	{
 		PasswordGenerator pwg = new PasswordGenerator();
+		
 		assertTrue(pwg.isIncluded_az());
 		pwg.setInclude_az(false);
 		assertFalse(pwg.isIncluded_az());
+		
 		String password = pwg.generatePW(200);
 		logger.info("testNotInclude_az Password is: " + password);
+		
 		assertFalse(pwg.getAlphabet().matches(".*[a-z].*"));
 		assertFalse(password.matches(".*[a-z].*"));
 	}
@@ -148,10 +156,13 @@ public class PasswordGeneratorTest
 	public void testInclude_AZ()
 	{
 		PasswordGenerator pwg = new PasswordGenerator();
+		
 		pwg.setInclude_AZ(true);
 		assertTrue(pwg.isIncluded_AZ());
+		
 		String password = pwg.generatePW(200);
 		logger.info("testInclude_az Password is: " + password);
+		
 		assertTrue(pwg.getAlphabet().matches(".*[A-Z].*"));
 		assertTrue(password.matches(".*[A-Z].*"));
 	}
@@ -159,11 +170,14 @@ public class PasswordGeneratorTest
 	public void testNotInclude_AZ()
 	{
 		PasswordGenerator pwg = new PasswordGenerator();
+		
 		assertTrue(pwg.isIncluded_AZ());
 		pwg.setInclude_AZ(false);
 		assertFalse(pwg.isIncluded_AZ());
+		
 		String password = pwg.generatePW(200);
 		logger.info("testNotInclude_az Password is: " + password);
+		
 		assertFalse(pwg.getAlphabet().matches(".*[A-Z].*"));
 		assertFalse(password.matches(".*[A-Z].*"));
 	}
@@ -172,10 +186,13 @@ public class PasswordGeneratorTest
 	public void testInclude_Special()
 	{
 		PasswordGenerator pwg = new PasswordGenerator();
+		
 		pwg.setInclude_Special(true);
 		assertTrue(pwg.isIncluded_Special());
+		
 		String password = pwg.generatePW(200);
 		logger.info("testInclude_az Password is: " + password);
+		
 		assertTrue(pwg.getAlphabet().matches(".*[.:,*+/()=@].*"));
 		assertTrue(password.matches(".*[.:,*+/()=@].*"));
 	}
@@ -183,11 +200,14 @@ public class PasswordGeneratorTest
 	public void testNotInclude_Special()
 	{
 		PasswordGenerator pwg = new PasswordGenerator();
+		
 		assertTrue(pwg.isIncluded_Special());
 		pwg.setInclude_Special(false);
 		assertFalse(pwg.isIncluded_Special());
+		
 		String password = pwg.generatePW(200);
 		logger.info("testNotInclude_az Password is: " + password);
+		
 		assertFalse(pwg.getAlphabet().matches(".*[.:,*+/()=@].*"));
 		assertFalse(password.matches(".*[.:,*+/()=@].*"));
 	}
