@@ -207,31 +207,31 @@ public class AtaraxisCrypterTest
 	public void acOldCreateTrue() {
 
 		String ksPath = TEST_DIR_DATA+"/ACnewCreateTrue.ks";
-
-		// Check that no KS with this name exist. When then try to delete. If this does not
-		// work, then mark this test as failed
 		File newKS = new File(ksPath);
 
 
 		if(!newKS.exists())
 		{
-			fail("KS does not exist on" + ksPath);
-		}
-		else
-		{
-			try 
-			{
-				AtaraxisCrypter ac = new AtaraxisCrypter(new File(ksPath),"ThisIsMyPass".toCharArray(),true);
-				fail("KS should have thrown a KeyStoreException for " + ac);
+			try {
+				newKS.createNewFile();
 			} 
-			catch (KeyStoreException e) 
-			{
-				assertEquals(e.getMessage(), "KS already exists");
-			} 
-			catch (IOException e) 
-			{
-				fail("IOException");
+			catch (IOException e) {
+				fail("When KS is missing it should be allowed to create a empty file with its name");
 			}
+		}
+
+		try 
+		{
+			AtaraxisCrypter ac = new AtaraxisCrypter(new File(ksPath),"ThisIsMyPass".toCharArray(),true);
+			fail("KS should have thrown a KeyStoreException for " + ac);
+		} 
+		catch (KeyStoreException e) 
+		{
+			assertEquals(e.getMessage(), "KS already exists");
+		} 
+		catch (IOException e) 
+		{
+			fail("IOException");
 		}
 	}
 
@@ -244,9 +244,16 @@ public class AtaraxisCrypterTest
 	public void acOldCreateFalse() {
 
 		String ksPath = TEST_DIR_DATA+"/ACnewCreateTrue.ks";
-		if(!(new File(ksPath)).exists())
+		File ksFile = new File(ksPath);
+		if(!ksFile.exists())
 		{
 			fail("KS does not exist on" + ksPath);
+			try {
+				new AtaraxisCrypter(new File(ksPath),"ThisIsMyPass".toCharArray(),true);
+			} 
+			catch (Exception e) {
+				fail("When no KS exist it must be possible to create one");
+			}
 		}
 		else
 		{
