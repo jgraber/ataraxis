@@ -202,7 +202,7 @@ public class ErrorHandlingTest
     {
         s_ac = null;
         
-        File propertiesFile = new File(TEST_DIR+"/unsupportedKSType.property");
+        File propertiesFile = new File(TEST_DIR+"/testrun/unsupportedKSType.property");
         
         Properties specialProps = new Properties();
         specialProps.setProperty("ATARAXIS.KEYSTORE_CLASS",
