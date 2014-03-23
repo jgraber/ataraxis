@@ -56,7 +56,7 @@ public class AtaraxisHashCreatorTest
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	
-	private static final File FILE_SMALL = new File(TEST_DIR + "/performance.xls");
+	private static final File FILE_SMALL = new File(TEST_DIR + "/fixtures/performance.xls");
 	
 	/**
 	 * @throws java.lang.Exception

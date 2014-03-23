@@ -49,8 +49,8 @@ public class AtaraxisFileComparatorTest
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/fileCompareTest";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	
-	private static final File FILE_SMALL = new File(TEST_DIR + "/performance.xls");
-	private static final File FILE_BIG = new File(TEST_DIR + "/wallstreet.mp3");
+	private static final File FILE_SMALL = new File(TEST_DIR + "/fixtures/performance.xls");
+	private static final File FILE_BIG = new File(TEST_DIR + "/fixtures/wallstreet.mp3");
 	private static AtaraxisFileComparator s_hashCreator;
 	private static File DIR_A, DIR_B;
 	private static File DIR_C, DIR_D;

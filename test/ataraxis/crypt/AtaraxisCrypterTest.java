@@ -81,7 +81,7 @@ public class AtaraxisCrypterTest
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/ac_test_data";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
-	private static final String FILE_SMALL = TEST_DIR + "/performance.xls";
+	private static final String FILE_SMALL = TEST_DIR + "/fixtures/performance.xls";
 	private static File inputTestFile;
 	private static String s_ksPath;
 	private static String s_ksPassword = "The starter Password";
@@ -247,7 +247,6 @@ public class AtaraxisCrypterTest
 		File ksFile = new File(ksPath);
 		if(!ksFile.exists())
 		{
-			fail("KS does not exist on" + ksPath);
 			try {
 				new AtaraxisCrypter(new File(ksPath),"ThisIsMyPass".toCharArray(),true);
 			} 

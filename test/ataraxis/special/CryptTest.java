@@ -73,8 +73,9 @@ public class CryptTest
     private static AtaraxisCrypter s_ac;
     private static InputStream s_inStream;
     
-    private static final String DIR_DATA = System.getProperty("user.dir") + "/test";
-    private static final String DIR_TEMP = DIR_DATA + "/tmp";
+    private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
+    private static final String DIR_DATA = TEST_DIR + "/fixtures";
+    private static final String DIR_TEMP = TEST_DIR + "/testrun/tmp";
     
     /**
      * Original path of the small file.
@@ -108,7 +109,6 @@ public class CryptTest
     
     private static final Logger logger = Logger.getLogger(CryptTest.class);
     
-    private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
     
     
