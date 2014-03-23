@@ -54,7 +54,7 @@ public class AtaraxisBackupTest
 {
 	private static final Logger logger = Logger.getLogger(AESKeyCreatorTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
-	private static final String TEST_DIR_DATA = TEST_DIR + "/AtaraxisBackupTest";
+	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/AtaraxisBackupTest";
 	private static final String TEST_DIR_DIRECTORY = TEST_DIR_DATA + "/HomeDirectory";
 	private static final String TEST_DIR_DIRECTORY_USER = TEST_DIR_DIRECTORY + "/UserA";
 	private static final String TEST_DIR_DIRECTORY_USER_FILE = TEST_DIR_DIRECTORY_USER + "/comment.txt";

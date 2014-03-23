@@ -48,7 +48,7 @@ public class UBERKeyStoreCreatorTest
 
 	private static final Logger logger = Logger.getLogger(UBERKeyStoreCreatorTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
-	private static final String TEST_DIR_DATA = TEST_DIR + "/ueberKSCreator_data";
+	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/ueberKSCreator_data";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	
 	private static String ks_Password = "thisisA";

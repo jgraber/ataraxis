@@ -46,7 +46,7 @@ public class AtaraxisFileComparatorTest
 
 	private static final Logger logger = Logger.getLogger(AESKeyCreatorTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
-	private static final String TEST_DIR_DATA = TEST_DIR + "/fileCompareTest";
+	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/fileCompareTest";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	
 	private static final File FILE_SMALL = new File(TEST_DIR + "/performance.xls");

@@ -61,7 +61,7 @@ public class XMLHandlerTest
 {
 	private static final Logger logger = Logger.getLogger(XMLHandlerTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
-	private static final String TEST_DIR_DATA = TEST_DIR + "/xmlhandler";
+	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/xmlhandler";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	protected static final String PW_FILE = TEST_DIR_DATA + "/passwords.xml";
 	private static String ATARAXIS_DEFAULT_ACCOUNTS = System.getProperty("user.dir") + "/application_data/user_data_template/template.xml";

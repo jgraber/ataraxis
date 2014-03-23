@@ -50,7 +50,7 @@ public class ShredderTest {
     private static AtaraxisShredder s_shredder;
     
     
-    private static final String DIR_TEST = System.getProperty("user.dir") + "/test/shredderTest";
+    private static final String DIR_TEST = System.getProperty("user.dir") + "/test/testrun/shredderTest";
     private static final String DIR_MAIN_TEST = System.getProperty("user.dir") + "/test";
     private static final String DIR_GENERATED_1 = DIR_TEST + "/genDir1";
     private static final String FILE_GENERATED_11 = DIR_GENERATED_1 + "/generated11.file";

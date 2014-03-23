@@ -59,7 +59,7 @@ public class ErrorHandlingTest
     private static AtaraxisCrypter s_ac = null;
     private static AtaraxisCrypter s_acDefault;
     
-    private static final String DIR_DATA    = System.getProperty("user.dir") + "/test";
+    private static final String DIR_DATA    = System.getProperty("user.dir") + "/test/testrun";
     private static final String DIR_TEMP    = DIR_DATA + "/tmp";
     private static final char[] STD_PWD     = "asdf_j.k#lo12".toCharArray();
     private static final String LONG_STRING = "lkajfajdsiofojkdsajfohdsagoijdsfl" +

@@ -74,9 +74,8 @@ public class PerformanceTest
     private static InputStream s_inStream;
     
     private static final String DIR_DATA = System.getProperty("user.dir") + "/test";
-    private static final String DIR_TEMP = DIR_DATA + "/tmp";
-    private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
-    protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
+    private static final String DIR_TEMP = DIR_DATA + "/testrun/PerformanceTest";
+    protected static final String LOG_PROPS_FILE = DIR_DATA + "/config/log4j_test.properties";
     private static final Logger logger = Logger.getLogger(PerformanceTest.class);
     
     /**

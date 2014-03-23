@@ -54,7 +54,7 @@ public class PasswordManagerTest
 
 	private static final Logger logger = Logger.getLogger(PasswordManagerTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
-	private static final String TEST_DIR_DATA = TEST_DIR + "/passwordManager";
+	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/passwordManager";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	protected static final String PW_FILE = TEST_DIR_DATA + "/passwords.xml";
 	private static final String PASSWORD = "password";

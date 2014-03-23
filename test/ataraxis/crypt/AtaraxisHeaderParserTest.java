@@ -40,7 +40,7 @@ public class AtaraxisHeaderParserTest
 {
 	private static final Logger logger = Logger.getLogger(AtaraxisHeaderParserTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
-	private static final String TEST_DIR_DATA = TEST_DIR + "/AtaraxisHeaderParser";
+	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/AtaraxisHeaderParser";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	private static String headerPath = TEST_DIR_DATA + "/headerTestFile.ac";
 	
