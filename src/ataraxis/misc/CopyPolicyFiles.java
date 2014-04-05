@@ -47,9 +47,7 @@ public class CopyPolicyFiles
 	
 	private static String s_PatchedPolicyLoc = APPL_DIR+"/jce_policy/";
 	
-	private static String s_PatchedPolicyLoc_15 = APPL_DIR+"/jce_policy/";
-	private static String s_PatchedPolicyLoc_16 = APPL_DIR+"/jce_policy/java6/";
-	private static String s_PatchedPolicyLoc_17 = APPL_DIR+"/jce_policy/java7/";
+	private static String s_PatchedPolicyLoc_7 = APPL_DIR+"/jce_policy/java7/";
 	private static String s_PatchedPolicyLoc_8 = APPL_DIR+"/jce_policy/java8/";
 	
 	private static String s_local_policy = "local_policy.jar";
@@ -90,19 +88,11 @@ public class CopyPolicyFiles
 		boolean patchWasOk = false;
 		LOGGER.fatal("JRE path:    " + s_JreSecurityPlace);
 		LOGGER.fatal("JRE version: " + s_JreVersion);
-		if(s_JreVersion.startsWith("1.5") || s_JreVersion.startsWith("1.6") || s_JreVersion.startsWith("1.7") || s_JreVersion.startsWith("1.8"))
+		if(s_JreVersion.startsWith("1.7") || s_JreVersion.startsWith("1.8"))
 		{
-			if(s_JreVersion.startsWith("1.5"))
+			if(s_JreVersion.startsWith("1.7"))
 			{
-				s_PatchedPolicyLoc = s_PatchedPolicyLoc_15;
-			}
-			else if(s_JreVersion.startsWith("1.6"))
-			{
-				s_PatchedPolicyLoc = s_PatchedPolicyLoc_16;
-			}
-			else if(s_JreVersion.startsWith("1.7"))
-			{
-				s_PatchedPolicyLoc = s_PatchedPolicyLoc_17;
+				s_PatchedPolicyLoc = s_PatchedPolicyLoc_7;
 			}
 			else if(s_JreVersion.startsWith("1.8"))
 			{
@@ -174,7 +164,7 @@ public class CopyPolicyFiles
 		}
 		else
 		{
-			LOGGER.error("Can only patch Java JRE Version 1.5.x to Java 8");		
+			LOGGER.error("Can only patch Java Version 7 or 8");		
 		}
 		
 		return patchWasOk;
