@@ -228,7 +228,13 @@ public class AtaraxisDecryptGUI
 			public void widgetSelected(SelectionEvent e)
 			{
 				if(s_buttonDecryptCompr.getSelection())
-					s_textDecryptTarget.setText((new File(s_textDecryptSource.getText())).getParent());
+				{
+					final String fileName = s_textDecryptSource.getText();
+					if (!fileName.trim().equals(""))
+					{
+						s_textDecryptTarget.setText((new File(fileName)).getParent());
+					}
+				}
 				else
 				{
 					final String fileName = s_textDecryptTarget.getText();
