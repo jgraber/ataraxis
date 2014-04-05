@@ -1,62 +1,131 @@
-# ![AtaraxiS](http://jgraber.ch/AtaraxiS/wiki/Info_Ataraxis.png) AtaraxiS
+# Changelog
 
-AtaraxiS dient zum sicheren Speichern von Passwörtern und dem Verschlüsseln von Dateien (mittels AES 256).
-AtaraxiS entstand als Diplomarbeit von Johnny Graber und Andreas Müdespacher an der 
-FH Biel und wird seit 2007 [weiterentwickelt](https://github.com/jgraber/ataraxis/blob/master/changelog.md). 
+## AtaraxiS 1.5.0 (08. 04. 2014)
+Aktualisierungen:
+* Unterstützung von Java 8
+* Minimalanforderung von AtaraxiS auf Java 7 hochgesetzt
+* Unbehandelte Exception auf Entschlüsseln-Dialog behoben
+* Diverse interne Umbauten (Unit-Tests verbessert)
 
-![Create new password](http://jgraber.ch/AtaraxiS/wiki/Ataraxis_PasswortErzeugen.png)
-
-## Download
-Download kompilierter Version bieten wir als [Zip](http://jgraber.ch/AtaraxiS/AtaraxiS_140.zip) (für Windows) 
-und als [Tar](http://jgraber.ch/AtaraxiS/AtaraxiS_140.tar.gz) (für Linux/Mac) an. Der Source Code 
-ist unter der EUPL v1.1 lizenziert und auf [GitHub](https://github.com/jgraber/ataraxis) zu finden.
-
-
-## Update auf neuste Version
-Um die neue Version von AtaraxiS einzusetzen, können Sie so vorgehen:
- * Benennen Sie den Ordner um, in dem die AtaraxiS Software liegt (als Beispiel: AtaraxiS nach AtaraxiS_alt)
- * Entpacken Sie die neue Version von AtaraxiS
- * Kopieren Sie den Inhalt des Ordners ''AtaraxiS_alt\user_data\'' in den Ordner ''AtaraxiS\user_data\''.
+Aktualisierte Hilfsbibliotheken:
+* SWT auf 4.3
+* Bouncycastle auf 1.50
 
 
 
-## Ältere Versionen
-* AtaraxiS v1.3.1 (30. November 2011) [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_131.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_131.tar.gz)
+## AtaraxiS 1.4.0 (05. 09. 2012)
+Aktualisierungen:
+* Passwort-Manager: Umbenennen eines Eintrages auf einen bestehenden Namen führte zu Absturz
+* Kleinere Anpassungen am GUI
+* Kleinere Übersetzungskorrekturen
+* Diverse interne Umbauten (vereinfachte Namensgebung für package-Struktur)
 
-* AtaraxiS v1.3.0 (29. Oktober 2011)  [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_130.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_130.tar.gz)
-
-* AtaraxiS v1.2.0 (16. Oktober 2010) [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_120.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_120.tar.gz) 
-
-* AtaraxiS v1.1.1 (1. August 2008) [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_111.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_111.tar.gz) 
-
-* AtaraxiS v1.1.0 (16. Juni 2008) [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_110.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_110.tar.gz) 
-
-* AtaraxiS v1.0.2 (14. August 2007) [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_102.zip)
-
-* AtaraxiS v1.0.1 (30. März 2007) [*.zip](http://projects.hti.bfh.ch/ataraxis/AtaraxiS_101.zip)
-
-
-## Informationen für Entwickler
-
-### Voraussetzungen
-Um AtaraxiS selber weiterzuentwickeln gibt es diese Voraussetzungen
-* JDK >= 7
-* Ant
-* Eclipse (empfohlen)
+Aktualisierte Hilfsbibliotheken:
+* SWT auf 4.2 
+* Bouncycastle auf 1.47
+* Log4J auf 1.2.17
+* Jaxen auf 1.1.4
+* JUnit auf 4.10
 
 
-### Wie bauen?
-`ant distGeneric`
 
-### Wie testen?
-`ant testsuite`
+## AtaraxiS 1.3.1 (30. 11. 2011)
+Korrigierte Fehler
+* Beim Verschlüsseln konnten nur noch Dateien, aber keine Ordner mehr ausgewählt werden.
 
-**Achtung:** In Eclipse muss dem JUnit Test Runner als VM Argument `-javaagent:./lib/jmockit.jar` mitgegeben werden.
 
-### Verwendete Komponenten
-* [Bouncy Castle](http://www.bouncycastle.org/): Copyright (c) The Legion Of The Bouncy Castle
-* [JDom](http://www.jdom.org/): Copyright (c) Jason Hunter & Brett McLaughlin. All rights reserved.
-* [Jaxen](http://jaxen.codehaus.org/releases.html): Copyright (c) The Werken Company. All Rights Reserved.
-* [The JMockit Testing Toolkit](http://code.google.com/p/jmockit/): Copyright (c) Rogério Liesenfeld
-* [Log4J](http://logging.apache.org/log4j/): Copyright (c) Apache Software Foundation is licensed under Apache 2.0
-* [SWT](http://eclipse.org/swt/): Copyright (c) The Eclipse Foundation licensed under Eclipse Public License - Version 1.0
+
+## AtaraxiS 1.3.0 (29. 10. 2011)
+Aktualisierungen:
+* JCE Policy Dateien für Java 7.
+* Überprüfen der Verschlüsselungsstärke während Start (Splash Screen)
+* Fehlerhafte Darstellung (abgeschnittenen Knöpfen im Passwort-Manager) unter Linux korrigiert.
+* Unterstützung für 64bit Mac OS X.
+* Diverse interne Umbauten für eine modularere Oberfläche.
+* Lange dauernde Aktionen (ver- und entschlüsseln, löschen) laufen in eigenen Hintergrund-Threads.
+
+Aktualisierte Hilfsbibliotheken:
+* SWT auf 3.7.1 
+* Bouncycastle auf 1.46
+
+
+
+## AtaraxiS 1.2.0 (16. 10. 2010)
+Aktualisierungen:
+* AtaraxiS benötigt nun Java 6.
+* AtaraxiS MainGUI: GUI wird in der Mitte des 1. Monitors angezeigt. Bei 2 Monitoren nicht mehr zwischen den beiden Monitoren.
+* AtaraxiS Crypter: Properties-File nicht mehr nötig.
+* Passwort-Manager: Einträge können umbenannt werden.
+* Passwort-Manager: Keine Abhängigkeiten mehr zwischen dem Manager und JDOM.
+
+Aktualisierte Hilfsbibliotheken:
+* SWT auf 3.6.1
+* Bouncycastle auf 1.45
+* JDom auf 1.1.1
+* JUnit auf 4.8.2
+* Log4J auf 1.2.16
+
+
+
+## AtaraxiS 1.1.1 (1. August 2008)
+Aktualisierungen:
+* Sprachauswahl zeigt nun immer die gleiche, lokalisierte Liste an (Deutsch, Français, English).
+* Warnung fals AtaraxiS unter dem gleichen Benutzer ein zweites mal gestartet wird.
+* Kleinere Übersetzungskorrekturen
+
+Aktualisierte Hilfsbibliotheken:
+* SWT auf 3.3.2
+
+
+
+## AtaraxiS 1.1.0 (16. Juni 2008) 
+Aktualisierungen:
+* Neues Verschlüsselungsverfahren mit Cipher Block Chaining Mode (CBC) und einem zufälligen Initialvektor
+* AtaraxiS startet neu mit dem Passwort-Manager
+* Funktion zum prüfen ob Update verfügbar ist
+* Minimierung auf Tasklisten-Icon
+
+Aktualisierte Hilfsbibliotheken:
+* SWT auf 3.3.2
+* Bouncycastle auf 1.39
+* JDom auf 1.1
+* JUnit auf 4.4
+* Log4J auf 1.2.15
+* Jaxen auf 1.1.1
+
+
+
+## AtaraxiS 1.0.2 (14. August 2007) 
+
+Aktualisierungen:
+* Unterstützung von Windows Vista
+* (experimentelle) Unterstützung von Mac OS X 
+* drop-down Auswahl für Benutzernamen
+* Mauszeiger wechselt bei längeren Operationen
+* kleinere Anpassungen am GUI
+* geänderte Handhabung von Bearbeitungsabbrüchen im Passwort Manager
+* farbliche Integration des PW-Generators
+* Strukturbereinigung der Verzeichnisse 
+
+Aktualisierte Hilfsbibliotheken:
+* SWT auf 3.3
+* Bereitstellung von Java 6u2 JRE
+
+
+
+## AtaraxiS 1.0.1 (30. März 2007) 
+
+Aktualisierungen:
+* Passwort-Verwaltung: Die Passwörter werden mit * versteckt
+* Verschlüsselung: Das Änderungsdatum einer Datei bleibt erhalten
+* Windows Startscripte: Beim Start wird im Hintergrund kein DOS-Fenster mehr geöffnet.
+* Policy-Dateien: Neu kann auch ein Java 6 JRE gepatcht werden, bisher ging nur ein JRE in Version 5.
+
+Aktualisierte Hilfsbibliotheken:
+* Bouncycastle auf 1.36
+
+
+
+## AtaraxiS 1.0.0 (15. Dezember 2006) 
+
+1. Version von AtaraxiS nach Abschluss der Diplomarbeit an der HTI Biel.
