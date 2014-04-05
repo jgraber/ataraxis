@@ -50,6 +50,7 @@ public class CopyPolicyFiles
 	private static String s_PatchedPolicyLoc_15 = APPL_DIR+"/jce_policy/";
 	private static String s_PatchedPolicyLoc_16 = APPL_DIR+"/jce_policy/java6/";
 	private static String s_PatchedPolicyLoc_17 = APPL_DIR+"/jce_policy/java7/";
+	private static String s_PatchedPolicyLoc_8 = APPL_DIR+"/jce_policy/java8/";
 	
 	private static String s_local_policy = "local_policy.jar";
 	private static String s_usexport_policy = "US_export_policy.jar";
@@ -105,7 +106,7 @@ public class CopyPolicyFiles
 			}
 			else if(s_JreVersion.startsWith("1.8"))
 			{
-				s_PatchedPolicyLoc = s_PatchedPolicyLoc_17;
+				s_PatchedPolicyLoc = s_PatchedPolicyLoc_8;
 			}
 			else
 			{
