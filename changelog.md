@@ -1,6 +1,6 @@
 # Changelog
 
-## AtaraxiS 1.5.0 (08. 04. 2014)
+## AtaraxiS 1.5.0 (21. 04. 2014)
 Aktualisierungen:
 * Unterstützung von Java 8
 * Minimalanforderung von AtaraxiS auf Java 7 hochgesetzt
