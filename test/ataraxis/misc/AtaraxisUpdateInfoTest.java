@@ -50,6 +50,7 @@ public class AtaraxisUpdateInfoTest
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	private static final String networkConfigFile =  System.getProperty("user.dir") + 
 	"/application_data/config/network.properties";
+	private static final String currentVersion = "1.5.0";
 	
 	@BeforeClass 
 	public static void initClass() throws KeyStoreException, IOException, JurisdictionPolicyError
@@ -100,7 +101,7 @@ public class AtaraxisUpdateInfoTest
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo(new NetworkUpdateCheck(configuration));
 		
 		updateInfo.existNewerVersion("3.0.0");
-		assertEquals("1.4.0",updateInfo.getCurrentVersion());
+		assertEquals(currentVersion, updateInfo.getCurrentVersion());
 		assertEquals("http://github.com/jgraber/ataraxis/",updateInfo.getCurrentURL());
 	}
 	
@@ -124,7 +125,7 @@ public class AtaraxisUpdateInfoTest
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo(new NetworkUpdateCheck(configuration));
 		
 		updateInfo.existNewerVersion("3.0.0");
-		assertEquals("1.4.0",updateInfo.getCurrentVersion());
+		assertEquals(currentVersion, updateInfo.getCurrentVersion());
 	}
 
 	@Test
