@@ -201,7 +201,7 @@
 	<!--===========================================-->
 	<target name="testsuite" depends="build, build-test" description="runs JUnit testsuite">		
 		<mkdir dir="${test.report.dir}" />
-		<junit printsummary="withOutAndErr">
+		<junit printsummary="withOutAndErr" haltonfailure="on">
 			<classpath location="bin/"/>
 	    	<classpath refid="ataraxis.classpath"/>
 	        <classpath refid="test.classpath"/>
@@ -220,7 +220,7 @@
 	<!--===========================================-->
 	<target name="testsuiteLinux" depends="build, build-test" description="runs JUnit testsuite (Linux)">		
 		<mkdir dir="${test.report.dir}" />
-		<junit printsummary="withOutAndErr">
+		<junit printsummary="withOutAndErr" haltonfailure="on">
 			<classpath location="bin/"/>
 	    	<classpath refid="ataraxisLinux.classpath"/>
 	        <classpath refid="test.classpath"/>
