@@ -642,8 +642,7 @@ public class AtaraxisCrypterTest
 		s_ac.decryptFile(outFile, outFileDecrypted);
 	}
 	
-
-	@Test(expected=ZipException.class)
+	@Test
 	public void decrypt_ZipFile_NotZipped() throws Exception
 	{
 		File outFile = new File(TEST_DIR_DATA+"/decrypt_ZipFile_NotZipped.acz");
@@ -656,7 +655,14 @@ public class AtaraxisCrypterTest
 			fail("Test-Setup failed");
 		}
 		
-		s_ac.decryptFile(outFile, outFileDecrypted);
+		Thread.sleep(1000);
+		
+		try {
+			s_ac.decryptFile(outFile, outFileDecrypted);
+			fail("ZipException missing");
+		} catch (ZipException ex) {
+			// Unzipped Files throw exception
+		} 
 	}
 
 
