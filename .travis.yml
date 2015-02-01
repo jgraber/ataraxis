@@ -8,4 +8,6 @@ script: ant testsuiteLinux
 before_install:
     - "sudo cp application_data/jce_policy/java7/*.jar $JAVA_HOME/jre/lib/security"
     - "ls -la $JAVA_HOME/jre/lib/security"
+    - "export DISPLAY=:99.0"
+    - "sh -e /etc/init.d/xvfb start"
 after_failure: "cat test/report/TEST-ataraxis.AtaraxisTestSuite.xml"
