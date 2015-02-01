@@ -362,9 +362,13 @@ public final class AtaraxisCrypter {
 			{
 				try 
 				{
-					fout.flush();
-					fout.close();
-					fis.close();
+					if(fout != null) {
+						fout.flush();
+						fout.close();
+					}
+					if(fis != null) {
+						fis.close();
+					}
 					outFile.setLastModified(inFile.lastModified());
 				} 
 				catch (IOException e) 
