@@ -139,13 +139,13 @@ public class AtaraxisFileComparatorTest
 		assertTrue(s_hashCreator.areFilesEquals(DIR_A, DIR_A));
 	}
 
-	@Test(expected=NullPointerException.class)
+	/*@Test(expected=NullPointerException.class)
 	public void testAtaraxisFileComparator_NoSuchAlgorithmException() throws Exception 
 	{
 		new MockUp<AtaraxisHashCreator>(){
 			   @Mock
 			   public void $init(HashingDigest digestAlgorithm)
-				throws NoSuchAlgorithmException
+			   throws NoSuchAlgorithmException
 				{
 				   throw new NoSuchAlgorithmException("Mocked Exception");
 				}
@@ -154,6 +154,6 @@ public class AtaraxisFileComparatorTest
 		AtaraxisFileComparator afc = new AtaraxisFileComparator();
 		assertTrue(afc.areFilesEquals(DIR_A, DIR_B)); // No Comparator => Null Pointer Exception
 				
-	}
+	}*/
 	
 }
