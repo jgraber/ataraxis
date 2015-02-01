@@ -656,7 +656,7 @@ public class AtaraxisCrypterTest
 		}
 		
 		try {
-			s_ac.decryptFile(outFile, outFileDecrypted, true);
+			s_ac.decryptFile(outFile, outFileDecrypted, false);
 			fail("ZipException missing");
 		} catch (ZipException ex) {
 			// Unzipped Files throw exception
