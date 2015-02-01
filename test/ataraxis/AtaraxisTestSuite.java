@@ -31,6 +31,7 @@ import ataraxis.passwordmanager.AtaraxisDiskAccessAdapterTest;
 import ataraxis.passwordmanager.GroupEntryTest;
 import ataraxis.passwordmanager.PasswordManagerTest;
 import ataraxis.passwordmanager.XMLHandlerTest;
+import ataraxis.passwordmanager.XMLHandler_JMockit_Test;
 import ataraxis.special.*;
 import ataraxis.util.AtaraxisHelperTest;
 import ataraxis.util.FileCopyTest;
@@ -40,13 +41,14 @@ import ataraxis.util.FileListTest;
 
 @RunWith(Suite.class)
 @SuiteClasses(value={AtaraxisFileComparatorTest.class,
-		AtaraxisCrypterTest.class,ErrorHandlingTest.class,CryptTest.class,
+		AtaraxisCrypterTest.class,AtaraxisCrypter_JMockit_Test.class,ErrorHandlingTest.class,CryptTest.class,
 		AtaraxisHashCreatorTest.class,
 		ShredderTest.class,AtaraxisFileComparatorTest.class,
 		AESKeyCreatorTest.class,RSAKeyCreatorTest.class,
 		UBERKeyStoreCreatorTest.class,UBERKeyStoreHandlerTest.class,
 		AtaraxisHeaderCreatorTest.class,PasswordManagerTest.class,
-		PasswordGeneratorTest.class,XMLHandlerTest.class,AtaraxisUpdateInfoTest.class,
+		PasswordGeneratorTest.class,XMLHandlerTest.class,XMLHandler_JMockit_Test.class,
+		AtaraxisUpdateInfoTest.class,
 		ExceptionTest.class,AtaraxisDiskAccessAdapterTest.class,
 		GroupEntryTest.class,AccountEntryTest.class,AtaraxisHeaderParserTest.class,
 		FileCopyTest.class,FileListTest.class,ACEncryptOutputStreamTest.class,

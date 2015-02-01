@@ -35,12 +35,9 @@ import java.io.OutputStream;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
-import mockit.Mockit;
-
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.jdom.Document;
-import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -472,70 +469,7 @@ public class XMLHandlerTest
 		return xml;
 	}
 	
-	
-	@Test(expected=EntryDoesNotExistException.class)
-	public void deleteElement_JDOMException() throws Exception
-	{
-		File accountFile = new File(PW_FILE);
-		accountFile.createNewFile();
-		Mockit.redefineMethods(XMLHandler.class, new Object() {
-			@SuppressWarnings("unused")
-			public void deleteElement(String ElementID) throws JDOMException
-			{
-				throw new JDOMException();
-			}
-		});
 		
-		XMLHandler xml = new XMLHandler(new ExceptionDiskAccess(0,0), accountFile);
-		PasswordEntry entry = new AccountEntry("deleteElement_JDOMException");
-		xml.addEntry(entry);
-		xml.deleteEntry(entry);
-		assertNotNull(xml);
-	}
-	
-	@Test(expected=EntryDoesNotExistException.class)
-	public void addEntry_Parent_JDOMException() throws Exception
-	{
-		File accountFile = new File(PW_FILE);
-		accountFile.createNewFile();
-		Mockit.redefineMethods(XMLHandler.class, new Object() {
-			@SuppressWarnings("unused")
-			public Element getElement(String ElementID) throws JDOMException
-			{
-				throw new JDOMException();
-			}
-		});
-		
-		XMLHandler xml = new XMLHandler(new ExceptionDiskAccess(0,0), accountFile);
-		GroupEntry group = new GroupEntry("Group_addEntry_Parent_JDOMException");
-		AccountEntry entry = new AccountEntry("Account_addEntry_Parent_JDOMException");
-		entry.setParentEntry(group);
-		xml.addEntry(entry);
-		
-		fail("JDOM Exception expected");
-	}
-
-	@Test(expected=EntryDoesNotExistException.class)
-	public void addEntry_Create_JDOMException() throws Exception
-	{
-		File accountFile = new File(PW_FILE);
-		accountFile.createNewFile();
-		Mockit.redefineMethods(XMLHandler.class, new Object() {
-			@SuppressWarnings("unused")
-			public void createAccountElement(AccountEntry entry) 
-			throws JDOMException, EntryDoesNotExistException
-			{
-				throw new JDOMException();
-			}
-		});
-		
-		XMLHandler xml = new XMLHandler(new ExceptionDiskAccess(0,0), accountFile);
-		AccountEntry entry = new AccountEntry("Account_addEntry_Parent_JDOMException");
-		xml.addEntry(entry);
-		
-		fail("JDOM Exception expected");
-	}
-	
 	@Test(expected=EntryDoesNotExistException.class)
 	public void getEntry_DontExist() throws Exception
 	{
@@ -559,81 +493,13 @@ public class XMLHandlerTest
 	
 	
 	@Test
-	public void getGroupEntryList_JDOMException() throws Exception
-	{
-		File accountFile = new File(PW_FILE);
-		accountFile.createNewFile();
-		Mockit.redefineMethods(XMLHandler.class, new Object() {
-			@SuppressWarnings({ "unused", "rawtypes" })
-			public List getGroupList() throws JDOMException
-			{
-				throw new JDOMException();
-			}
-		});
-		
-		XMLHandler xml = new XMLHandler(new ExceptionDiskAccess(0,0), accountFile);
-		assertNotNull(xml.getGroupEntryList());
-	}
-	
-	@Test
-	public void getAccountEntryList_JDOMException() throws Exception
-	{
-		File accountFile = new File(PW_FILE);
-		accountFile.createNewFile();
-		Mockit.redefineMethods(XMLHandler.class, new Object() {
-			@SuppressWarnings({ "unused", "rawtypes" })
-			public List getAccountList() throws JDOMException
-			{
-				throw new JDOMException();
-			}
-		});
-		
-		XMLHandler xml = new XMLHandler(new ExceptionDiskAccess(0,0), accountFile);
-		assertNotNull(xml.getAccountEntryList());
-	}
-	
-	@Test
-	public void getAccountEntryList_EntryDoesNotExistException() throws Exception
-	{
-		File accountFile = new File(PW_FILE);
-		accountFile.createNewFile();
-		Mockit.redefineMethods(XMLHandler.class, new Object() {
-			@SuppressWarnings({ "unused" })
-			public AccountEntry getAccountEntry(String id) throws EntryDoesNotExistException
-			{
-				throw new EntryDoesNotExistException();
-			}
-		});
-		
-		XMLHandler xml = new XMLHandler(new ExceptionDiskAccess(0,0), accountFile);
-		assertNotNull(xml.getAccountEntryList());
-	}
-	
-	@Test
 	public void hasChilds_Null() throws Exception
 	{
 		XMLHandler xml = createXMLHandler();
 		assertFalse("should have no children",xml.hasChilds(null));
 	}
 	
-	@Test(expected=StorageException.class)
-	public void renameElementId_JDOMException() throws Exception
-	{
-		File accountFile = new File(PW_FILE);
-		accountFile.createNewFile();
-		Mockit.redefineMethods(XMLHandler.class, new Object() {
-			@SuppressWarnings({ "unused" })
-			public Element getElement(String ElementID) throws JDOMException
-			{
-				throw new JDOMException();
-			}
-		});
-		String nameOld = "renameElementId_JDOMException_old";
-		XMLHandler xml = createXMLHandler();
-		AccountEntry accOld = new AccountEntry(nameOld);
-		xml.addEntry(accOld);
-		xml.renameElementId(nameOld, "renameElementId_JDOMException_new");
-	}
+	
 	
 	class ExceptionDiskAccess implements DiskAccess
 	{
