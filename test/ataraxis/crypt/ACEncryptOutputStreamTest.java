@@ -31,12 +31,12 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Provider;
 import java.security.spec.AlgorithmParameterSpec;
-
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 
-import mockit.Mockit;
+import mockit.Mock;
+import mockit.MockUp;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -82,16 +82,16 @@ public class ACEncryptOutputStreamTest
 	{
 		File outFile = new File(TEST_DIR_DATA+"/const_2");
 		
-		Mockit.redefineMethods(javax.crypto.Cipher.class, new Object() {
-			@SuppressWarnings("unused")
-			public final Cipher getInstance(String transformation,
-                    Provider provider)
-             throws NoSuchAlgorithmException,
-                    NoSuchPaddingException
-			{
-				throw new NoSuchAlgorithmException();
-			}
-		});
+		new MockUp<javax.crypto.Cipher>(){
+			   @Mock
+			   public final Cipher getInstance(String transformation,
+	                    Provider provider)
+	             throws NoSuchAlgorithmException,
+	                    NoSuchPaddingException
+				{
+					throw new NoSuchAlgorithmException();
+				}
+		};
 		
 		ACEncryptOutputStream acOut = new ACEncryptOutputStream(outFile, key);
 		assertNotNull(acOut.getEncryptOutputStream());
@@ -102,16 +102,16 @@ public class ACEncryptOutputStreamTest
 	{
 		File outFile = new File(TEST_DIR_DATA+"/const_2");
 		
-		Mockit.redefineMethods(javax.crypto.Cipher.class, new Object() {
-			@SuppressWarnings("unused")
-			public final Cipher getInstance(String transformation,
-                    Provider provider)
-             throws NoSuchAlgorithmException,
-                    NoSuchPaddingException
-			{
-				throw new NoSuchPaddingException();
-			}
-		});
+		new MockUp<javax.crypto.Cipher>(){
+			   @Mock
+			   public final Cipher getInstance(String transformation,
+	                    Provider provider)
+	             throws NoSuchAlgorithmException,
+	                    NoSuchPaddingException
+				{
+					throw new NoSuchPaddingException();
+				}
+		};
 		
 		ACEncryptOutputStream acOut = new ACEncryptOutputStream(outFile, key);
 		assertNotNull(acOut.getEncryptOutputStream());
@@ -123,9 +123,9 @@ public class ACEncryptOutputStreamTest
 	{
 		File outFile = new File(TEST_DIR_DATA+"/const_2");
 		
-		Mockit.redefineMethods(javax.crypto.Cipher.class, new Object() {
-			@SuppressWarnings("unused")
-			public final void init(int opmode,
+		new MockUp<javax.crypto.Cipher>(){
+			   @Mock
+			   public final void init(int opmode,
                        Key key,
                        AlgorithmParameterSpec params)
                 throws InvalidKeyException,
@@ -134,7 +134,7 @@ public class ACEncryptOutputStreamTest
 			{
 				throw new InvalidKeyException();
 			}
-		});
+		};
 		
 		ACEncryptOutputStream acOut = new ACEncryptOutputStream(outFile, key);
 		assertNotNull(acOut.getEncryptOutputStream());
@@ -145,9 +145,9 @@ public class ACEncryptOutputStreamTest
 	{
 		File outFile = new File(TEST_DIR_DATA+"/const_2");
 		
-		Mockit.redefineMethods(javax.crypto.Cipher.class, new Object() {
-			@SuppressWarnings("unused")
-			public final void init(int opmode,
+		new MockUp<javax.crypto.Cipher>(){
+			   @Mock
+			   public final void init(int opmode,
                        Key key,
                        AlgorithmParameterSpec params)
                 throws InvalidKeyException,
@@ -156,7 +156,7 @@ public class ACEncryptOutputStreamTest
 			{
 				throw new InvalidAlgorithmParameterException();
 			}
-		});
+		};
 		
 		ACEncryptOutputStream acOut = new ACEncryptOutputStream(outFile, key);
 		assertNotNull(acOut.getEncryptOutputStream());
@@ -167,20 +167,20 @@ public class ACEncryptOutputStreamTest
 	{
 		File outFile = new File(TEST_DIR_DATA+"/const_2");
 		
-		Mockit.redefineMethods(javax.crypto.Cipher.class, new Object() {
-			@SuppressWarnings("unused")
-			public final Cipher getInstance(String transformation,
-                                       String provider)
-                                throws NoSuchAlgorithmException,
-                                       NoSuchProviderException,
-                                       NoSuchPaddingException
-			{
-				throw new NoSuchProviderException();
-			}
-		});
+		new MockUp<javax.crypto.Cipher>(){
+			   @Mock
+			   public final Cipher getInstance(String transformation,
+                       String provider)
+                throws NoSuchAlgorithmException,
+                       NoSuchProviderException,
+                       NoSuchPaddingException
+                       {
+				   			throw new NoSuchProviderException();
+                       }
+		};
 		
 		ACEncryptOutputStream acOut = new ACEncryptOutputStream(outFile, key);
 		assertNotNull(acOut.getEncryptOutputStream());
 	}
-	
+
 }

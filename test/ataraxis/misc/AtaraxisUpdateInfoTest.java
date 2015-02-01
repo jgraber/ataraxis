@@ -31,7 +31,8 @@ import java.net.SocketTimeoutException;
 import java.security.KeyStoreException;
 import java.util.Properties;
 
-import mockit.Mockit;
+import mockit.Mock;
+import mockit.MockUp;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -131,13 +132,13 @@ public class AtaraxisUpdateInfoTest
 	@Test
 	public void AtaraxisUpdateInfo_ErrorOnProperties_LoadInsted() throws Exception
 	{
-		Mockit.redefineMethods(java.util.Properties.class, new Object() {
-			@SuppressWarnings("unused")
-			public void load(InputStream inStream) throws IOException
-			{
-				throw new IOException();
-			}
-		});
+		new MockUp<java.util.Properties>(){
+			   @Mock
+			   public void load(InputStream inStream) throws IOException
+				{
+					throw new IOException();
+				}
+		};
 		
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo();
 		assertNotNull(updateInfo);
@@ -147,13 +148,13 @@ public class AtaraxisUpdateInfoTest
 	@Test(expected=IOException.class)
 	public void AtaraxisUpdateInfo_TimeOut_LoadInsted() throws Exception
 	{
-		Mockit.redefineMethods(java.util.Properties.class, new Object() {
-			@SuppressWarnings("unused")
-			public void load(InputStream inStream) throws IOException
-			{
-				throw new SocketTimeoutException();
-			}
-		});
+		new MockUp<java.util.Properties>(){
+			   @Mock
+			   public void load(InputStream inStream) throws IOException
+				{
+					throw new SocketTimeoutException();
+				}
+		};
 		
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo();
 		boolean newerVersion = updateInfo.existNewerVersion("1.0.0");
@@ -163,4 +164,5 @@ public class AtaraxisUpdateInfoTest
 		System.out.println("->"+updateInfo.getCurrentURL());
 		System.out.println(updateInfo.getCurrentVersion());
 	}
+
 }

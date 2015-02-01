@@ -33,7 +33,8 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.CertificateException;
 
-import mockit.Mockit;
+import mockit.Mock;
+import mockit.MockUp;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -116,15 +117,15 @@ public class UBERKeyStoreCreatorTest
 	{
 		
 		File ksFile = new File(ks_Path+"_io");
-		Mockit.redefineMethods(KeyStore.class, new Object() {
-			@SuppressWarnings("unused")
-			public final void store(OutputStream stream, char[] password)
-                 throws KeyStoreException,IOException,NoSuchAlgorithmException,
-                        CertificateException
-			{
-				throw new IOException();
-			}
-		});
+		new MockUp<KeyStore>(){
+			   @Mock
+			   public final void store(OutputStream stream, char[] password)
+		                 throws KeyStoreException,IOException,NoSuchAlgorithmException,
+		                        CertificateException
+					{
+						throw new IOException();
+					}
+		};
 		
 		try
 		{
@@ -142,17 +143,17 @@ public class UBERKeyStoreCreatorTest
 	public void testCreateKeyStore_CertificateException() throws Exception
 	{
 		File ksFile = new File(ks_Path+"_io");
-		Mockit.redefineMethods(KeyStore.class, new Object() {
-			@SuppressWarnings("unused")
-			public void load(InputStream stream,
-                    char[] password)
-            throws IOException,
-                   NoSuchAlgorithmException,
-                   CertificateException
-			{
-				throw new CertificateException();
-			}
-		});
+		new MockUp<KeyStore>(){
+			   @Mock
+			   public void load(InputStream stream,
+	                    char[] password)
+	            throws IOException,
+	                   NoSuchAlgorithmException,
+	                   CertificateException
+				{
+					throw new CertificateException();
+				}
+		};
 		
 		try
 		{
@@ -165,4 +166,5 @@ public class UBERKeyStoreCreatorTest
 			assertTrue(e.getMessage().contains("Certificate Error on KeyStore"));
 		}
 	}
+	
 }

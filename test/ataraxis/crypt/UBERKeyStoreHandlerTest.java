@@ -48,11 +48,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
-
 import javax.crypto.SecretKey;
 import javax.security.auth.x500.X500Principal;
 
-import mockit.Mockit;
+import mockit.Mock;
+import mockit.MockUp;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -358,18 +358,18 @@ public class UBERKeyStoreHandlerTest
 	public void testKeyStoreHandler_CertificateException() throws Exception
 	{
 		File ksFile = new File(ks_PathClean);
-		Mockit.redefineMethods(KeyStore.class, new Object() {
-			@SuppressWarnings("unused")
-			public void load(InputStream stream,
-					char[] password)
-			throws IOException,
-			NoSuchAlgorithmException,
-			CertificateException
-			{
-				throw new CertificateException();
-			}
-		});
-
+		new MockUp<KeyStore>(){
+			   @Mock
+			   public void load(InputStream stream,
+						char[] password)
+				throws IOException,
+				NoSuchAlgorithmException,
+				CertificateException
+				{
+					throw new CertificateException();
+				}
+		};
+		
 		try
 		{
 			UBERKeyStoreHandler ksHandler = new UBERKeyStoreHandler(ksFile, ks_Password.toCharArray());
@@ -385,18 +385,18 @@ public class UBERKeyStoreHandlerTest
 	public void testKeyStoreHandler_IOException() throws Exception
 	{
 		File ksFile = new File(ks_PathClean);
-		Mockit.redefineMethods(FileInputStream.class, new Object() {
-			@SuppressWarnings("unused")
-			public int read(byte[] b, int off, int len) throws IOException
-			{
-				throw new IOException();
-			}
-			@SuppressWarnings("unused")
-			public void close() throws IOException
-			{
-				throw new IOException();
-			}
-		});
+		new MockUp<FileInputStream>(){
+			   @Mock
+			   public int read(byte[] b, int off, int len) throws IOException
+				{
+					throw new IOException();
+				}
+				@SuppressWarnings("unused")
+				public void close() throws IOException
+				{
+					throw new IOException();
+				}
+		};
 
 		try
 		{
@@ -428,17 +428,17 @@ public class UBERKeyStoreHandlerTest
 	public void testKeyStoreHandler_NoSuchAlgorithmException() throws Exception
 	{
 		File ksFile = new File(ks_PathClean);
-		Mockit.redefineMethods(KeyStore.class, new Object() {
-			@SuppressWarnings("unused")
-			public void load(InputStream stream,
-					char[] password)
-			throws IOException,
-			NoSuchAlgorithmException,
-			CertificateException
-			{
-				throw new NoSuchAlgorithmException();
-			}
-		});
+		new MockUp<KeyStore>(){
+			   @Mock
+			   public void load(InputStream stream,
+						char[] password)
+				throws IOException,
+				NoSuchAlgorithmException,
+				CertificateException
+				{
+					throw new NoSuchAlgorithmException();
+				}
+		};
 
 		try
 		{
@@ -455,13 +455,13 @@ public class UBERKeyStoreHandlerTest
 	public void testShowKeyStore_KeyStoreException() throws Exception
 	{
 		File ksFile = new File(ks_PathClean);
-		Mockit.redefineMethods(KeyStore.class, new Object() {
-			@SuppressWarnings("unused")
-			public final Enumeration<String> aliases() throws KeyStoreException
-			{
-				throw new KeyStoreException();
-			}
-		});
+		new MockUp<KeyStore>(){
+			   @Mock
+			   public final Enumeration<String> aliases() throws KeyStoreException
+				{
+					throw new KeyStoreException();
+				}
+		};
 
 		UBERKeyStoreHandler ksHandler = new UBERKeyStoreHandler(ksFile, ks_Password.toCharArray());
 		ksHandler.showKeyStore();
@@ -471,18 +471,18 @@ public class UBERKeyStoreHandlerTest
 	public void testShowKeyStore_OtherThanKeyOrCert() throws Exception
 	{
 		File ksFile = new File(ks_Path);
-		Mockit.redefineMethods(KeyStore.class, new Object() {
-			@SuppressWarnings("unused")
-			public final boolean isCertificateEntry(String alias) throws KeyStoreException
-			{
-				return false;
-			}
-			@SuppressWarnings("unused")
-			public final boolean isKeyEntry(String alias) throws KeyStoreException
-			{
-				return false;
-			}
-		});
+		new MockUp<KeyStore>(){
+			   @Mock
+			   public final boolean isCertificateEntry(String alias) throws KeyStoreException
+				{
+					return false;
+				}
+				@SuppressWarnings("unused")
+				public final boolean isKeyEntry(String alias) throws KeyStoreException
+				{
+					return false;
+				}
+		};
 
 		UBERKeyStoreHandler ksHandler = new UBERKeyStoreHandler(ksFile, ks_Password.toCharArray());
 		ksHandler.showKeyStore();
@@ -496,17 +496,17 @@ public class UBERKeyStoreHandlerTest
 		
 		UBERKeyStoreHandler ksHandler = new UBERKeyStoreHandler(ksFile, ks_Password.toCharArray());
 		
-		Mockit.redefineMethods(KeyStore.class, new Object() {
-			@SuppressWarnings("unused")
-			public final void store(OutputStream stream, char[] password)
-                 throws KeyStoreException,
-                        IOException,
-                        NoSuchAlgorithmException,
-                        CertificateException
-			{
-				throw new NoSuchAlgorithmException();
-			}
-		});
+		new MockUp<KeyStore>(){
+			   @Mock
+			   public final void store(OutputStream stream, char[] password)
+		                 throws KeyStoreException,
+		                        IOException,
+		                        NoSuchAlgorithmException,
+		                        CertificateException
+					{
+						throw new NoSuchAlgorithmException();
+					}
+		};
 
 		try
 		{	ksHandler.store();
@@ -527,17 +527,17 @@ public class UBERKeyStoreHandlerTest
 		
 		UBERKeyStoreHandler ksHandler = new UBERKeyStoreHandler(ksFile, ks_Password.toCharArray());
 		
-		Mockit.redefineMethods(KeyStore.class, new Object() {
-			@SuppressWarnings("unused")
-			public final void store(OutputStream stream, char[] password)
-                 throws KeyStoreException,
-                        IOException,
-                        NoSuchAlgorithmException,
-                        CertificateException
-			{
-				throw new CertificateException();
-			}
-		});
+		new MockUp<KeyStore>(){
+			   @Mock
+			   public final void store(OutputStream stream, char[] password)
+		                 throws KeyStoreException,
+		                        IOException,
+		                        NoSuchAlgorithmException,
+		                        CertificateException
+					{
+						throw new CertificateException();
+					}
+		};
 
 		try
 		{	ksHandler.store();
@@ -557,18 +557,18 @@ public class UBERKeyStoreHandlerTest
 		
 		UBERKeyStoreHandler ksHandler = new UBERKeyStoreHandler(ksFile, ks_Password.toCharArray());
 		
-		Mockit.redefineMethods(KeyStore.class, new Object() {
-			@SuppressWarnings("unused")
-			public final void store(OutputStream stream, char[] password)
-                 throws KeyStoreException,
-                        IOException,
-                        NoSuchAlgorithmException,
-                        CertificateException
-			{
-				throw new IOException();
-			}
-		});
-
+		new MockUp<KeyStore>(){
+			   @Mock
+			   public final void store(OutputStream stream, char[] password)
+		                 throws KeyStoreException,
+		                        IOException,
+		                        NoSuchAlgorithmException,
+		                        CertificateException
+					{
+						throw new IOException();
+					}
+		};
+		
 		try
 		{	ksHandler.store();
 			fail("should throw a Exception");
@@ -589,7 +589,14 @@ public class UBERKeyStoreHandlerTest
 		
 		UBERKeyStoreHandler ksHandler = new UBERKeyStoreHandler(ksFile, ks_Password.toCharArray());
 		
-		Mockit.redefineMethods(FileOutputStream.class, MockedFileOutputStream.class);
+		new MockUp<FileOutputStream>(){
+			   @Mock
+			   public void $init(String name) throws FileNotFoundException
+				{
+				   throw new FileNotFoundException("Mocked Exception");
+				}
+		};
+		//Mockit.redefineMethods(FileOutputStream.class, MockedFileOutputStream.class);
 
 		try
 		{	ksHandler.store();
@@ -607,11 +614,18 @@ public class UBERKeyStoreHandlerTest
 		File ksFile = new File(ks_PathClean+"ChangePWException");
 		FileCopy.copyFile(ks_PathClean, ksFile.getAbsolutePath());
 		
+
 		
 		UBERKeyStoreHandler ksHandler = new UBERKeyStoreHandler(ksFile, ks_Password.toCharArray());
 		
-		Mockit.redefineMethods(FileOutputStream.class, MockedFileOutputStream.class);
-
+		new MockUp<FileOutputStream>(){
+			   @Mock
+			   public void $init(String name) throws FileNotFoundException
+				{
+				   throw new FileNotFoundException("Mocked Exception");
+				}
+		};
+		
 		try
 		{	ksHandler.changePassword(ks_Password.toCharArray(), "newPassword".toCharArray());
 			fail("should throw a Exception");
@@ -622,7 +636,6 @@ public class UBERKeyStoreHandlerTest
 		}
 	}
 
-	
 	
 }
 class MockedFileOutputStream

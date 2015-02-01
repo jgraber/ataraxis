@@ -26,7 +26,8 @@ import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
-import mockit.Mockit;
+import mockit.Mock;
+import mockit.MockUp;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -141,19 +142,18 @@ public class AtaraxisFileComparatorTest
 	@Test(expected=NullPointerException.class)
 	public void testAtaraxisFileComparator_NoSuchAlgorithmException() throws Exception 
 	{
-		Mockit.redefineMethods(AtaraxisHashCreator.class, MockAtaraxisHashCreator.class);
-
+		new MockUp<AtaraxisHashCreator>(){
+			   @Mock
+			   public void $init(HashingDigest digestAlgorithm)
+				throws NoSuchAlgorithmException
+				{
+				   throw new NoSuchAlgorithmException("Mocked Exception");
+				}
+		};
+		
 		AtaraxisFileComparator afc = new AtaraxisFileComparator();
 		assertTrue(afc.areFilesEquals(DIR_A, DIR_B)); // No Comparator => Null Pointer Exception
 				
 	}
-}
-
-class MockAtaraxisHashCreator 
-{
-	public MockAtaraxisHashCreator(HashingDigest digestAlgorithm) throws NoSuchAlgorithmException
-	{
-		throw new NoSuchAlgorithmException("Mocked Exception");
-	}
-}
 	
+}
