@@ -642,7 +642,7 @@ public class AtaraxisCrypterTest
 		s_ac.decryptFile(outFile, outFileDecrypted);
 	}
 	
-	@Test
+	/*@Test
 	public void decrypt_ZipFile_NotZipped() throws Exception
 	{
 		File outFile = new File(TEST_DIR_DATA+"/notZipped.acz");
@@ -662,6 +662,6 @@ public class AtaraxisCrypterTest
 			// Unzipped Files throw exception
 		} 
 	}
-
+*/
 
 }
