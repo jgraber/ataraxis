@@ -61,6 +61,7 @@ public class XMLHandlerTest
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/xmlhandler";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	protected static final String PW_FILE = TEST_DIR_DATA + "/passwords.xml";
+	protected static final String PW_FILE_INITIAL = TEST_DIR_DATA + "/passwords_initial.xml";
 	private static String ATARAXIS_DEFAULT_ACCOUNTS = System.getProperty("user.dir") + "/application_data/user_data_template/template.xml";
 	
 	@BeforeClass
@@ -84,6 +85,8 @@ public class XMLHandlerTest
 		}
 	
 		FileCopy.copyFile(ATARAXIS_DEFAULT_ACCOUNTS, PW_FILE);
+		FileCopy.copyFile(ATARAXIS_DEFAULT_ACCOUNTS, PW_FILE_INITIAL);
+
 	}
 
 	
@@ -146,7 +149,7 @@ public class XMLHandlerTest
 	@Test
 	public void testInitialGroupList() throws FileNotFoundException, StorageException
 	{
-		XMLHandler xml = createXMLHandler();
+		XMLHandler xml = createXMLHandler(new File(PW_FILE_INITIAL));
 		
 		List<GroupEntry> groups = xml.getGroupEntryList();
 		
