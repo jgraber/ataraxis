@@ -32,7 +32,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.jdom.JDOMException;
+import org.jdom2.JDOMException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

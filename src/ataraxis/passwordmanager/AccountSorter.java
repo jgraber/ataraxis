@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
 
 import java.util.Comparator;
 
-import org.jdom.Element;
+import org.jdom2.Element;
 
 
 /**

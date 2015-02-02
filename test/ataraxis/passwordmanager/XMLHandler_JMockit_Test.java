@@ -36,8 +36,8 @@ import mockit.MockUp;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.jdom.Element;
-import org.jdom.JDOMException;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

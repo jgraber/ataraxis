@@ -37,8 +37,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.jdom.Document;
-import org.jdom.JDOMException;
+import org.jdom2.Document;
+import org.jdom2.JDOMException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -550,10 +550,10 @@ public class XMLHandlerTest
 		}
 	}
 	
-	public class SaxMock extends org.jdom.input.SAXBuilder
+	public class SaxMock extends org.jdom2.input.SAXBuilder
 	{
 		
-		public org.jdom.Document build(InputStream in)
+		public org.jdom2.Document build(InputStream in)
         throws JDOMException, java.io.IOException
 		{
 			throw new JDOMException();
