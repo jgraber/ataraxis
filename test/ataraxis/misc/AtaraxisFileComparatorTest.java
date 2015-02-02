@@ -24,10 +24,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-
-import mockit.Mock;
-import mockit.MockUp;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -37,8 +33,6 @@ import org.junit.Test;
 
 import ataraxis.crypt.AESKeyCreatorTest;
 import ataraxis.misc.AtaraxisFileComparator;
-import ataraxis.misc.AtaraxisHashCreator;
-import ataraxis.misc.HashingDigest;
 import ataraxis.util.FileCopy;
 
 

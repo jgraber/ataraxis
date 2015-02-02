@@ -42,7 +42,6 @@ import java.util.zip.ZipOutputStream;
 
 import javax.crypto.SecretKey;
 
-import junit.framework.Assert;
 import mockit.Mock;
 import mockit.MockUp;
 
@@ -114,7 +113,7 @@ public class AtaraxisCrypter_JMockit_Test {
 			AtaraxisCrypter.checkJurisdictionPolicy(new AESKeyCreator());
 			fail("should have throw an Exception");
 		} catch (JurisdictionPolicyError e) {
-			Assert.assertEquals("Unrestricted Files needed","unrestricted PolicyFiles needet", e.getMessage());
+			assertEquals("Unrestricted Files needed","unrestricted PolicyFiles needet", e.getMessage());
 		}		
 	}
 

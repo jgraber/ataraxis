@@ -19,12 +19,12 @@
 
 package ataraxis.util;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-
-import junit.framework.Assert;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -82,7 +82,7 @@ public class AtaraxisHelperTest {
 	{
 		AtaraxisHelper ah = new AtaraxisHelper();
 				
-		Assert.assertEquals("UserA", ah.GetUserName(ac_UserA.getKeyStorePath()));		
+		assertEquals("UserA", ah.GetUserName(ac_UserA.getKeyStorePath()));		
 	}
 	
 	@Test
@@ -90,7 +90,7 @@ public class AtaraxisHelperTest {
 	{
 		AtaraxisHelper ah = new AtaraxisHelper();
 				
-		Assert.assertEquals("UserA", ah.GetUserName(ac_UserA));		
+		assertEquals("UserA", ah.GetUserName(ac_UserA));		
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
@@ -99,7 +99,7 @@ public class AtaraxisHelperTest {
 		AtaraxisHelper ah = new AtaraxisHelper();
 		String empty = "";
 				
-		Assert.assertEquals("UserA", ah.GetUserName(empty));		
+		assertEquals("UserA", ah.GetUserName(empty));		
 	}
 	
 	@Test
@@ -107,7 +107,7 @@ public class AtaraxisHelperTest {
 	{
 		CreateUserProperty(PATH_PROPS_USER_A, "de");
 		AtaraxisHelper ah = new AtaraxisHelper();
-		Assert.assertEquals("de", ah.GetUserLanguage(ac_UserA.getKeyStorePath()));
+		assertEquals("de", ah.GetUserLanguage(ac_UserA.getKeyStorePath()));
 	}
 	
 	@Test
@@ -115,7 +115,7 @@ public class AtaraxisHelperTest {
 	{
 		CreateUserProperty(PATH_PROPS_USER_A, "fr");
 		AtaraxisHelper ah = new AtaraxisHelper();
-		Assert.assertEquals("fr", ah.GetUserLanguage(ac_UserA.getKeyStorePath()));
+		assertEquals("fr", ah.GetUserLanguage(ac_UserA.getKeyStorePath()));
 	}
 	
 	@Test
@@ -123,13 +123,13 @@ public class AtaraxisHelperTest {
 	{
 		CreateUserProperty(PATH_PROPS_USER_A);
 		AtaraxisHelper ah = new AtaraxisHelper();
-		Assert.assertEquals("en", ah.GetUserLanguage(ac_UserA.getKeyStorePath()));
+		assertEquals("en", ah.GetUserLanguage(ac_UserA.getKeyStorePath()));
 	}
 	
 	@Test(expected=IllegalArgumentException.class)
 	public void GetUserLanguage_FromKSPath_EmptyPath() throws Exception
 	{
 		AtaraxisHelper ah = new AtaraxisHelper();
-		Assert.assertEquals("en", ah.GetUserLanguage(""));
+		assertEquals("en", ah.GetUserLanguage(""));
 	}
 }

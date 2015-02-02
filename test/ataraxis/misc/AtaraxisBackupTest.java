@@ -18,14 +18,14 @@
  */
 package ataraxis.misc;
 
+import static org.junit.Assert.*;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
-
-import junit.framework.Assert;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
@@ -113,8 +113,8 @@ public class AtaraxisBackupTest
 		AtaraxisBackup ab = new AtaraxisBackup(new Shell(new Display()));
 		boolean zipOK = ab.createZipFile(TEST_DIR_DATA + "/" + zipName, TEST_DIR_DIRECTORY);
 		
-		Assert.assertTrue("Creation of Zip failed", zipOK);
-		Assert.assertTrue("Zip file is missing", zipFile.exists());
+		assertTrue("Creation of Zip failed", zipOK);
+		assertTrue("Zip file is missing", zipFile.exists());
 		
 		validateZipFile(zipFile);
 	}
@@ -149,16 +149,16 @@ public class AtaraxisBackupTest
 	        		foundTextFile = true;
 	        		ByteArrayOutputStream bout = new ByteArrayOutputStream();
 	        		FileCopy.copyFile(zippedFile.getInputStream(entry), bout);
-	        		Assert.assertEquals("Content of file does not match", USER_FILE_CONTENT, bout.toString());
+	        		assertEquals("Content of file does not match", USER_FILE_CONTENT, bout.toString());
 	        		
 	        	}
 	        }
 		}		
 		zippedFile.close();
 
-		Assert.assertTrue("Did not find HomeDirectory", foundHome);
-		Assert.assertTrue("Did not find UserA", foundUser);
-		Assert.assertTrue("Did not find comment.txt", foundTextFile);
+		assertTrue("Did not find HomeDirectory", foundHome);
+		assertTrue("Did not find UserA", foundUser);
+		assertTrue("Did not find comment.txt", foundTextFile);
 	}
 
 }
