@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2009 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2009 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -35,10 +35,13 @@ import org.apache.log4j.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
+import org.jdom2.filter.Filters;
 import org.jdom2.input.SAXBuilder;
+import org.jdom2.input.sax.XMLReaders;
 import org.jdom2.output.Format;
 import org.jdom2.output.XMLOutputter;
-import org.jdom2.xpath.XPath;
+import org.jdom2.xpath.XPathExpression;
+import org.jdom2.xpath.XPathFactory;
 
 /**
  * XMLHandler handles all the XML for the Account storage.
@@ -131,8 +134,7 @@ public class XMLHandler implements PasswordStore
 		try
 		{
 			// Build document with on-the-fly decryption
-			SAXBuilder xmlReader = new SAXBuilder(false);
-			xmlReader.setValidation(false);
+			SAXBuilder xmlReader = new SAXBuilder(XMLReaders.NONVALIDATING);
 
 			InputStream inStream = getAccountFileInputStream();
 			s_doc = xmlReader.build(inStream);
@@ -327,8 +329,10 @@ public class XMLHandler implements PasswordStore
 	 */
 	private void deleteElement(String ElementID) throws JDOMException
 	{
-		XPath xPath = XPath.newInstance("//*[@id='"+ElementID+"']");
-		Element el = (Element) xPath.selectSingleNode(s_doc);
+		XPathExpression<Element> xpath = XPathFactory.instance().compile("//*[@id='"+ElementID+"']", 
+				Filters.element());
+		Element el = xpath.evaluateFirst(s_doc);
+		
 		if(el != null) 
 		{
 			el.detach();
@@ -462,13 +466,14 @@ public class XMLHandler implements PasswordStore
 
 		try 
 		{
-			XPath xPath = XPath.newInstance("//*[@id='"+EntryID+"']");
-			Element tempElement = (Element) xPath.selectSingleNode(s_doc);
-
+			XPathExpression<Element> xpath = XPathFactory.instance().compile("//*[@id='"+EntryID+"']", 
+					Filters.element());
+			Element tempElement = xpath.evaluateFirst(s_doc);
+			
 			if(tempElement != null) 
 				exist = true;
 		}
-		catch (JDOMException e) 
+		catch (Exception e) 
 		{
 			logger.debug("Element " + EntryID + " NOT found");
 		}	
@@ -489,15 +494,16 @@ public class XMLHandler implements PasswordStore
 		
 		try 
 		{
-			XPath xPath = XPath.newInstance("//group[@id='"+ElementID+"']");
-			Element tempElement = (Element) xPath.selectSingleNode(s_doc);
+			XPathExpression<Element> xpath = XPathFactory.instance().compile("//group[@id='"+ElementID+"']", 
+					Filters.element());
+			Element tempElement = xpath.evaluateFirst(s_doc);
 			
 			if(tempElement != null) 
 			{
 				isGroupElement = true;
 			}
 		} 
-		catch (JDOMException e) 
+		catch (Exception e) 
 		{
 			logger.debug("Element " + ElementID + " NOT found");
 		}	
@@ -563,11 +569,10 @@ public class XMLHandler implements PasswordStore
 	 * @return the GroupList
 	 * @throws JDOMException by problems with JDOM 
 	 */
-	@SuppressWarnings("rawtypes")
-	private List getGroupList() throws JDOMException
+	private List<Element> getGroupList() throws JDOMException
 	{
-		XPath x = XPath.newInstance("//group");
-		return x.selectNodes(s_doc);
+		XPathExpression<Element> xpath = XPathFactory.instance().compile("//group", Filters.element());
+		return xpath.evaluate(s_doc);
 	}
 	
 	
@@ -609,11 +614,10 @@ public class XMLHandler implements PasswordStore
 	 * @return the GroupList
 	 * @throws JDOMException by problems with JDOM 
 	 */
-	@SuppressWarnings("rawtypes")
-	private List getAccountList() throws JDOMException
+	private List<Element> getAccountList() throws JDOMException
 	{
-		XPath y = XPath.newInstance("//account");
-		return y.selectNodes(s_doc);
+		XPathExpression<Element> xpath = XPathFactory.instance().compile("//account", Filters.element());
+		return xpath.evaluate(s_doc);
 	}
 	
 	
@@ -623,7 +627,6 @@ public class XMLHandler implements PasswordStore
 	 * @param ElementID
 	 * @return true if Child's exist, false otherwise
 	 */
-	@SuppressWarnings("rawtypes")
 	public boolean hasChilds(String ElementID) 
 	{
 		boolean hasChilds = false;
@@ -634,23 +637,18 @@ public class XMLHandler implements PasswordStore
 		}
 		else
 		{
-			try 
+			XPathExpression<Element> xpath = XPathFactory.instance().compile("//group[@id='"+ElementID+"']", 
+					Filters.element());
+			Element tempElement = xpath.evaluateFirst(s_doc);
+
+			if (tempElement == null)
 			{
-				XPath x = XPath.newInstance("//group[@id='"+ElementID+"']");
-				Element tempElement = (Element) x.selectSingleNode(s_doc);
-				if (tempElement == null)
-				{
-					hasChilds = false;
-				}
-				else 
-				{
-					List childList = tempElement.getChildren();
-					hasChilds = (childList.size() > 0);
-				}
-			} 
-			catch (JDOMException e)
+				hasChilds = false;
+			}
+			else 
 			{
-				logger.debug("JDOMException", e);
+				List<Element> childList = tempElement.getChildren();
+				hasChilds = (childList.size() > 0);
 			}
 		}
 		
@@ -771,8 +769,9 @@ public class XMLHandler implements PasswordStore
 	{
 		Element returnElement;
 
-		XPath xPath = XPath.newInstance("//*[@id='"+ElementID+"']");
-		Element tempElement = (Element) xPath.selectSingleNode(s_doc);
+		XPathExpression<Element> xpath = XPathFactory.instance().compile("//*[@id='"+ElementID+"']", 
+				Filters.element());
+		Element tempElement = xpath.evaluateFirst(s_doc);
 					
 		if(tempElement != null) 
 		{
@@ -844,7 +843,6 @@ public class XMLHandler implements PasswordStore
 	}	
 	
 	
-	@SuppressWarnings("unchecked")
 	private List<PasswordEntry> getElementSubTree(Element parent)
 	{
 		List<PasswordEntry> allChildEntries = new ArrayList<PasswordEntry>();
