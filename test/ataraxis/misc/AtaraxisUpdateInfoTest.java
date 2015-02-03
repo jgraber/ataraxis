@@ -52,6 +52,8 @@ public class AtaraxisUpdateInfoTest
 	private static final String networkConfigFile =  System.getProperty("user.dir") + 
 	"/application_data/config/network.properties";
 	private static final String currentVersion = "1.5.0";
+	private static final String oldVersion = "1.1.0";
+	private static final String nextMajorVersion = "2.0.0";
 	
 	@BeforeClass 
 	public static void initClass() throws KeyStoreException, IOException, JurisdictionPolicyError
@@ -65,7 +67,7 @@ public class AtaraxisUpdateInfoTest
 	public void olderVersion_existNewer() throws IOException
 	{
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo();
-		boolean existNewer = updateInfo.existNewerVersion("1.1.0");
+		boolean existNewer = updateInfo.existNewerVersion(oldVersion);
 		assertTrue(existNewer);
 	}
 	
@@ -73,7 +75,7 @@ public class AtaraxisUpdateInfoTest
 	public void newerVersion_noNewerVersion() throws IOException
 	{
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo();
-		boolean existNewer = updateInfo.existNewerVersion("2.0.0");
+		boolean existNewer = updateInfo.existNewerVersion(nextMajorVersion);
 		assertFalse(existNewer);
 	}
 	
@@ -81,7 +83,7 @@ public class AtaraxisUpdateInfoTest
 	public void wrongVersion_existNewer() throws IOException
 	{
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo();
-		boolean existNewer = updateInfo.existNewerVersion("3.0.0");
+		boolean existNewer = updateInfo.existNewerVersion("a.b.c");
 		assertTrue(existNewer);
 	}
 	
@@ -89,8 +91,8 @@ public class AtaraxisUpdateInfoTest
 	public void wrongVersion_testFields() throws IOException
 	{
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo();
-		updateInfo.existNewerVersion("3.0.0");
-		assertFalse("3.0.0".equals(updateInfo.getCurrentVersion()));
+		updateInfo.existNewerVersion(nextMajorVersion);
+		assertFalse(nextMajorVersion.equals(updateInfo.getCurrentVersion()));
 		assertEquals("http://github.com/jgraber/ataraxis/",updateInfo.getCurrentURL());
 	}
 	
@@ -101,7 +103,7 @@ public class AtaraxisUpdateInfoTest
 		configuration.load(new FileInputStream(networkConfigFile));
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo(new NetworkUpdateCheck(configuration));
 		
-		updateInfo.existNewerVersion("3.0.0");
+		updateInfo.existNewerVersion(nextMajorVersion);
 		assertEquals(currentVersion, updateInfo.getCurrentVersion());
 		assertEquals("http://github.com/jgraber/ataraxis/",updateInfo.getCurrentURL());
 	}
@@ -114,7 +116,7 @@ public class AtaraxisUpdateInfoTest
 		configuration.setProperty("ATARAXIS.NETWORK.UPDATEURL", "http://jgraber.ch/AtaraxiS/updateinfo.php_dontExist");
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo(new NetworkUpdateCheck(configuration));
 		
-		updateInfo.existNewerVersion("3.0.0");
+		updateInfo.existNewerVersion(nextMajorVersion);
 	}
 	
 	@Test
@@ -125,7 +127,7 @@ public class AtaraxisUpdateInfoTest
 		configuration.setProperty("ATARAXIS.NETWORK.USE_PROXY", "TRUE");
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo(new NetworkUpdateCheck(configuration));
 		
-		updateInfo.existNewerVersion("3.0.0");
+		updateInfo.existNewerVersion(nextMajorVersion);
 		assertEquals(currentVersion, updateInfo.getCurrentVersion());
 	}
 
@@ -157,7 +159,7 @@ public class AtaraxisUpdateInfoTest
 		};
 		
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo();
-		boolean newerVersion = updateInfo.existNewerVersion("1.0.0");
+		boolean newerVersion = updateInfo.existNewerVersion(oldVersion);
 		assertTrue(newerVersion);
 		assertNotNull(updateInfo);
 		
