@@ -32,6 +32,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Provider;
 import java.security.spec.AlgorithmParameterSpec;
+
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
@@ -39,6 +40,7 @@ import javax.crypto.SecretKey;
 import mockit.Mock;
 import mockit.MockUp;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
@@ -52,7 +54,7 @@ import ataraxis.crypt.NotImplementedException;
 
 public class ACDecryptInputStreamTest {
 
-	private static final Logger logger = Logger.getLogger(ACDecryptInputStreamTest.class);
+	private static final Logger logger = LogManager.getLogger(ACDecryptInputStreamTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/ACDecryptInputStreamTest";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";

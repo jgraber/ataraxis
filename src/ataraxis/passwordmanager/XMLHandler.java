@@ -31,6 +31,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -55,7 +56,7 @@ public class XMLHandler implements PasswordStore
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger.getLogger(XMLHandler.class);
+	private static final Logger logger = LogManager.getLogger(XMLHandler.class);
 
 
 	private Element s_rootElement;

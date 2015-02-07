@@ -19,6 +19,7 @@
 
 package ataraxis.passwordmanager;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.util.Comparator;
@@ -42,7 +43,7 @@ public class AccountSorter implements Comparator<Element> {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AccountSorter.class);
+	private static final Logger LOGGER = LogManager.getLogger(AccountSorter.class);
 
 	/**
 	 * Compare first object with second.

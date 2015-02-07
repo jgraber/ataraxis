@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.ResourceBundle;
 import java.util.zip.ZipException;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
@@ -67,7 +68,7 @@ public class AtaraxisDecryptGUI
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisDecryptGUI.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisDecryptGUI.class);
 
 	// used AtaraxiS classes	
 	private AtaraxisCrypter s_ac;

@@ -25,6 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import ataraxis.crypt.AtaraxisCrypter;
@@ -44,7 +45,7 @@ public class PasswordManager
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger logger = Logger.getLogger(PasswordManager.class);
+	private static final Logger logger = LogManager.getLogger(PasswordManager.class);
 
 	private PasswordStore s_passwordStore;
 

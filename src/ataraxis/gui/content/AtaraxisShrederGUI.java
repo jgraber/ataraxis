@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ResourceBundle;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.DND;
@@ -37,7 +38,7 @@ public class AtaraxisShrederGUI
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisEncryptGUI.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisEncryptGUI.class);
 
 	// used AtaraxiS classes	
 	private GUIHelper guiHelper;

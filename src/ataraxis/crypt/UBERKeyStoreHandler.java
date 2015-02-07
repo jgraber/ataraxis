@@ -19,6 +19,7 @@
 
 package ataraxis.crypt;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -48,7 +49,7 @@ public final class UBERKeyStoreHandler extends KeyStoreHandler
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(UBERKeyStoreHandler.class);
+	private static final Logger LOGGER = LogManager.getLogger(UBERKeyStoreHandler.class);
 
     /**
      * Constructor for the UBERKeyStoreHandler with a KeyStorePath and

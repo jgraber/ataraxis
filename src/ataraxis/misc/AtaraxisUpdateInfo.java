@@ -23,6 +23,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 
@@ -39,7 +40,7 @@ public class AtaraxisUpdateInfo
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisUpdateInfo.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisUpdateInfo.class);
 	
 	
 	private static final String networkConfigFile =  System.getProperty("user.dir") + 

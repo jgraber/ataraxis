@@ -26,6 +26,7 @@ import java.security.Security;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -41,7 +42,7 @@ public final class AESKeyCreator implements SecretKeyCreator
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AESKeyCreator.class);
+	private static final Logger LOGGER = LogManager.getLogger(AESKeyCreator.class);
 
     /**
      * Size of the AES-Key.

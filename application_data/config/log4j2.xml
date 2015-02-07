@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d %-5p %c - %m%n"/>
+        </Console>
+		<RollingFile name="myFile" immediateFlush="true" append="true" fileName="application_data/ataraxis.log"
+             filePattern="application_data/ataraxis-%d{MM-dd-yyyy}-%i.log">
+			<PatternLayout>
+				<pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %c - %m%n</pattern>
+			</PatternLayout>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="5 MB"/>
+			</Policies>
+			<DefaultRolloverStrategy max="1"/>
+		</RollingFile>
+    </Appenders>
+    <Loggers>
+    <Logger name="org.apache.log4j.xml" level="debug"/>
+        <Root level="debug">
+            <!--<AppenderRef ref="STDOUT"/>-->
+			<AppenderRef ref="myFile"/>
+        </Root>
+    </Loggers>
+</Configuration>

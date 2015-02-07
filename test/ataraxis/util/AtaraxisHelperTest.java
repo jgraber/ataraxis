@@ -26,6 +26,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
@@ -38,7 +39,7 @@ import ataraxis.util.AtaraxisHelper;
 
 public class AtaraxisHelperTest {
 	
-	private static final Logger logger = Logger.getLogger(AtaraxisHelperTest.class);
+	private static final Logger logger = LogManager.getLogger(AtaraxisHelperTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/AtaraxisHelperTest";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";

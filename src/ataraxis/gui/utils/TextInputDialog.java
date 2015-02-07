@@ -21,6 +21,7 @@ package ataraxis.gui.utils;
 
 import java.util.ResourceBundle;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -45,7 +46,7 @@ import org.eclipse.swt.widgets.Text;
  */
 public class TextInputDialog {
 	
-	private static final Logger LOGGER = Logger.getLogger(TextInputDialog.class);
+	private static final Logger LOGGER = LogManager.getLogger(TextInputDialog.class);
 
 	// GUI Basic components
 	private static Display display = Display.getDefault();

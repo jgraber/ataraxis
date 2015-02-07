@@ -29,8 +29,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ListIterator;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import org.bouncycastle.util.encoders.Base64;
 
 /**
@@ -51,7 +51,7 @@ public class AtaraxisHeaderParser
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisHeaderParser.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisHeaderParser.class);
 
 	
 	/**

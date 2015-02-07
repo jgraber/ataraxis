@@ -21,6 +21,7 @@ package ataraxis.gui.content;
 
 import java.util.ResourceBundle;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -57,7 +58,7 @@ public class AtaraxisInfoGUI
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisInfoGUI.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisInfoGUI.class);
 
 	// used AtaraxiS classes
 	private GUIHelper guiHelper;

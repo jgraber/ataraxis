@@ -27,6 +27,7 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.eclipse.swt.widgets.Display;
@@ -52,7 +53,7 @@ import java.io.ByteArrayOutputStream;
  */
 public class AtaraxisBackupTest 
 {
-	private static final Logger logger = Logger.getLogger(AESKeyCreatorTest.class);
+	private static final Logger logger = LogManager.getLogger(AESKeyCreatorTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/AtaraxisBackupTest";
 	private static final String TEST_DIR_DIRECTORY = TEST_DIR_DATA + "/HomeDirectory";

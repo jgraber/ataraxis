@@ -25,8 +25,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;
 
@@ -45,14 +45,14 @@ public class AtaraxisStarter
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisStarter.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisStarter.class);
 
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args)
 	{
-		PropertyConfigurator.configure(LOG_PROPS_FILE); 
+		//PropertyConfigurator.configure(LOG_PROPS_FILE); 
 		Date date = new Date();
 
 		AtaraxisHelper ataraxisHelper = new AtaraxisHelper();

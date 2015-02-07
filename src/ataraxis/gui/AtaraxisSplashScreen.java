@@ -22,6 +22,7 @@ package ataraxis.gui;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.eclipse.swt.SWT;
@@ -52,7 +53,7 @@ public class AtaraxisSplashScreen
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisSplashScreen.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisSplashScreen.class);
 
 	private ResourceBundle s_translations;
 	private GUIHelper guiHelper;

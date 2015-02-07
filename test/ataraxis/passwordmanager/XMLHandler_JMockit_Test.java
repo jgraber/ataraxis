@@ -34,6 +34,7 @@ import java.util.List;
 import mockit.Mock;
 import mockit.MockUp;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.jdom2.Element;
@@ -52,7 +53,7 @@ import ataraxis.util.FileCopy;
 
 
 public class XMLHandler_JMockit_Test {
-	private static final Logger logger = Logger.getLogger(XMLHandlerTest.class);
+	private static final Logger logger = LogManager.getLogger(XMLHandlerTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/xmlhandler";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";

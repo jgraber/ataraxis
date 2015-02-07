@@ -27,6 +27,7 @@ import java.util.Date;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import ataraxis.util.FileCopy;
@@ -37,7 +38,7 @@ public class CopyPolicyFiles
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(CopyPolicyFiles.class);
+	private static final Logger LOGGER = LogManager.getLogger(CopyPolicyFiles.class);
 
 	private static final String USER_DIR = System.getProperty("user.dir");
 	private static final String APPL_DIR = USER_DIR + "/application_data";

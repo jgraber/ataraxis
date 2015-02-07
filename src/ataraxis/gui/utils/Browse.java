@@ -20,6 +20,7 @@ package ataraxis.gui.utils;
 
 import java.util.ResourceBundle;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -38,7 +39,7 @@ public final class Browse extends SelectionAdapter
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisEncryptGUI.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisEncryptGUI.class);
 
 	private boolean opearateOnFolder = false;
 	

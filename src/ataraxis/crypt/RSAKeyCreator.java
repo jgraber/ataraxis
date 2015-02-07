@@ -25,6 +25,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
 import java.security.Security;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -40,7 +41,7 @@ public final class RSAKeyCreator implements KeyPairCreator
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(RSAKeyCreator.class);
+	private static final Logger LOGGER = LogManager.getLogger(RSAKeyCreator.class);
 
     /**
      * Size of the AES-Key.

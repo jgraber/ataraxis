@@ -25,6 +25,7 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.Properties;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 public class NetworkUpdateCheck implements UpdateCheckable 
@@ -38,7 +39,7 @@ public class NetworkUpdateCheck implements UpdateCheckable
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisUpdateInfo.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisUpdateInfo.class);
 	
 
 	/**

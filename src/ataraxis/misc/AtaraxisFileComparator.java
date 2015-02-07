@@ -25,6 +25,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import ataraxis.util.FileList;
@@ -41,7 +42,7 @@ public class AtaraxisFileComparator
 {
 	
 	private AtaraxisHashCreator hashCreator;
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisFileComparator.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisFileComparator.class);
 	
 	/**
 	 * Empty Constructor for the AtaraxisFileComparator. It prepare the AtaraxisHashCreator

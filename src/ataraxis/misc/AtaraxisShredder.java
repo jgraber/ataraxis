@@ -29,6 +29,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import ataraxis.util.FileList;
@@ -148,7 +149,7 @@ public class AtaraxisShredder {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisShredder.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisShredder.class);
 	
 	
 	

@@ -49,6 +49,8 @@
     <path id="ataraxis.classpath">
         <pathelement location="${bc.jar}"/>
 		<pathelement location="${log.jar}"/>
+		<pathelement location="${logapi.jar}"/>
+		<pathelement location="${logcore.jar}"/>
 		<pathelement location="${bc.jar}"/>
 		<pathelement location="${swt.jar}"/>
 		<pathelement location="${jdom.jar}"/>
@@ -59,6 +61,8 @@
 	<path id="ataraxisLinux.classpath">
         <pathelement location="${bc.jar}"/>
 		<pathelement location="${log.jar}"/>
+		<pathelement location="${logapi.jar}"/>
+		<pathelement location="${logcore.jar}"/>
 		<pathelement location="${swtLinux.jar}"/>
 		<pathelement location="${jdom.jar}"/>
 	    <pathelement location="${jaxen.jar}"/>
@@ -68,6 +72,8 @@
     <path id="jar.classpath">
         <pathelement location="${bc.jar}"/>
 		<pathelement location="${log.jar}"/>
+		<pathelement location="${logapi.jar}"/>
+		<pathelement location="${logcore.jar}"/>
 		<pathelement location="${swt.jar}"/>
 		<pathelement location="${jdom.jar}"/>
 	    <pathelement location="${jaxen.jar}"/>
@@ -76,6 +82,8 @@
     <path id="jarGeneric.classpath">
         <pathelement location="${bc.jar}"/>
 		<pathelement location="${log.jar}"/>
+		<pathelement location="${logapi.jar}"/>
+		<pathelement location="${logcore.jar}"/>
 		<pathelement location="${jdom.jar}"/>
 	    <pathelement location="${jaxen.jar}"/>
     </path>
@@ -187,6 +195,7 @@
 			<classpath location="bin/"/>
 	    	<classpath refid="ataraxis.classpath"/>
 	        <classpath refid="test.classpath"/>
+			<jvmarg value="-Dlog4j.configurationFile=test\config\log4j2.xml"/>
 			<formatter type="plain"/>
 			<batchtest fork="yes" todir="${test.report.dir}">
 			    <fileset dir="${test.src.dir}">
@@ -198,7 +207,7 @@
    
 
 	<!--===========================================-->
-	<!-- test: JUnit Test suite                    -->
+	<!-- testsuite: JUnit Test suite                    -->
 	<!--===========================================-->
 	<target name="testsuite" depends="build, build-test" description="runs JUnit testsuite">		
 		<mkdir dir="${test.report.dir}" />
@@ -207,7 +216,8 @@
 	    	<classpath refid="ataraxis.classpath"/>
 	        <classpath refid="test.classpath"/>
 			<jvmarg value="-javaagent:lib/jmockit.jar"/>
-			<formatter type="xml"/>
+			 <jvmarg value="-Dlog4j.configurationFile=test\config\log4j2.xml"/>
+			 <formatter type="xml"/>
 			<batchtest fork="yes" todir="${test.report.dir}">
 			    <fileset dir="${test.src.dir}">
 			    	<include name="**/AtaraxisTestSuite.java"/>
@@ -226,6 +236,7 @@
 	    	<classpath refid="ataraxisLinux.classpath"/>
 	        <classpath refid="test.classpath"/>
 			<jvmarg value="-javaagent:lib/jmockit.jar"/>
+			<jvmarg value="-Dlog4j.configurationFile=test\config\log4j2.xml"/>
 			<formatter type="xml"/>
 			<batchtest fork="yes" todir="${test.report.dir}">
 			    <fileset dir="${test.src.dir}">

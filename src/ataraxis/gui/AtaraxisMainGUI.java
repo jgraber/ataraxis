@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;
@@ -73,7 +74,7 @@ public class AtaraxisMainGUI
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisMainGUI.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisMainGUI.class);
 
 	
 	// component constants:

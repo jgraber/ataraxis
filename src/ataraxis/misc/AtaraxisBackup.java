@@ -21,6 +21,7 @@ package ataraxis.misc;
 
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -54,7 +55,7 @@ public class AtaraxisBackup
 	private static final String APPL_DIR = System.getProperty("user.dir");
 	private static final String USER_DATA_DIR = APPL_DIR + "/user_data";
 	
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisBackup.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisBackup.class);
 
 	private static Shell s_shell;
 	private static FileDialog s_fileDilaog;

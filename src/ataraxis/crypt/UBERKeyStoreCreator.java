@@ -19,6 +19,7 @@
 
 package ataraxis.crypt;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.io.File;
@@ -45,7 +46,7 @@ public final class UBERKeyStoreCreator implements KeyStoreCreator
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(UBERKeyStoreCreator.class);
+	private static final Logger LOGGER = LogManager.getLogger(UBERKeyStoreCreator.class);
     
     /**
      * UBERKeyStoreCreator create a UBER KeyStore at the FileSystem-Path 

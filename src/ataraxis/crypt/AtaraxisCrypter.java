@@ -44,6 +44,7 @@ import java.util.zip.ZipOutputStream;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -62,7 +63,7 @@ public final class AtaraxisCrypter {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisCrypter.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisCrypter.class);
 
 	/**
 	 * The field for the KeyStoreHandler.

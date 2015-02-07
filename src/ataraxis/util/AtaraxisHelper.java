@@ -25,6 +25,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import ataraxis.crypt.AtaraxisCrypter;
@@ -41,7 +42,7 @@ public class AtaraxisHelper
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisHelper.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisHelper.class);
 
 	/**
 	 * Get the user name based on the AtaraxisCrypter.

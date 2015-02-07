@@ -25,6 +25,7 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.FileInputStream;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.AfterClass;
@@ -52,7 +53,7 @@ public class AtaraxisHashCreatorTest
 	 *  - http://kobesearch.cpan.org/htdocs/perl/Digest.pm.html
 	 */
 
-	private static final Logger logger = Logger.getLogger(AESKeyCreatorTest.class);
+	private static final Logger logger = LogManager.getLogger(AESKeyCreatorTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	

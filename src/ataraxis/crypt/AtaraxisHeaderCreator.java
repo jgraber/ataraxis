@@ -22,6 +22,7 @@ package ataraxis.crypt;
 import java.security.SecureRandom;
 import java.util.Arrays;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.bouncycastle.util.encoders.Base64;
 
@@ -44,7 +45,7 @@ public class AtaraxisHeaderCreator
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisHeaderCreator.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisHeaderCreator.class);
 
 	/**
 	 * AtaraxisHeaderCreator create a new random initial Vector and makes all ready

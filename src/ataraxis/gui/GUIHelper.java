@@ -21,6 +21,7 @@ package ataraxis.gui;
 import java.io.File;
 import java.util.ResourceBundle;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
@@ -50,7 +51,7 @@ public class GUIHelper
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisInfoGUI.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisInfoGUI.class);
 
 
 	public static int COMPOSITE_WIDTH = 456;

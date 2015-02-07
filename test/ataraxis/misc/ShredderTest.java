@@ -29,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.AfterClass;
@@ -59,7 +60,7 @@ public class ShredderTest {
     private static final String FILE_GENERATED_21 = DIR_GENERATED_2 + "/generated21.file";
     private static final String FILE_GENERATED_22 = DIR_GENERATED_2 + "/generated22.file";
     
-    private static final Logger logger = Logger.getLogger(ShredderTest.class);
+    private static final Logger logger = LogManager.getLogger(ShredderTest.class);
     protected static final String LOG_PROPS_FILE = DIR_MAIN_TEST + "/config/log4j_test.properties";
     
     private static File s_dir = new File (DIR_TEST);

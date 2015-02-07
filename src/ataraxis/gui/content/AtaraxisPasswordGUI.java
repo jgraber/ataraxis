@@ -30,6 +30,7 @@ import java.util.Properties;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;
@@ -86,7 +87,7 @@ public class AtaraxisPasswordGUI {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisPasswordGUI.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisPasswordGUI.class);
 
 	// used AtaraxiS classes
 	private PasswordManager s_pwManager;

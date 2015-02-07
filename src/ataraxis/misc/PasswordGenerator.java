@@ -21,6 +21,7 @@ package ataraxis.misc;
 
 import java.security.SecureRandom;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 /**
@@ -36,7 +37,7 @@ public class PasswordGenerator
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(PasswordGenerator.class);
+	private static final Logger LOGGER = LogManager.getLogger(PasswordGenerator.class);
 
 
 	// Basic Elements for the Alphabet

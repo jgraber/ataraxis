@@ -28,6 +28,7 @@ import java.security.KeyStoreException;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StackLayout;
@@ -67,7 +68,7 @@ class AtaraxisLoginGUI {
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisLoginGUI.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisLoginGUI.class);
 
 	private static AtaraxisCrypter s_ac = null;
 	

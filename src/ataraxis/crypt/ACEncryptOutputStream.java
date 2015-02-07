@@ -34,6 +34,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 /**
@@ -47,7 +48,7 @@ import org.apache.log4j.Logger;
  */
 public class ACEncryptOutputStream 
 {
-	private static final Logger LOGGER = Logger.getLogger(ACEncryptOutputStream.class);
+	private static final Logger LOGGER = LogManager.getLogger(ACEncryptOutputStream.class);
 	private CipherOutputStream encryptedOutputStream;
 
 

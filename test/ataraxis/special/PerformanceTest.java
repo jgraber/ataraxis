@@ -28,6 +28,7 @@ import java.io.InputStream;
 import java.util.zip.CRC32;
 import java.util.zip.CheckedInputStream;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.AfterClass;
@@ -76,7 +77,7 @@ public class PerformanceTest
     private static final String DIR_DATA = System.getProperty("user.dir") + "/test";
     private static final String DIR_TEMP = DIR_DATA + "/testrun/PerformanceTest";
     protected static final String LOG_PROPS_FILE = DIR_DATA + "/config/log4j_test.properties";
-    private static final Logger logger = Logger.getLogger(PerformanceTest.class);
+    private static final Logger logger = LogManager.getLogger(PerformanceTest.class);
     
     /**
      * Original path of the medium sized file.

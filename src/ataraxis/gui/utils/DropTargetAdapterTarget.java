@@ -19,6 +19,7 @@
 
 package ataraxis.gui.utils;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.dnd.DropTargetAdapter;
 import org.eclipse.swt.dnd.DropTargetEvent;
@@ -36,7 +37,7 @@ public final class DropTargetAdapterTarget extends DropTargetAdapter
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(AtaraxisMainGUI.class);
+	private static final Logger LOGGER = LogManager.getLogger(AtaraxisMainGUI.class);
 
 	// SWT references
 	private final Text source;

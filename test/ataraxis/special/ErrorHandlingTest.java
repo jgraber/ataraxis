@@ -28,6 +28,7 @@ import java.io.FileOutputStream;
 import java.security.KeyStoreException;
 import java.util.Properties;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.AfterClass;
@@ -51,7 +52,7 @@ public class ErrorHandlingTest
      * ## Don't change this fields, please. ##
      * #######################################
      */
-	private static final Logger LOGGER = Logger.getLogger(ErrorHandlingTest.class);
+	private static final Logger LOGGER = LogManager.getLogger(ErrorHandlingTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	

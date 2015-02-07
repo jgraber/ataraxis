@@ -19,6 +19,7 @@
 
 package ataraxis.crypt;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import java.io.FileNotFoundException;
@@ -48,7 +49,7 @@ public abstract class KeyStoreHandler
 	/**
 	 * Logger for this class
 	 */
-	private static final Logger LOGGER = Logger.getLogger(KeyStoreHandler.class);
+	private static final Logger LOGGER = LogManager.getLogger(KeyStoreHandler.class);
 
 	/**
 	 * Field for the KeyStore.
