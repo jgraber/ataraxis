@@ -1,6 +1,6 @@
 <?php
 /* ----------------------------------------------------------------------------
- * Copyright 2008 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2008 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (https://github.com/jgraber/ataraxis) and is
@@ -23,9 +23,9 @@
 
 // define some basic vars
 $version_is_valid = false;
-$old_versions = array("1.0.0", "1.0.1", "1.0.2", "1.1.0", "1.1.1", "1.2.0","1.3.0","1.3.1","1.4.0");
-$current_version = "1.5.0";
-$next_versions = array("1.5.1", "1.6.0", "2.0.0");
+$old_versions = array("1.0.0", "1.0.1", "1.0.2", "1.1.0", "1.1.1", "1.2.0","1.3.0","1.3.1","1.4.0","1.5.0");
+$current_version = "1.6.0";
+$next_versions = array("1.6.1", "1.7.0", "2.0.0");
 $version_addons = array("RC", "DEV");
 $version_is_current = false;
 $submitted_version = "";
@@ -102,6 +102,5 @@ else
 print "current.version = ".$current_version."\n";
 print "submitted.version = ".$submitted_version."\n";
 print "download.url = ".$download_url;
-
 
 ?>
