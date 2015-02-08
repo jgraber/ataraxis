@@ -48,7 +48,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import ataraxis.crypt.AtaraxisCrypter;
-import ataraxis.gui.AtaraxisStarter;
 import ataraxis.gui.GUIHelper;
 
 
@@ -76,7 +75,6 @@ public class AtaraxisConfigGUI
 	private int s_lang;
 	
 	// SWT components
-	private Combo s_configLogCombo;
 	private Combo s_configLangCombo;
 	public Text s_configPwd;
 	public Text s_configPwdNew;
@@ -86,23 +84,15 @@ public class AtaraxisConfigGUI
 	private static final String APPL_DIR = System.getProperty("user.dir");
 	private static final String USER_DATA_DIR = APPL_DIR + "/user_data";
 	private static final String APPL_DATA_DIR = APPL_DIR + "/application_data";
+	private static final String LOG_CONFIG = APPL_DATA_DIR + "/config/log4j2.xml";
+	private static final String LOG_CONFIG_SHORT = ".../application_data/config/log4j2.xml";
 	private static final String LOG_FILE = APPL_DATA_DIR + "/ataraxis.log";
 	private static final String LOG_FILE_SHORT = ".../application_data/ataraxis.log";
 	private static final String NET_FILE = APPL_DATA_DIR + "/config/network.properties";
-	
-	// Log level
-	private static final int FATAL = 0;
-	private static final int WARN = 1;
-	private static final int INFO = 2;
-	private static final int DEBUG = 3;
-	private static final String LOG_LEVEL_KEY = "log4j.appender.dest1.Threshold";
 	private static final String DEFAULT_DELETE_KEY = "default.delete.algo";
-
-	private static int s_logLevel = 1;
 
 	// Properties to store the settings
 	private static Properties s_userProps = null;
-	private static Properties s_logProps = null;
 	private static Properties s_networkProps;
 	
 	// Shred settings
@@ -135,7 +125,6 @@ public class AtaraxisConfigGUI
 		s_translations = translations;
 		s_ac = ac;
 		s_user = user;
-		loadLogProps();
 		loadProperties();
 	}
 
@@ -173,26 +162,23 @@ public class AtaraxisConfigGUI
 
 		final Label label_3 = new Label(groupApplConfig, SWT.LEFT);
 		label_3.setLayoutData(new GridData(163, 20));
-		label_3.setText(s_translations.getString("LOG.LEVEL") + ":");
+		label_3.setText(s_translations.getString("LOG.CONFIG") + ":");
 
-		s_configLogCombo = new Combo(groupApplConfig, SWT.DROP_DOWN | SWT.READ_ONLY);
-		final GridData configLogComboGridData = new GridData(SWT.LEFT, SWT.CENTER, true, false);
-		configLogComboGridData.widthHint = 163 - 16;
-		s_configLogCombo.setLayoutData(configLogComboGridData);
-		s_configLogCombo.setItems(new String [] {"FATAL", "WARN", "INFO", "DEBUG"});
-		s_configLogCombo.select(s_logLevel);
-		s_configLogCombo.addSelectionListener(new SelectionAdapter()
-		{
-			public void widgetSelected(SelectionEvent e)
-			{
-				if (s_logLevel != s_configLogCombo.getSelectionIndex())
-				{
-					s_logLevel = s_configLogCombo.getSelectionIndex();
-					changeLogLevel();
-				}
+		final Link linkLogConfig = new Link(groupApplConfig, SWT.NONE);
+		linkLogConfig.setLayoutData(new GridData(270, 20));
+		linkLogConfig.setText("<a href=\"" + LOG_CONFIG + "\">" + LOG_CONFIG_SHORT + "</a>");
+		linkLogConfig.setToolTipText(LOG_CONFIG);
+		linkLogConfig.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event event) {				
+				final Program p = Program.findProgram (".xml");
+
+				if (p != null) 
+					Program.launch(event.text);
+				else
+					guiHelper.displayInfoMessage(s_translations.getString("MESSAGE.NOTXT.PROGRAM.TITLE"), s_translations.getString("MESSAGE.NOTXT.PROGRAM"));
 			}
 		});
-
+		
 		final Label label_11 = new Label(groupApplConfig, SWT.LEFT);
 		label_11.setLayoutData(new GridData(163, 20));
 		label_11.setText(s_translations.getString("LOG.FILE") + ":");
@@ -402,43 +388,6 @@ public class AtaraxisConfigGUI
 	}
 	
 	/**
-	 * Method to change log level (write to log4j file).
-	 */
-	private void changeLogLevel() 
-	{
-		//save user language
-
-		String logLevel = "";
-
-		switch(s_logLevel)
-		{
-		case FATAL: 
-			LOGGER.debug("new logLevel selected - FATAL");
-			logLevel = "FATAL";
-			break;
-		case WARN: 
-			LOGGER.debug("new logLevel selected - WARN"); 
-			logLevel = "WARN";
-			break;
-		case DEBUG: 
-			LOGGER.debug("new logLevel selected - DEBUG"); 
-			logLevel = "DEBUG";
-			break;
-		case INFO: 
-			LOGGER.debug("new logLevel selected - INFO"); 
-			logLevel = "INFO";
-			break;
-		default: 
-			LOGGER.warn("couldn't retrieve new log level - don't save changes");
-		}
-		if (!logLevel.equals(""))
-		{
-			s_logProps.put(LOG_LEVEL_KEY, logLevel);
-			saveLogProps();
-		}
-	}
-
-	/**
 	 * Method to change the user language and save it to user properties file.
 	 */
 	private void changeUserLang() 
@@ -522,56 +471,6 @@ public class AtaraxisConfigGUI
 	}
 
 	
-	/**
-	 * Method to save the log4j properties in config file.
-	 */
-	private void saveLogProps()
-	{
-		// save log4j props
-		try
-		{
-			s_logProps.store(new FileOutputStream(AtaraxisStarter.LOG_PROPS_FILE), null);
-		} 
-		catch (IOException e) {
-			LOGGER.warn("Could not open/write log properties file: " + AtaraxisStarter.LOG_PROPS_FILE);
-		}
-	}
-
-	/**
-	 * Method to load the log4j properties.
-	 */
-	private void loadLogProps() 
-	{
-		// load log4j props
-		s_logProps = new Properties();
-		try 
-		{
-			s_logProps.load(new FileInputStream(AtaraxisStarter.LOG_PROPS_FILE));
-		}
-		catch (FileNotFoundException e) 
-		{
-			LOGGER.warn("Could not find log properties file: " + AtaraxisStarter.LOG_PROPS_FILE);
-		}
-		catch (IOException e) 
-		{
-			LOGGER.warn("Could not load log properties file: " + AtaraxisStarter.LOG_PROPS_FILE);
-		}
-		String logLevel;
-		logLevel = s_logProps.getProperty(LOG_LEVEL_KEY);
-		if (logLevel != null)
-		{
-			if (logLevel.equals("FATAL"))
-				s_logLevel = FATAL;
-			else if (logLevel.equals("WARN"))
-				s_logLevel = WARN;
-			else if (logLevel.equals("INFO"))
-				s_logLevel = INFO;
-			else if (logLevel.equals("DEBUG"))
-				s_logLevel = DEBUG;
-			// else s_logLevel is initialized with WARN
-		}
-	}
-
 	/**
 	 * Method to load the network properties.
 	 */
