@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2006 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2006 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -39,7 +39,7 @@ public class AtaraxisStarter
 	private static AtaraxisCrypter s_ac = null;
 	private static final String APPL_DIR = System.getProperty("user.dir");
 	private static final String APPL_DATA_DIR = APPL_DIR + "/application_data";
-	public static final String LOG_PROPS_FILE = APPL_DATA_DIR + "/config/log4j.properties";
+	public static final String LOG_CONFIG_FILE = APPL_DATA_DIR + "/config/log4j2.xml";
 	public static final Color COLOR = new Color(Display.getDefault(), 220, 220, 255);
 	
 	/**
