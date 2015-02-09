@@ -58,7 +58,9 @@ public class FileListTest
 		
 		for(String filePath : onlyFiles)
 		{
-			assertTrue(new File(filePath).isFile());
+			File file = new File(filePath);
+			assertTrue(file.isFile());
+			assertTrue(!file.isDirectory());
 		}
 	}
 	
