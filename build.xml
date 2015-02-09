@@ -92,6 +92,7 @@
 		<pathelement location="${hamcrest.jar}/."/>
 		<pathelement location="${junit.jar}/."/>
 		<pathelement location="${bc.jar}"/>
+		<pathelement location="${bcpki.jar}"/>
     	<pathelement location="${jmockit.jar}"/>
 	</path>
 	

@@ -32,41 +32,36 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigInteger;
-import java.security.InvalidKeyException;
 import java.security.KeyPair;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.NoSuchProviderException;
-import java.security.SignatureException;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.security.interfaces.RSAPrivateKey;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
 import javax.crypto.SecretKey;
-import javax.security.auth.x500.X500Principal;
 
 import mockit.Mock;
 import mockit.MockUp;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.bouncycastle.x509.X509V3CertificateGenerator;
+import org.bouncycastle.asn1.x500.X500Name;
+import org.bouncycastle.cert.X509v1CertificateBuilder;
+import org.bouncycastle.cert.jcajce.JcaX509CertificateConverter;
+import org.bouncycastle.cert.jcajce.JcaX509v1CertificateBuilder;
+import org.bouncycastle.operator.ContentSigner;
+import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import ataraxis.crypt.AESKeyCreator;
-import ataraxis.crypt.KeyPairCreator;
-import ataraxis.crypt.RSAKeyCreator;
-import ataraxis.crypt.SecretKeyCreator;
-import ataraxis.crypt.UBERKeyStoreCreator;
-import ataraxis.crypt.UBERKeyStoreHandler;
 import ataraxis.misc.AtaraxisHashCreator;
 import ataraxis.util.FileCopy;
 
@@ -76,7 +71,6 @@ import ataraxis.util.FileCopy;
  * @author Johnny Graber
  *
  */
-@SuppressWarnings("deprecation") // until BC sorts out X509V3CertificateGenerator
 public class UBERKeyStoreHandlerTest 
 {
 
@@ -319,31 +313,19 @@ public class UBERKeyStoreHandlerTest
 		} 	
 	}
 
+	public static X509Certificate generateX509V3Cert(KeyPair keyPair) throws Exception {
+		X509v1CertificateBuilder certBldr = new JcaX509v1CertificateBuilder(
+				new X500Name("CN=Root"),
+				BigInteger.valueOf(1),
+				new Date(System.currentTimeMillis()),
+				new Date(System.currentTimeMillis() + 1000 * 3600 * 24),
+				new X500Name("CN=Root"), keyPair.getPublic());
 
-	private static X509Certificate generateX509V3Cert(KeyPair pair)
-	throws InvalidKeyException, NoSuchProviderException, SignatureException
-	{
-		// define Generator
-		X509V3CertificateGenerator  certGen = new X509V3CertificateGenerator();
+		ContentSigner signer = new JcaContentSignerBuilder("SHA1withRSA")
+		.setProvider("BC").build(keyPair.getPrivate());
 
-		// define the parameters
-		certGen.setSerialNumber(BigInteger.valueOf(System.currentTimeMillis()));
-		certGen.setIssuerDN(new X500Principal("CN=Test Certificate Issuer"));
-		certGen.setNotBefore(new Date(System.currentTimeMillis() - 50000));
-		Calendar cal = Calendar.getInstance();
-
-		cal.add(Calendar.YEAR, +1);
-
-		//Date then = cal.getTime();
-
-		certGen.setNotAfter(cal.getTime());
-		certGen.setSubjectDN(new X500Principal("CN=Test Certificate Subject"));
-		certGen.setPublicKey(pair.getPublic());
-		certGen.setSignatureAlgorithm("SHA256WithRSAEncryption");
-
-		;
-		// generate and return the certificate
-		return certGen.generateX509Certificate(pair.getPrivate(), "BC");
+		return new JcaX509CertificateConverter().setProvider("BC")
+				.getCertificate(certBldr.build(signer));
 	}
 
 	@Test
