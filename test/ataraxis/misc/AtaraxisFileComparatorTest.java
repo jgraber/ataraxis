@@ -27,7 +27,6 @@ import java.io.IOException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -43,7 +42,6 @@ public class AtaraxisFileComparatorTest
 	private static final Logger logger = LogManager.getLogger(AESKeyCreatorTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/fileCompareTest";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	
 	private static final File FILE_SMALL = new File(TEST_DIR + "/fixtures/performance.xls");
 	private static final File FILE_BIG = new File(TEST_DIR + "/fixtures/wallstreet.mp3");
@@ -54,7 +52,6 @@ public class AtaraxisFileComparatorTest
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception 
 	{
-		PropertyConfigurator.configure(LOG_PROPS_FILE); 
 		logger.debug("AtaraxisFileComparatorTest startet");
 	
 		s_hashCreator = new AtaraxisFileComparator();
@@ -132,23 +129,5 @@ public class AtaraxisFileComparatorTest
 	public void testDirDirEquals() throws IOException 
 	{
 		assertTrue(s_hashCreator.areFilesEquals(DIR_A, DIR_A));
-	}
-
-	/*@Test(expected=NullPointerException.class)
-	public void testAtaraxisFileComparator_NoSuchAlgorithmException() throws Exception 
-	{
-		new MockUp<AtaraxisHashCreator>(){
-			   @Mock
-			   public void $init(HashingDigest digestAlgorithm)
-			   throws NoSuchAlgorithmException
-				{
-				   throw new NoSuchAlgorithmException("Mocked Exception");
-				}
-		};
-		
-		AtaraxisFileComparator afc = new AtaraxisFileComparator();
-		assertTrue(afc.areFilesEquals(DIR_A, DIR_B)); // No Comparator => Null Pointer Exception
-				
-	}*/
-	
+	}	
 }

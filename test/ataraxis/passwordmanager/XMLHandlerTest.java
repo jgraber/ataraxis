@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2009 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2009 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -37,7 +37,6 @@ import java.util.List;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.junit.BeforeClass;
@@ -60,7 +59,6 @@ public class XMLHandlerTest
 	private static final Logger logger = LogManager.getLogger(XMLHandlerTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/xmlhandler";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	protected static final String PW_FILE = TEST_DIR_DATA + "/passwords.xml";
 	protected static final String PW_FILE_INITIAL = TEST_DIR_DATA + "/passwords_initial.xml";
 	private static String ATARAXIS_DEFAULT_ACCOUNTS = System.getProperty("user.dir") + "/application_data/user_data_template/template.xml";
@@ -68,7 +66,6 @@ public class XMLHandlerTest
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception 
 	{
-		PropertyConfigurator.configure(LOG_PROPS_FILE); 
 		logger.debug("XMLHandlerTest startet");
 	
 		File xmlTestDir = new File(TEST_DIR_DATA);

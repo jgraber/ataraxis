@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2006 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2006 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -30,7 +30,6 @@ import java.util.Properties;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -54,8 +53,6 @@ public class ErrorHandlingTest
      */
 	private static final Logger LOGGER = LogManager.getLogger(ErrorHandlingTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
-	
 	
     private static AtaraxisCrypter s_ac = null;
     private static AtaraxisCrypter s_acDefault;
@@ -75,8 +72,7 @@ public class ErrorHandlingTest
      */
     @BeforeClass
     public static void runOnceBeforeAllTests() throws Exception
-    {        
-    	PropertyConfigurator.configure(LOG_PROPS_FILE); 
+    {
         (new File (DIR_TEMP)).mkdir();
         
         

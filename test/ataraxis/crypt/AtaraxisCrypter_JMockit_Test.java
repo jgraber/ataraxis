@@ -45,7 +45,6 @@ import javax.crypto.SecretKey;
 import mockit.Mock;
 import mockit.MockUp;
 
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -70,7 +69,6 @@ public class AtaraxisCrypter_JMockit_Test {
 	private static AtaraxisCrypter s_ac = null;
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/ac_test_data";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	private static final String FILE_SMALL = TEST_DIR + "/fixtures/performance.xls";
 	private static File inputTestFile;
 	private static String s_ksPath;
@@ -86,9 +84,6 @@ public class AtaraxisCrypter_JMockit_Test {
 	@BeforeClass 
 	public static void initClass() throws KeyStoreException, IOException, JurisdictionPolicyError
 	{
-
-		PropertyConfigurator.configure(LOG_PROPS_FILE); 
-		
 		TestingHelper.deleteDir(new File(TEST_DIR_DATA));
 				
 		(new File(TEST_DIR_DATA)).mkdirs();

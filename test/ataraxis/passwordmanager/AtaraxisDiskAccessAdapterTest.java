@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2009 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2009 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is

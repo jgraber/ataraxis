@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2009 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2009 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -27,7 +27,6 @@ import java.io.IOException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -42,14 +41,12 @@ public class FileCopyTest
 	private static final Logger logger = LogManager.getLogger(FileCopyTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/FileCopy";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	private static String originalFile = TEST_DIR_DATA + "/originalFile.txt";
 	private static String copyFile = TEST_DIR_DATA + "/copyFile.txt";
 	
 	@BeforeClass 
 	public static void initClass() throws IOException
 	{
-		PropertyConfigurator.configure(LOG_PROPS_FILE);
 		logger.info("Start FileCopyTest");
 		(new File(TEST_DIR_DATA)).mkdirs();
 		

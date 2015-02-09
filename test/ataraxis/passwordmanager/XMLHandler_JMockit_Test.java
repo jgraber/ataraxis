@@ -36,7 +36,6 @@ import mockit.MockUp;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.junit.BeforeClass;
@@ -56,14 +55,12 @@ public class XMLHandler_JMockit_Test {
 	private static final Logger logger = LogManager.getLogger(XMLHandlerTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/xmlhandler";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	protected static final String PW_FILE = TEST_DIR_DATA + "/passwords.xml";
 	private static String ATARAXIS_DEFAULT_ACCOUNTS = System.getProperty("user.dir") + "/application_data/user_data_template/template.xml";
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception 
 	{
-		PropertyConfigurator.configure(LOG_PROPS_FILE); 
 		logger.debug("XMLHandlerTest startet");
 	
 		File xmlTestDir = new File(TEST_DIR_DATA);

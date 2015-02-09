@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2009 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2009 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -27,7 +27,6 @@ import java.security.KeyStoreException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -40,13 +39,10 @@ public class PasswordGeneratorTest
 {
 
 	private static final Logger logger = LogManager.getLogger(AtaraxisHeaderCreatorTest.class);
-	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	
 	@BeforeClass 
 	public static void initClass() throws KeyStoreException, IOException, JurisdictionPolicyError
 	{
-		PropertyConfigurator.configure(LOG_PROPS_FILE); 
 		logger.info("Start PasswordGeneratorTest");
 	}
 	

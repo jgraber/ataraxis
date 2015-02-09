@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2009 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2009 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -41,7 +41,6 @@ import mockit.MockUp;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -55,14 +54,11 @@ public class ACEncryptOutputStreamTest
 	private static final Logger logger = LogManager.getLogger(ACEncryptOutputStreamTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/ACEncryptOutputStreamTest";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	private static SecretKey key;
 	
 	@BeforeClass 
 	public static void initClass() throws KeyStoreException, IOException, JurisdictionPolicyError, Exception, NoSuchProviderException, NotImplementedException
 	{
-		
-		PropertyConfigurator.configure(LOG_PROPS_FILE); 
 		(new File(TEST_DIR_DATA)).mkdirs();
 		
 		AESKeyCreator ac = new AESKeyCreator();

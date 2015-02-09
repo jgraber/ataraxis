@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2006 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2006 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -29,7 +29,6 @@ import java.util.zip.ZipFile;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.junit.AfterClass;
@@ -60,12 +59,10 @@ public class AtaraxisBackupTest
 	private static final String TEST_DIR_DIRECTORY_USER = TEST_DIR_DIRECTORY + "/UserA";
 	private static final String TEST_DIR_DIRECTORY_USER_FILE = TEST_DIR_DIRECTORY_USER + "/comment.txt";
 	private static final String USER_FILE_CONTENT = "This is a simple little text!";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-		PropertyConfigurator.configure(LOG_PROPS_FILE); 
 		logger.debug("AtaraxisBackupTest startet");
 	
 		

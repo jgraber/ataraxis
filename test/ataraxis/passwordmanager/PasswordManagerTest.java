@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2009 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2009 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -32,7 +32,6 @@ import java.util.List;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.jdom2.JDOMException;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -56,7 +55,6 @@ public class PasswordManagerTest
 	private static final Logger logger = LogManager.getLogger(PasswordManagerTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/passwordManager";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	protected static final String PW_FILE = TEST_DIR_DATA + "/passwords.xml";
 	private static final String PASSWORD = "password";
 	private static AtaraxisCrypter s_ac;
@@ -66,7 +64,6 @@ public class PasswordManagerTest
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception 
 	{
-		PropertyConfigurator.configure(LOG_PROPS_FILE); 
 		logger.debug("AtaraxisFileComparatorTest startet");
 
 		File pwmTestDir = new File(TEST_DIR_DATA);

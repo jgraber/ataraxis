@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2007 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2007 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -27,7 +27,6 @@ import java.security.NoSuchProviderException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -40,8 +39,6 @@ import ataraxis.crypt.RSAKeyCreator;
 public class RSAKeyCreatorTest 
 {
 	private static final Logger logger = LogManager.getLogger(RSAKeyCreatorTest.class);
-	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	
 	
 	/**
@@ -49,8 +46,7 @@ public class RSAKeyCreatorTest
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception 
-	{
-		PropertyConfigurator.configure(LOG_PROPS_FILE); 
+	{ 
 		logger.debug("RSAKeyCreatorTest startet");
 	}
 

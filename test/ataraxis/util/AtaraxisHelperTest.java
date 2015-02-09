@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2009 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2009 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -28,7 +28,6 @@ import java.util.Properties;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -42,7 +41,6 @@ public class AtaraxisHelperTest {
 	private static final Logger logger = LogManager.getLogger(AtaraxisHelperTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/AtaraxisHelperTest";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	private static final String TEST_DIR_USER_A = TEST_DIR_DATA + "/UserA";
 	private static final String KSFILE_USER_A = TEST_DIR_USER_A + "/keystore.ks";
 	private static final String PATH_PROPS_USER_A = TEST_DIR_USER_A + "/user.props";
@@ -51,7 +49,6 @@ public class AtaraxisHelperTest {
 	@BeforeClass 
 	public static void initClass() throws IOException, Exception
 	{
-		PropertyConfigurator.configure(LOG_PROPS_FILE);
 		logger.info("Start FileCopyTest");
 		
 		File userAFiles = new File(TEST_DIR_USER_A);

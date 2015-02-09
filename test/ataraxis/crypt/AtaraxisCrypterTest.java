@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2007 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2007 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -60,7 +60,6 @@ public class AtaraxisCrypterTest
 	private static final Logger logger = LogManager.getLogger(AESKeyCreatorTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/ac_test_data";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	private static final String FILE_SMALL = TEST_DIR + "/fixtures/performance.xls";
 	private static File inputTestFile;
 	private static String s_ksPath;
@@ -76,9 +75,6 @@ public class AtaraxisCrypterTest
 	@BeforeClass 
 	public static void initClass() throws KeyStoreException, IOException, JurisdictionPolicyError
 	{
-
-		PropertyConfigurator.configure(LOG_PROPS_FILE); 
-		
 		TestingHelper.deleteDir(new File(TEST_DIR_DATA));
 				
 		(new File(TEST_DIR_DATA)).mkdirs();
@@ -642,27 +638,4 @@ public class AtaraxisCrypterTest
 		
 		s_ac.decryptFile(outFile, outFileDecrypted);
 	}
-	
-	/*@Test
-	public void decrypt_ZipFile_NotZipped() throws Exception
-	{
-		File outFile = new File(TEST_DIR_DATA+"/notZipped.acz");
-		File outFileDecrypted = new File(TEST_DIR_DATA+"/decrypt_NotZipped.dir");
-
-		
-		try {
-			s_ac.encryptFile(new File(FILE_SMALL), outFile, false);
-		} catch (Exception e) {
-			fail("Test-Setup failed");
-		}
-		
-		try {
-			s_ac.decryptFile(outFile, outFileDecrypted, true);
-			fail("ZipException missing");
-		} catch (ZipException ex) {
-			// Unzipped Files throw exception
-		} 
-	}
-*/
-
 }

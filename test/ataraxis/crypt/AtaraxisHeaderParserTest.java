@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2009 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2009 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -29,7 +29,6 @@ import java.security.KeyStoreException;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -42,13 +41,11 @@ public class AtaraxisHeaderParserTest
 	private static final Logger logger = LogManager.getLogger(AtaraxisHeaderParserTest.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + "/test";
 	private static final String TEST_DIR_DATA = TEST_DIR + "/testrun/AtaraxisHeaderParser";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 	private static String headerPath = TEST_DIR_DATA + "/headerTestFile.ac";
 	
 	@BeforeClass 
 	public static void initClass() throws KeyStoreException, IOException, JurisdictionPolicyError
 	{
-		PropertyConfigurator.configure(LOG_PROPS_FILE);
 		logger.info("Start AtaraxisHeaderParserTest");
 		(new File(TEST_DIR_DATA)).mkdirs();
 		File headerFile = new File(headerPath);

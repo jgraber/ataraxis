@@ -57,7 +57,6 @@ import mockit.MockUp;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.bouncycastle.x509.X509V3CertificateGenerator;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -84,7 +83,6 @@ public class UBERKeyStoreHandlerTest
 	private static final Logger logger = LogManager.getLogger(UBERKeyStoreHandler.class);
 	private static final String TEST_DIR = System.getProperty("user.dir") + File.separator + "test";
 	private static final String TEST_DIR_DATA = TEST_DIR + File.separator + "testrun" + File.separator + "ueberHandler";
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
 
 	private static String ks_Password = "thisisA";
 	private static String ks_Path = TEST_DIR_DATA + File.separator + "ueber.ubr";
@@ -94,7 +92,6 @@ public class UBERKeyStoreHandlerTest
 	@BeforeClass 
 	public static void initClass() throws KeyStoreException, NoSuchProviderException, NoSuchAlgorithmException
 	{
-		PropertyConfigurator.configure(LOG_PROPS_FILE); 
 
 		(new File(TEST_DIR_DATA)).mkdirs();
 

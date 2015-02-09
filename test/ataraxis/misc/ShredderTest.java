@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2006 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2006 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -31,7 +31,6 @@ import java.util.Arrays;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -52,7 +51,6 @@ public class ShredderTest {
     
     
     private static final String DIR_TEST = System.getProperty("user.dir") + "/test/testrun/shredderTest";
-    private static final String DIR_MAIN_TEST = System.getProperty("user.dir") + "/test";
     private static final String DIR_GENERATED_1 = DIR_TEST + "/genDir1";
     private static final String FILE_GENERATED_11 = DIR_GENERATED_1 + "/generated11.file";
     private static final String FILE_GENERATED_12 = DIR_GENERATED_1 + "/generated12.file";
@@ -61,7 +59,6 @@ public class ShredderTest {
     private static final String FILE_GENERATED_22 = DIR_GENERATED_2 + "/generated22.file";
     
     private static final Logger logger = LogManager.getLogger(ShredderTest.class);
-    protected static final String LOG_PROPS_FILE = DIR_MAIN_TEST + "/config/log4j_test.properties";
     
     private static File s_dir = new File (DIR_TEST);
     private static File s_dir1 = new File (DIR_GENERATED_1);
@@ -87,9 +84,7 @@ public class ShredderTest {
      */
     @BeforeClass
     public static void runOnceBeforeAllTests() throws Exception
-    {        
-    	PropertyConfigurator.configure(LOG_PROPS_FILE); 
-
+    { 
     	TestingHelper.deleteDir(new File(DIR_TEST));
     	
         s_startTime = System.currentTimeMillis();

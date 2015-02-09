@@ -1,5 +1,5 @@
 /* ----------------------------------------------------------------------------
- * Copyright 2006 - 2010 Johnny Graber & Andreas Muedespacher
+ * Copyright 2006 - 2015 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
  * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
@@ -30,7 +30,6 @@ import java.util.zip.CheckedInputStream;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -110,7 +109,6 @@ public class CryptTest
     
     private static final Logger logger = LogManager.getLogger(CryptTest.class);
     
-	protected static final String LOG_PROPS_FILE = TEST_DIR + "/config/log4j_test.properties";
     
     
     /**
@@ -121,8 +119,7 @@ public class CryptTest
     @BeforeClass
     public static void runOnceBeforeAllTests() throws Exception
     {        
-    	PropertyConfigurator.configure(LOG_PROPS_FILE); 
-		logger.debug("AtaraxisFileComparatorTest startet");
+    	logger.debug("AtaraxisFileComparatorTest startet");
     	
         (new File (DIR_TEMP)).mkdir();
         
