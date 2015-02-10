@@ -1,4 +1,4 @@
-# ![AtaraxiS](http://jgraber.ch/AtaraxiS/wiki/Info_Ataraxis.png) AtaraxiS
+# ![AtaraxiS](http://jgraber.ch/AtaraxiS/wiki/Info_Ataraxis.png) AtaraxiS [![Build Status](https://travis-ci.org/jgraber/ataraxis.svg?branch=master)](https://travis-ci.org/jgraber/ataraxis)
 
 AtaraxiS dient zum sicheren Speichern von Passwörtern und dem Verschlüsseln von Dateien (mittels AES 256).
 AtaraxiS entstand als Diplomarbeit von Johnny Graber und Andreas Müdespacher an der 
