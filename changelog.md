@@ -1,5 +1,19 @@
 # Changelog
 
+## AtaraxiS 1.6.0 (X. X. 2015)
+Aktualisierungen:
+* Kleinere Anpassungen am GUI (Pfad zur Log-Konfiguration)
+ 
+Aktualisierte Hilfsbibliotheken:
+* SWT auf 4.4
+* Bouncycastle auf 1.51
+* Log4J auf 2.1
+* JUnit auf 4.12
+* JMockit auf 1.14
+* JDom auf 2.0.5
+
+
+
 ## AtaraxiS 1.5.0 (21. 04. 2014)
 Aktualisierungen:
 * Unterstützung von Java 8
