@@ -153,7 +153,7 @@ public class AtaraxisConfigGUI
 		final Group groupApplConfig = new Group(s_compositeConfig, SWT.NONE);
 		groupApplConfig.setText(s_translations.getString("APPL.CONFIG"));
 		final GridData gridDataConfigAppl = new GridData(SWT.LEFT, SWT.CENTER, true, false, 2, 1);
-		gridDataConfigAppl.heightHint = 65; //GROUP_HEIGHT;
+		gridDataConfigAppl.heightHint = 50; //GROUP_HEIGHT;
 		gridDataConfigAppl.widthHint = GUIHelper.GROUP_WIDTH;
 		groupApplConfig.setLayoutData(gridDataConfigAppl);
 		final GridLayout gridLayoutConfigAppl = new GridLayout();
@@ -165,7 +165,7 @@ public class AtaraxisConfigGUI
 		label_3.setText(s_translations.getString("LOG.CONFIG") + ":");
 
 		final Link linkLogConfig = new Link(groupApplConfig, SWT.NONE);
-		linkLogConfig.setLayoutData(new GridData(270, 20));
+		linkLogConfig.setLayoutData(new GridData(270, 18));
 		linkLogConfig.setText("<a href=\"" + LOG_CONFIG + "\">" + LOG_CONFIG_SHORT + "</a>");
 		linkLogConfig.setToolTipText(LOG_CONFIG);
 		linkLogConfig.addListener(SWT.Selection, new Listener() {
@@ -180,7 +180,7 @@ public class AtaraxisConfigGUI
 		});
 		
 		final Label label_11 = new Label(groupApplConfig, SWT.LEFT);
-		label_11.setLayoutData(new GridData(163, 20));
+		label_11.setLayoutData(new GridData(163, 18));
 		label_11.setText(s_translations.getString("LOG.FILE") + ":");
 
 		final Link link = new Link(groupApplConfig, SWT.NONE);
@@ -293,7 +293,7 @@ public class AtaraxisConfigGUI
 
 		final Group groupNetworkConfig = new Group(s_compositeConfig, SWT.NONE);
 		final GridData gridDataNetworkConfig = new GridData(SWT.LEFT, SWT.BOTTOM, true, false);
-		gridDataNetworkConfig.heightHint = 100;
+		gridDataNetworkConfig.heightHint = 110;
 		gridDataNetworkConfig.widthHint = GUIHelper.GROUP_WIDTH;
 		groupNetworkConfig.setLayoutData(gridDataNetworkConfig);
 		final GridLayout gridLayout = new GridLayout();
