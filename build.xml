@@ -413,6 +413,7 @@
     <target name="run" depends="build" description="Starts the GUI-Version">
         <java classname="ataraxis.gui.AtaraxisStarter" failonerror="true" fork="yes">
         	<!--<jvmarg line="-Djava.library.path=${swt.home}"/>-->
+        	<jvmarg value="-Dlog4j.configurationFile=application_data/config/log4j2.xml"/>
         	<classpath location="bin/"/>
             <classpath refid="ataraxis.classpath"/>
         </java>
@@ -425,6 +426,7 @@
     <target name="runLinux" depends="build" description="Starts the GUI-Version (Linux)">
         <emmajava enabled="true" libclasspathref="emma.lib"  fullmetadata="yes" classname="ataraxis.gui.AtaraxisStarter" failonerror="true" fork="yes">
         	<!--<jvmarg line="-Djava.library.path=${swt.home}"/>-->
+        	<jvmarg value="-Dlog4j.configurationFile=application_data/config/log4j2.xml"/>
         	<classpath location="bin/"/>
             <classpath refid="ataraxisLinux.classpath"/>
 	 <html outfile="emma/coverage.html"  />
