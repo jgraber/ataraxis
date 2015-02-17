@@ -85,7 +85,7 @@ public class AtaraxisConfigGUI
 	private static final String USER_DATA_DIR = APPL_DIR + "/user_data";
 	private static final String APPL_DATA_DIR = APPL_DIR + "/application_data";
 	private static final String LOG_CONFIG = APPL_DATA_DIR + "/config/log4j2.xml";
-	private static final String LOG_CONFIG_SHORT = ".../application_data/config/log4j2.xml";
+	private static final String LOG_CONFIG_SHORT = ".../config/log4j2.xml";
 	private static final String LOG_FILE = APPL_DATA_DIR + "/ataraxis.log";
 	private static final String LOG_FILE_SHORT = ".../application_data/ataraxis.log";
 	private static final String NET_FILE = APPL_DATA_DIR + "/config/network.properties";
@@ -161,11 +161,11 @@ public class AtaraxisConfigGUI
 		groupApplConfig.setLayout(gridLayoutConfigAppl);
 
 		final Label label_3 = new Label(groupApplConfig, SWT.LEFT);
-		label_3.setLayoutData(new GridData(163, 20));
+		label_3.setLayoutData(new GridData(200, 20));
 		label_3.setText(s_translations.getString("LOG.CONFIG") + ":");
 
 		final Link linkLogConfig = new Link(groupApplConfig, SWT.NONE);
-		linkLogConfig.setLayoutData(new GridData(270, 18));
+		linkLogConfig.setLayoutData(new GridData(230, 18));
 		linkLogConfig.setText("<a href=\"" + LOG_CONFIG + "\">" + LOG_CONFIG_SHORT + "</a>");
 		linkLogConfig.setToolTipText(LOG_CONFIG);
 		linkLogConfig.addListener(SWT.Selection, new Listener() {
@@ -180,11 +180,11 @@ public class AtaraxisConfigGUI
 		});
 		
 		final Label label_11 = new Label(groupApplConfig, SWT.LEFT);
-		label_11.setLayoutData(new GridData(163, 18));
+		label_11.setLayoutData(new GridData(200, 18));
 		label_11.setText(s_translations.getString("LOG.FILE") + ":");
 
 		final Link link = new Link(groupApplConfig, SWT.NONE);
-		link.setLayoutData(new GridData(270, 20));
+		link.setLayoutData(new GridData(230, 20));
 		link.setText("<a href=\"" + LOG_FILE + "\">" + LOG_FILE_SHORT + "</a>");
 		link.setToolTipText(LOG_FILE);
 		link.addListener(SWT.Selection, new Listener() {
@@ -211,12 +211,12 @@ public class AtaraxisConfigGUI
 		groupUserConfig.setLayout(gridLayoutConfigSystem);
 
 		final Label label_23 = new Label(groupUserConfig, SWT.LEFT);
-		label_23.setLayoutData(new GridData(163, SWT.DEFAULT));
+		label_23.setLayoutData(new GridData(200, SWT.DEFAULT));
 		label_23.setText(s_translations.getString("LANGUAGE") + ":");
 
 		s_configLangCombo = new Combo(groupUserConfig, SWT.DROP_DOWN | SWT.READ_ONLY);
 		final GridData configLangComboGridData = new GridData(SWT.LEFT, SWT.CENTER, true, false);
-		configLangComboGridData.widthHint = 163 - 16;
+		configLangComboGridData.widthHint = 200;
 		s_configLangCombo.setLayoutData(configLangComboGridData);
 		s_configLangCombo.setItems(new String [] {s_translations.getString("GERMAN"), s_translations.getString("FRENCH"), s_translations.getString("ENGLISH")});
 		s_configLangCombo.select(s_lang);
@@ -234,7 +234,7 @@ public class AtaraxisConfigGUI
 		});
 
 		final Label labelConfigDelete = new Label(groupUserConfig, SWT.LEFT);
-		labelConfigDelete.setLayoutData(new GridData(163, SWT.DEFAULT));
+		labelConfigDelete.setLayoutData(new GridData(183, SWT.DEFAULT));
 		labelConfigDelete.setText(s_translations.getString("DELETE.ALGORITHMS") + ":");
 
 		final Combo comboConfigDelete = new Combo(groupUserConfig, SWT.DROP_DOWN | SWT.READ_ONLY);
@@ -258,34 +258,34 @@ public class AtaraxisConfigGUI
 		});
 
 		final Label label_21 = new Label(groupUserConfig, SWT.LEFT);
-		label_21.setLayoutData(new GridData(163, SWT.DEFAULT));
+		label_21.setLayoutData(new GridData(200, SWT.DEFAULT));
 		label_21.setText(s_translations.getString("PASSWORD.OLD") + ":");
 
 		s_configPwd = new Text(groupUserConfig, SWT.LEFT | SWT.BORDER);
-		s_configPwd.setLayoutData(new GridData(163, SWT.DEFAULT));
+		s_configPwd.setLayoutData(new GridData(200, SWT.DEFAULT));
 		s_configPwd.setEchoChar('*');
 
 		final Label label_22 = new Label(groupUserConfig, SWT.LEFT);
-		label_22.setLayoutData(new GridData(163, SWT.DEFAULT));
+		label_22.setLayoutData(new GridData(200, SWT.DEFAULT));
 		label_22.setText(s_translations.getString("PASSWORD.REP.1") + ":");
 
 		s_configPwdNew = new Text(groupUserConfig, SWT.LEFT | SWT.BORDER);
-		s_configPwdNew.setLayoutData(new GridData(163, SWT.DEFAULT));
+		s_configPwdNew.setLayoutData(new GridData(200, SWT.DEFAULT));
 		s_configPwdNew.setEchoChar('*');
 
 		final Label label_27 = new Label(groupUserConfig, SWT.LEFT);
-		label_27.setLayoutData(new GridData(163, SWT.DEFAULT));
+		label_27.setLayoutData(new GridData(200, SWT.DEFAULT));
 		label_27.setText(s_translations.getString("PASSWORD.REP.2") + ":");
 
 		s_configPwdNewRep = new Text(groupUserConfig, SWT.LEFT | SWT.BORDER);
-		s_configPwdNewRep.setLayoutData(new GridData(163, SWT.DEFAULT));
+		s_configPwdNewRep.setLayoutData(new GridData(200, SWT.DEFAULT));
 		s_configPwdNewRep.setEchoChar('*');
 
 		final Label label_28 = new Label(groupUserConfig, SWT.LEFT);
-		label_28.setLayoutData(new GridData(163, SWT.DEFAULT));
+		label_28.setLayoutData(new GridData(200, SWT.DEFAULT));
 
 		final Button buttonSavePwd = new Button(groupUserConfig, SWT.CENTER);
-		buttonSavePwd.setLayoutData(new GridData(156, SWT.DEFAULT));
+		buttonSavePwd.setLayoutData(new GridData(200, SWT.DEFAULT));
 		buttonSavePwd.setText(s_translations.getString("BUTTON.CHANGE.PWD"));
 		buttonSavePwd.addSelectionListener(new ChangePwdButton());
 
@@ -330,7 +330,7 @@ public class AtaraxisConfigGUI
 		s_networkPort.setText(s_textNetworkPort);
 
 		final Label label_21_1 = new Label(groupNetworkConfig, SWT.NONE);
-		label_21_1.setLayoutData(new GridData(163, SWT.DEFAULT));
+		label_21_1.setLayoutData(new GridData(200, SWT.DEFAULT));
 
 		final Button buttonSaveNetwork = new Button(groupNetworkConfig, SWT.NONE);
 		buttonSaveNetwork.setLayoutData(new GridData(156, SWT.DEFAULT));
