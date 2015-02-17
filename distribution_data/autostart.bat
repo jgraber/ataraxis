@@ -13,4 +13,4 @@ IF %errorlevel% == 0 (
 )
 
 REM otherwise we use the 32Bit SWT library
-start javaw.exe -classpath lib\swt.jar;AtaraxiS.jar ataraxis.gui.AtaraxisStarter
+start javaw.exe -classpath lib\swt.jar;AtaraxiS.jar -Dlog4j.configurationFile=application_data/config/log4j2.xml ataraxis.gui.AtaraxisStarter
