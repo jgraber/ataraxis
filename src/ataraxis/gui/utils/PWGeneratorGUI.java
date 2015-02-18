@@ -67,7 +67,7 @@ public class PWGeneratorGUI
 	private static final String APPL_DIR = System.getProperty("user.dir");
 	private static final String APPL_DATA_DIR = APPL_DIR + "/application_data";
 	private static final int SHELL_WIDTH = 242;
-	private static final int SHELL_HEIGHT = 210;
+	private static final int SHELL_HEIGHT = 230;
 	protected static final Color BACKGROUND_COLOR = new Color(Display.getDefault(), 220, 220, 255);
 	
 	private static Display s_display = Display.getDefault();
