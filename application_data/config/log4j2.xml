@@ -16,8 +16,8 @@
 		</RollingFile>
     </Appenders>
     <Loggers>
-    <Logger name="org.apache.log4j.xml" level="debug"/>
-        <Root level="debug">
+    <Logger name="org.apache.log4j.xml" level="info"/>
+        <Root level="info">
             <!--<AppenderRef ref="STDOUT"/>-->
 			<AppenderRef ref="myFile"/>
         </Root>
