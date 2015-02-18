@@ -8,7 +8,7 @@ java -d64 -version
 
 REM if it had no error we use the 64Bit SWT library
 IF %errorlevel% == 0 (
-	start javaw.exe -classpath lib\swt_64.jar;AtaraxiS.jar ataraxis.gui.AtaraxisStarter
+	start javaw.exe -classpath lib\swt_64.jar;AtaraxiS.jar -Dlog4j.configurationFile=application_data/config/log4j2.xml ataraxis.gui.AtaraxisStarter
 	goto :eof
 )
 
