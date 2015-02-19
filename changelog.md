@@ -3,6 +3,7 @@
 ## AtaraxiS 1.6.0 (X. X. 2015)
 Aktualisierungen:
 * Kleinere Anpassungen am GUI (Pfad zur Log-Konfiguration)
+* Darstellung unter Ubuntu optimiert
  
 Aktualisierte Hilfsbibliotheken:
 * SWT auf 4.4
