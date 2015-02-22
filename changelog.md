@@ -1,6 +1,6 @@
 # Changelog
 
-## AtaraxiS 1.6.0 (24. 2. 2015)
+## AtaraxiS 1.6.0 (22. 2. 2015)
 Aktualisierungen:
 * Kleinere Anpassungen am GUI (Pfad zur Log-Konfiguration)
 * Darstellung unter Ubuntu optimiert
