@@ -223,7 +223,7 @@ public class PWGeneratorGUI
 
 		final Spinner pwLengthSpinner = new Spinner(s_shell, SWT.BORDER);
 		pwLengthSpinner.setLayoutData(new GridData());
-		pwLengthSpinner.setSelection(8);
+		pwLengthSpinner.setSelection(16);
 		pwLengthSpinner.setMaximum(2048);
 		pwLengthSpinner.setMinimum(4);
 
