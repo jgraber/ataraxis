@@ -55,6 +55,11 @@ public class PasswordManagerSWTHelper
 	
 	public void createTree(Tree swtTree, List<PasswordEntry> entryList)
 	{
+		createTree(swtTree, entryList, "");
+	}
+	
+	public void createTree(Tree swtTree, List<PasswordEntry> entryList, String selectedId)
+	{
 		// clean up tree
 		swtTree.removeAll();
 	
@@ -77,6 +82,7 @@ public class PasswordManagerSWTHelper
 			else if(current.getType().equals("account"))
 			{
 				AccountEntry currentAccount = (AccountEntry) current;
+				boolean isSelected = current.getId().equals(selectedId);
 				
 				TreeItem elementItem = null; 
 				PasswordEntry parent = currentAccount.getParentEntry();
@@ -86,6 +92,10 @@ public class PasswordManagerSWTHelper
 					if(groupItems.containsKey(parent.getId()))
 					{
 						elementItem = new TreeItem(groupItems.get(parent.getId()),SWT.NONE);
+						if(isSelected)
+						{
+							expandTree(parent.getId());
+						}
 					}
 					else
 					{
@@ -100,6 +110,11 @@ public class PasswordManagerSWTHelper
 				
 				elementItem.setImage(XMLUser);
 				elementItem.setText(current.getId());
+				
+				if(isSelected)
+				{
+					swtTree.setSelection(elementItem);
+				}
 			}
 		}
 		

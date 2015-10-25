@@ -882,7 +882,7 @@ public class AtaraxisPasswordGUI {
 
 
 									s_pwManager.savePasswords();
-									s_pwMSwtHelper.createTree(tree,s_pwManager.getAllEntries());
+									s_pwMSwtHelper.createTree(tree, s_pwManager.getAllEntries(), editedAccount.getId());
 								} 
 								catch (EntryDoesNotExistException e) 
 								{
@@ -904,8 +904,6 @@ public class AtaraxisPasswordGUI {
 						{
 							s_allowAccountchange = true;
 							changePWManagerFields(false);
-							String currentId = textAccountID.getText().trim();
-							setSelection(currentId);
 						}
 					}
 				}
@@ -1100,29 +1098,7 @@ public class AtaraxisPasswordGUI {
 		}
 		m_pwCopyStack.layout();
 	}
-	
-	private void setSelection(String item)
-	{
-		TreeItem desiredTreeItem = null; 
-		TreeItem[] items = tree.getItems();
-		for (TreeItem treeItem : items) {
-			if(item.equals(treeItem.getText()))
-			{
-				desiredTreeItem = treeItem;
-				break;
-			}
-		}
-		
-		if(desiredTreeItem != null)
-		{
-			TreeItem parent = desiredTreeItem.getParentItem();
-			if(parent != null)
-			{
-				parent.setExpanded(true);
-			}
-			tree.setSelection(desiredTreeItem);
-		}
-	}
+
 	
 	/**
 	 * Method to set the icons.
