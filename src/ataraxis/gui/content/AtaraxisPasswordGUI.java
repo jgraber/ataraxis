@@ -114,6 +114,9 @@ public class AtaraxisPasswordGUI {
 	private Button generatePassword;
 	private Button openLinkButton;
 
+	// Tree with passwords
+	private Tree tree;
+	
 	// Buttons left side down
 	private Button createGroup;
 	private Button deleteGroup;
@@ -191,7 +194,7 @@ public class AtaraxisPasswordGUI {
 		gridLayout.numColumns = 2;
 		s_compositePasswords.setLayout(gridLayout);
 
-		final Tree tree = new Tree(s_compositePasswords, SWT.BORDER);
+		tree = new Tree(s_compositePasswords, SWT.BORDER);
 		final GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true);
 		gridData.widthHint = 159;
 		tree.setLayoutData(gridData);
@@ -901,6 +904,8 @@ public class AtaraxisPasswordGUI {
 						{
 							s_allowAccountchange = true;
 							changePWManagerFields(false);
+							String currentId = textAccountID.getText().trim();
+							setSelection(currentId);
 						}
 					}
 				}
@@ -1094,6 +1099,24 @@ public class AtaraxisPasswordGUI {
 			textPassword.setEchoChar('*');
 		}
 		m_pwCopyStack.layout();
+	}
+	
+	private void setSelection(String item)
+	{
+		TreeItem desiredTreeItem = null; 
+		TreeItem[] items = tree.getItems();
+		for (TreeItem treeItem : items) {
+			if(item.equals(treeItem.getText()))
+			{
+				desiredTreeItem = treeItem;
+				break;
+			}
+		}
+		//TreeItem treeItem = new TreeItem(tree);
+		if(desiredTreeItem != null)
+		{
+			tree.setSelection(desiredTreeItem);
+		}
 	}
 	
 	/**
