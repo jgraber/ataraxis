@@ -555,7 +555,7 @@ public class AtaraxisPasswordGUI {
 					final TreeItem[] t = tree.getSelection();
 
 					if (t.length == 0){   // warn nothing is selected
-						guiHelper.displayErrorMessage(s_translations.getString("ERROR"), s_translations.getString("PWM.SELECT_GROUP_BEFORE_DELETE"));
+						guiHelper.displayErrorMessage(s_translations.getString("ERROR"), s_translations.getString("PWM.SELECT_ACCOUNT"));
 					}
 					else 
 					{
@@ -1112,9 +1112,14 @@ public class AtaraxisPasswordGUI {
 				break;
 			}
 		}
-		//TreeItem treeItem = new TreeItem(tree);
+		
 		if(desiredTreeItem != null)
 		{
+			TreeItem parent = desiredTreeItem.getParentItem();
+			if(parent != null)
+			{
+				parent.setExpanded(true);
+			}
 			tree.setSelection(desiredTreeItem);
 		}
 	}
