@@ -4,6 +4,7 @@
 Aktualisierungen:
 * Passwort-Manager: Fokus bleibt auf neu erstellten Passwörtern
 * Passwort-Manager: Generierte Passwörter sind 16 Zeichen lang
+* Mac OS X: SWT unterstützt nur noch 64bit Systeme
  
 Aktualisierte Hilfsbibliotheken:
 * SWT auf 4.5
