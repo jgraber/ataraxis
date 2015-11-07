@@ -9,10 +9,12 @@ Aktualisierungen:
 Aktualisierte Hilfsbibliotheken:
 * SWT auf 4.5
 * Bouncycastle auf 1.53
-* (Log4J auf 2.4.1)
+* Log4J auf 2.4.1
 * JUnit auf 4.12
 * JMockit auf 1.19
 * JDom auf 2.0.6
+
+
 
 ## AtaraxiS 1.6.0 (22. 2. 2015)
 Aktualisierungen:
