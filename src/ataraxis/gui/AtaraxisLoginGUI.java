@@ -202,6 +202,10 @@ class AtaraxisLoginGUI {
         if (userDir.exists())
         {
         	s_loginUserList.setItems(userDir.list(userFilter));
+        	if(s_loginUserList.getItemCount() == 1)
+        	{
+        		s_loginUserList.select(0);
+        	}
         }
         //s_loginUserText = new Text(s_loginComp, SWT.BORDER);
         //s_loginUserText.setText("DDDD");
