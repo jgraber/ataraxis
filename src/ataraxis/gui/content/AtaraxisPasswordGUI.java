@@ -731,7 +731,7 @@ public class AtaraxisPasswordGUI {
 					textAccountID.setText("");
 					textUsername.setText("");
 					textPassword.setText("");
-					textLink.setText("");
+					textLink.setText("https://");
 					textComment.setText("");
 
 					changePWManagerFields(true);
