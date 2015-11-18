@@ -591,7 +591,7 @@ class AtaraxisLoginGUI {
         	if(notNull)
         	{
 	        	boolean validPwd = pwd.equals(pwdRep);
-	        	validPwd = validPwd && pwd.length() > 3; // pwd must have at least 4 chars
+	        	validPwd = validPwd && pwd.length() >= 8; // pwd must have at least 8 chars
 	        	validPwd = validPwd && !pwd.equalsIgnoreCase(user); // pwd must differ from username
 	        	boolean validUser = user.length() > 1;  // pwd must have at least 2 chars
 	        	validUser = validUser && user.matches("[a-z0-9]+"); // [a-zA-Z0-9]+ is incompatible with Linux
