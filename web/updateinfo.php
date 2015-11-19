@@ -23,9 +23,9 @@
 
 // define some basic vars
 $version_is_valid = false;
-$old_versions = array("1.0.0", "1.0.1", "1.0.2", "1.1.0", "1.1.1", "1.2.0","1.3.0","1.3.1","1.4.0","1.5.0");
-$current_version = "1.6.0";
-$next_versions = array("1.6.1", "1.7.0", "2.0.0");
+$old_versions = array("1.0.0", "1.0.1", "1.0.2", "1.1.0", "1.1.1", "1.2.0","1.3.0","1.3.1","1.4.0","1.5.0","1.6.0");
+$current_version = "1.7.0";
+$next_versions = array("1.7.1", "1.8.0", "2.0.0");
 $version_addons = array("RC", "DEV");
 $version_is_current = false;
 $submitted_version = "";
