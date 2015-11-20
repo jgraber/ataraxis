@@ -2,8 +2,11 @@
 
 ## AtaraxiS next (x. x. x)
 Aktualisierungen:
+* AtaraxiS-Hauptpasswort muss nun mindestens 8 Zeichen lang sein
+* Login: Wenn nur ein Benutzer vorhanden ist, wird dieser vorselektiert
 * Passwort-Manager: Fokus bleibt auf neu erstellten Passwörtern
 * Passwort-Manager: Generierte Passwörter sind 16 Zeichen lang
+* Passwort-Manager: Im Feld für den Link wird https:// vorgeschlagen
 * Mac OS X: SWT unterstützt nur noch 64bit Systeme
  
 Aktualisierte Hilfsbibliotheken:
