@@ -237,7 +237,7 @@
 	    	<classpath refid="ataraxisLinux.classpath"/>
 	        <classpath refid="test.classpath"/>
 			<jvmarg value="-javaagent:lib/jmockit.jar"/>
-			<jvmarg value="-Dlog4j.configurationFile=test\config\log4j2.xml"/>
+			<jvmarg value="-Dlog4j.configurationFile=test/config/log4j2.xml"/>
 			<formatter type="xml"/>
 			<batchtest fork="yes" todir="${test.report.dir}">
 			    <fileset dir="${test.src.dir}">
