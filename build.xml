@@ -340,8 +340,7 @@
 		<copy todir="distGeneric" file="distribution_data/startLinux_LocalJava_64bit.sh"/>
 		<copy todir="distGeneric" file="distribution_data/Backup_Linux_64bit.sh"/>
 		<copy todir="distGeneric/application_data" file="distribution_data/ataraxis.log"/>
-		<copy todir="distGeneric" file="distribution_data/startMac.command"/>
-    	<copy todir="distGeneric" file="distribution_data/startMac_64bit.command"/>
+    		<copy todir="distGeneric" file="distribution_data/startMac_64bit.command"/>
 		<copy todir="distGeneric" file="LICENCE.pdf"/>
     	<copy todir="distGeneric" file="LICENCE.txt"/>
 		<copy todir="distGeneric" file="README.md"/>
