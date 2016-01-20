@@ -1,6 +1,6 @@
 # Changelog
 
-## AtaraxiS 1.7.0 (x. x. x)
+## AtaraxiS 1.7.0 (3. 2. 2016)
 Aktualisierungen:
 * AtaraxiS-Hauptpasswort muss nun mindestens 8 Zeichen lang sein
 * Login: Wenn nur ein Benutzer vorhanden ist, wird dieser vorselektiert
@@ -11,7 +11,7 @@ Aktualisierungen:
  
 Aktualisierte Hilfsbibliotheken:
 * SWT auf 4.5
-* Bouncycastle auf 1.53
+* Bouncycastle auf 1.54
 * Log4J auf 2.4.1
 * JUnit auf 4.12
 * JMockit auf 1.19
