@@ -1,6 +1,6 @@
 # Changelog
 
-## AtaraxiS 1.7.0 (3. 2. 2016)
+## AtaraxiS 1.7.0 (27. 2. 2016)
 Aktualisierungen:
 * AtaraxiS-Hauptpasswort muss nun mindestens 8 Zeichen lang sein
 * Login: Wenn nur ein Benutzer vorhanden ist, wird dieser vorselektiert
