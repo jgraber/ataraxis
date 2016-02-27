@@ -7,8 +7,8 @@ FH Biel und wird seit 2007 [weiterentwickelt](https://github.com/jgraber/ataraxi
 ![Create new password](http://jgraber.ch/AtaraxiS/wiki/Ataraxis_PasswortErzeugen.png)
 
 ## Download
-Download kompilierter Version bieten wir als [Zip](http://jgraber.ch/AtaraxiS/AtaraxiS_160.zip) (für Windows) 
-und als [Tar](http://jgraber.ch/AtaraxiS/AtaraxiS_160.tar.gz) (für Linux/Mac) an. Der Source Code 
+Download kompilierter Version bieten wir als [Zip](http://jgraber.ch/AtaraxiS/AtaraxiS_170.zip) (für Windows) 
+und als [Tar](http://jgraber.ch/AtaraxiS/AtaraxiS_170.tar.gz) (für Linux/Mac) an. Der Source Code 
 ist unter der EUPL v1.1 lizenziert und auf [GitHub](https://github.com/jgraber/ataraxis) zu finden.
 
 * AtaraxiS v1.7.0 (27. Februar 2016) [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_170.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_170.tar.gz)
