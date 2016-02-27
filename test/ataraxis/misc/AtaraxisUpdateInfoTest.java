@@ -49,7 +49,7 @@ public class AtaraxisUpdateInfoTest
 	private static final Logger logger = LogManager.getLogger(AtaraxisUpdateInfoTest.class);
 	private static final String networkConfigFile =  System.getProperty("user.dir") + 
 	"/application_data/config/network.properties";
-	private static final String currentVersion = "1.6.0";
+	private static final String currentVersion = "1.7.0";
 	private static final String oldVersion = "1.1.0";
 	private static final String nextMajorVersion = "2.0.0";
 	
