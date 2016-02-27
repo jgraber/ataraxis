@@ -23,7 +23,7 @@ Um die neue Version von AtaraxiS einzusetzen, können Sie so vorgehen:
 
 ## Ältere Versionen
 * AtaraxiS v1.6.0 (22. Februar 2015) [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_160.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_160.tar.gz)
-* 
+
 * AtaraxiS v1.5.0 (21. April 2014) [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_150.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_150.tar.gz)
 
 * AtaraxiS v1.4.0 (5. September 2012) [*.zip](http://jgraber.ch/AtaraxiS/AtaraxiS_140.zip) / [*.tar.gz](http://jgraber.ch/AtaraxiS/AtaraxiS_140.tar.gz)
