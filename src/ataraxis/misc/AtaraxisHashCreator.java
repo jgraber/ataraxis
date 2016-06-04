@@ -2,7 +2,7 @@
  * Copyright 2007 - 2010 Johnny Graber & Andreas Muedespacher
  * ----------------------------------------------------------------------------
  * 
- * This File is part of AtaraxiS (http://ataraxis.origo.ethz.ch/) and is
+ * This File is part of AtaraxiS (https://github.com/jgraber/ataraxis) and is
  * licensed under the European Public License, Version 1.1 only (the "Licence").
  * You may not use this work except in compliance with the Licence. 
  * 
