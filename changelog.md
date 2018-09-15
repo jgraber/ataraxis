@@ -1,5 +1,16 @@
 # Changelog
 
+## AtaraxiS 1.8.0 (xx. x. 2018)
+Aktualisierungen:
+* 
+ 
+Aktualisierte Hilfsbibliotheken:
+* SWT auf 4.8
+* Bouncycastle auf 1.60
+* Log4J auf 2.11.2
+
+
+
 ## AtaraxiS 1.7.0 (27. 2. 2016)
 Aktualisierungen:
 * AtaraxiS-Hauptpasswort muss nun mindestens 8 Zeichen lang sein
