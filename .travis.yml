@@ -1,10 +1,10 @@
 language: java
 jdk:
 # JMockit problem JDK > 8  
-#  - oraclejdk9
-#  - oraclejdk10
-#  - openjdk10
-#  - openjdk11
+  - oraclejdk9
+  - oraclejdk10
+  - openjdk10
+  - openjdk11
   - openjdk8
 
 script: ant testsuiteLinux
