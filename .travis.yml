@@ -8,7 +8,9 @@ jdk:
 script: ant testsuiteLinux
 
 before_install:
-    - "sudo cp application_data/jce_policy/java7/*.jar $JAVA_HOME/jre/lib/security"
+    - "JAVA_VER=$(java -version 2>&1 | sed -n ';s/.* version "\(.*\)\.\(.*\)\..*"/\1\2/p;')"
+    - "echo JAVA_VER"
+    - "[ "$JAVA_VER" -le 18 ] && sudo cp application_data/jce_policy/java7/*.jar $JAVA_HOME/jre/lib/security"
     - "ls -la $JAVA_HOME/jre/lib/security"
     - "export DISPLAY=:99.0"
     - "sh -e /etc/init.d/xvfb start"
