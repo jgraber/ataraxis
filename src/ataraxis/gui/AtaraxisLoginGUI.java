@@ -63,7 +63,7 @@ import ataraxis.misc.AtaraxisBackup;
  * @author J. Graber & A. Muedespacher, HTI Biel
  * @version 1.2
  */
-class AtaraxisLoginGUI {
+public class AtaraxisLoginGUI {
 
 	/**
 	 * Logger for this class
