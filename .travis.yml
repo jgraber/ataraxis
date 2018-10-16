@@ -3,7 +3,7 @@ jdk:
 # JMockit problem JDK > 8  
   - openjdk11
   - oraclejdk9
-  - oraclejdk10
+  - oraclejdk11
   - openjdk10
   - openjdk8
 
