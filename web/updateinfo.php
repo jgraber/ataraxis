@@ -29,29 +29,29 @@ $next_versions = array("1.7.1", "1.8.0", "2.0.0");
 $version_addons = array("RC", "DEV");
 $version_is_current = false;
 $submitted_version = "";
-$download_url = "http://github.com/jgraber/ataraxis/";
+$download_url = "https://github.com/jgraber/ataraxis/";
 
 // Only check if a version is submitted as parameter "?version=...."
 if(isset($_GET['version']))
 {
-
 	// get the version parameter and split version part away
 	$version_param = rawurldecode(strip_tags($_GET['version']));
 	$version_param = trim($version_param);
-	$version_regex = '([0-9]{1,2})\.([0-9]{1,2})\.([0-9]{1,2})';	// XX.XX.XX ev.
-	$version_array = split(" ", $version_param);
-	$version_digits = $version_array[0];
-	
+	//print $version_param;
+	$version_regex = '/([0-9]{1,2}\.)([0-9]{1,2}\.)([0-9]{1,2})/';	// XX.XX.XX ev.
+
+	$version_array = explode(" ", $version_param);
+	$version_digits = $version_array[0];	
 	//echo $version_digits;
 	
-	
 	// Check if the version part matches the AtaraxiS Version Schema
-	if(ereg($version_regex,$version_digits))
+	$reg = preg_match($version_regex,$version_param, $matches);
+	
+	if(preg_match($version_regex, $version_param))
 	{
 		$version_is_valid = true;
 	}
-
-
+	
 	if($version_is_valid)
 	{
 

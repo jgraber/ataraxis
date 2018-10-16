@@ -90,7 +90,7 @@ public class AtaraxisUpdateInfoTest
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo();
 		updateInfo.existNewerVersion(nextMajorVersion);
 		assertFalse(nextMajorVersion.equals(updateInfo.getCurrentVersion()));
-		assertEquals("http://github.com/jgraber/ataraxis/",updateInfo.getCurrentURL());
+		assertEquals("https://github.com/jgraber/ataraxis/",updateInfo.getCurrentURL());
 	}
 	
 	@Test
@@ -102,7 +102,7 @@ public class AtaraxisUpdateInfoTest
 		
 		updateInfo.existNewerVersion(nextMajorVersion);
 		assertEquals(currentVersion, updateInfo.getCurrentVersion());
-		assertEquals("http://github.com/jgraber/ataraxis/",updateInfo.getCurrentURL());
+		assertEquals("https://github.com/jgraber/ataraxis/",updateInfo.getCurrentURL());
 	}
 	
 	@Test(expected=IOException.class)
