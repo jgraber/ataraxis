@@ -50,7 +50,7 @@ public class AtaraxisPasswordExportTest {
 	
 	@Test
 	public void test() throws Exception, IOException {
-		AtaraxisCrypter s_ac = new AtaraxisCrypter(new File(TEST_SOURCE_DATA+"/keystore.ks"), PASSWORD.toCharArray(), true);
+		AtaraxisCrypter s_ac = new AtaraxisCrypter(new File(TEST_SOURCE_DATA+"/keystore.ks"), PASSWORD.toCharArray(), false);
 		
 		String exportedFile = TEST_DIR_DATA + "/export.cvs";
 		

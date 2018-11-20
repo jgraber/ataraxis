@@ -195,18 +195,25 @@ public class AtaraxisPasswordExport {
 			
 			PasswordEntry current = listIterator.next();
 			
-			if(current.getType().equals("group"))
+			/*if(current.getType().equals("group"))
 			{
 				System.out.println(current.getId());
 				//groupItems.put(current.getId(),elementItem);
 			}
-			else if(current.getType().equals("account"))
+			else 
+			*/
+			if(current.getType().equals("account"))
 			{
 				AccountEntry currentAccount = (AccountEntry) current;
 				
 				PasswordEntry parent = currentAccount.getParentEntry();
 				
-				System.out.println(parent.getId() + ", " + currentAccount.getId() + ", "+ currentAccount.getName());
+				if(parent != null) {
+					System.out.println(parent.getId() + ", " + currentAccount.getId() + ", "+ currentAccount.getName());
+				}
+				else {
+					System.out.println(" -- " + ", " + currentAccount.getId() + ", "+ currentAccount.getName());
+				}
 			}
 		
 		
