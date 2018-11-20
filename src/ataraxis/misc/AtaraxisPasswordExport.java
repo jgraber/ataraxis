@@ -18,9 +18,12 @@
  */
 package ataraxis.misc;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -28,8 +31,6 @@ import java.util.Locale;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.eclipse.swt.SWT;
@@ -37,11 +38,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TreeItem;
 
 import ataraxis.crypt.AtaraxisCrypter;
 import ataraxis.gui.AtaraxisLoginGUI;
-import ataraxis.gui.AtaraxisMainGUI;
 import ataraxis.gui.AtaraxisSplashScreen;
 import ataraxis.gui.GUIHelper;
 import ataraxis.passwordmanager.AccountEntry;
@@ -59,8 +58,6 @@ import ataraxis.util.AtaraxisHelper;
  */
 public class AtaraxisPasswordExport {
 	
-	private static final String APPL_DIR = System.getProperty("user.dir");
-	private static final String USER_DATA_DIR = APPL_DIR + "/user_data";
 	
 	private static final Logger LOGGER = LogManager.getLogger(AtaraxisBackup.class);
 
@@ -70,8 +67,6 @@ public class AtaraxisPasswordExport {
 	private static Properties s_langProps;
 	private static String s_PWExportFileDialogTitle;
 	private static String s_PWExportOK;
-	private static String s_PWExportFail;
-	private static String s_PWExportFile;
 	private static String s_PWExportTitle;
 	private static MessageBox s_messageBox;
 	
@@ -142,6 +137,12 @@ public class AtaraxisPasswordExport {
 			}
 			else {
 				export.savePasswords(s_ac, location);	
+				
+				s_messageBox = new MessageBox(s_shell, SWT.ICON_INFORMATION | SWT.OK);
+				s_messageBox.setMessage(s_PWExportOK);
+				s_messageBox.setText(s_PWExportTitle);
+				s_messageBox.open();
+				LOGGER.info("Backup successful stored to: "+ location);
 			}
 			
 			
@@ -151,9 +152,6 @@ public class AtaraxisPasswordExport {
 		
 		
 	}
-
-	private String s_user;
-
 
 	private String getBackupFile() {
 		s_fileDilaog.setFilterPath(System.getProperty("user.home"));
@@ -178,30 +176,27 @@ public class AtaraxisPasswordExport {
 		loadProperties();
 	}
 	
-	public void savePasswords(AtaraxisCrypter s_ac, String string) throws FileNotFoundException, IOException, StorageException {
+	public void savePasswords(AtaraxisCrypter s_ac, String filePath) throws FileNotFoundException, IOException, StorageException {
 		String pathOfKeyStore = s_ac.getKeyStorePath();
 		File ksFile = new File(pathOfKeyStore);
 		File directoryOfKs = ksFile.getParentFile();
-		s_user = directoryOfKs.getName();
+		directoryOfKs.getName();
 		String s_accountFile = directoryOfKs.getAbsolutePath() + "/accounts.data";
 		
 		PasswordManager pwManager = new PasswordManager(s_ac, s_accountFile);
 		List<PasswordEntry> entries = pwManager.getAllEntries();
 		
+		List<String> rows = new ArrayList<String>();
+		String firstLine = "\"Group\",\"Account\",\"Login Name\",\"Password\",\"Web Site\",\"Comments\"";
+		
+		
+		
 		Iterator<PasswordEntry> listIterator = entries.iterator();
 		
 		while(listIterator.hasNext())
 		{
-			
 			PasswordEntry current = listIterator.next();
 			
-			/*if(current.getType().equals("group"))
-			{
-				System.out.println(current.getId());
-				//groupItems.put(current.getId(),elementItem);
-			}
-			else 
-			*/
 			if(current.getType().equals("account"))
 			{
 				AccountEntry currentAccount = (AccountEntry) current;
@@ -209,15 +204,29 @@ public class AtaraxisPasswordExport {
 				PasswordEntry parent = currentAccount.getParentEntry();
 				
 				if(parent != null) {
-					System.out.println(parent.getId() + ", " + currentAccount.getId() + ", "+ currentAccount.getName());
+					rows.add("\"" + parent.getId() +"\",\"" + currentAccount.getId()  +"\",\"" + currentAccount.getName() +"\",\"" + currentAccount.getPassword() +"\",\"" + currentAccount.getLink() +"\",\"" + currentAccount.getComment()+"\"");
 				}
 				else {
-					System.out.println(" -- " + ", " + currentAccount.getId() + ", "+ currentAccount.getName());
+					rows.add("\"\",\"" + currentAccount.getId()  +"\",\"" + currentAccount.getName() +"\",\"" + currentAccount.getPassword() +"\",\"" + currentAccount.getLink() +"\",\"" + currentAccount.getComment()+"\"");
 				}
-			}
-		
-		
+			}	
+			
 		}
+		java.util.Collections.sort(rows);
+		
+		rows.add(0, firstLine);
+		
+		
+		
+		BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+		 
+		for (String item : rows) {
+		    writer.write(item);
+		    writer.newLine();
+		} 
+		 
+		writer.flush();
+		writer.close();
 	}
 	
 	/**
@@ -235,8 +244,7 @@ public class AtaraxisPasswordExport {
 		// set the strings
 		s_PWExportFileDialogTitle = s_langProps.getProperty("ABACK.BACKUP_DIALOG_TITLE", "Select file to export the passwords");
 		s_PWExportTitle  = s_langProps.getProperty("ABACK.PWExport_TITLE", "AtaraxiS Password Export");
-		s_PWExportOK  = s_langProps.getProperty("ABACK.PWExport_OK", "Export was successful.");
-		s_PWExportFail  = s_langProps.getProperty("ABACK.PWExport_FAILED", "Export has failed!");		
+		s_PWExportOK  = s_langProps.getProperty("ABACK.PWExport_OK", "Export was successful.");		
 	} 
 	
 }
