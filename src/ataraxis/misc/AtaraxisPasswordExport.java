@@ -178,7 +178,7 @@ public class AtaraxisPasswordExport {
 		loadProperties();
 	}
 	
-	private void savePasswords(AtaraxisCrypter s_ac, String string) throws FileNotFoundException, IOException, StorageException {
+	public void savePasswords(AtaraxisCrypter s_ac, String string) throws FileNotFoundException, IOException, StorageException {
 		String pathOfKeyStore = s_ac.getKeyStorePath();
 		File ksFile = new File(pathOfKeyStore);
 		File directoryOfKs = ksFile.getParentFile();
