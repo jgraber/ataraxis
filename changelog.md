@@ -2,10 +2,10 @@
 
 ## AtaraxiS 1.8.0 (xx. x. 2018)
 Aktualisierungen:
-* 
+* Exportmöglichkeit für Passwörter 
  
 Aktualisierte Hilfsbibliotheken:
-* SWT auf 4.8
+* SWT auf 4.9
 * Bouncycastle auf 1.60
 * Log4J auf 2.11.2
 
