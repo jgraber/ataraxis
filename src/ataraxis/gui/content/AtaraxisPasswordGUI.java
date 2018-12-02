@@ -196,7 +196,7 @@ public class AtaraxisPasswordGUI {
 
 		tree = new Tree(s_compositePasswords, SWT.BORDER);
 		final GridData gridData = new GridData(SWT.FILL, SWT.FILL, true, true);
-		gridData.widthHint = 159;
+		gridData.widthHint = 150;
 		tree.setLayoutData(gridData);
 
 		// Create Tree Popup Menu
@@ -273,7 +273,7 @@ public class AtaraxisPasswordGUI {
 		gridLayout_1.numColumns = 3;
 		composite.setLayout(gridLayout_1);
 		final GridData gridData_1 = new GridData(SWT.LEFT, SWT.FILL, false, false);
-		gridData_1.widthHint = 295;
+		gridData_1.widthHint = 290;
 		composite.setLayoutData(gridData_1);
 
 		Label passwordManagerTitle = new Label(composite, SWT.NONE);

@@ -76,7 +76,7 @@ public class AtaraxisLoginGUI {
 	private static int s_lang = 0;
 	
 	//	component constants:
-	private static final int COMPOSITE_WIDTH = 240;
+	private static final int COMPOSITE_WIDTH = 250;
 	private static final int COMPOSITE_HEIGHT= 230;
 	private static final int LABEL_WIDTH = 94;
 	private static final int BUTTON_WIDTH = 92;
