@@ -155,7 +155,7 @@ public class AtaraxisPasswordExport {
 
 	private String getBackupFile() {
 		s_fileDilaog.setFilterPath(System.getProperty("user.home"));
-		String[] filterExtensions = {"*.zip"};
+		String[] filterExtensions = {"*.csv"};
 		s_fileDilaog.setFilterExtensions(filterExtensions);
 		s_fileDilaog.setText(s_PWExportFileDialogTitle);
 		
