@@ -203,11 +203,20 @@ public class AtaraxisPasswordExport {
 				
 				PasswordEntry parent = currentAccount.getParentEntry();
 				
-				if(parent != null) {
-					rows.add("\"" + parent.getId() +"\",\"" + currentAccount.getId()  +"\",\"" + currentAccount.getName() +"\",\"" + currentAccount.getPassword() +"\",\"" + currentAccount.getLink() +"\",\"" + currentAccount.getComment()+"\"");
+				String url;
+				
+				if("https://".equals(currentAccount.getLink()) || "http://".equals(currentAccount.getLink())) {
+					url = "";
 				}
 				else {
-					rows.add("\"\",\"" + currentAccount.getId()  +"\",\"" + currentAccount.getName() +"\",\"" + currentAccount.getPassword() +"\",\"" + currentAccount.getLink() +"\",\"" + currentAccount.getComment()+"\"");
+					url = currentAccount.getLink();
+				}
+				
+				if(parent != null) {
+					rows.add("\"" + parent.getId() +"\",\"" + currentAccount.getId()  +"\",\"" + currentAccount.getName() +"\",\"" + currentAccount.getPassword() +"\",\"" + url +"\",\"" + currentAccount.getComment()+"\"");
+				}
+				else {
+					rows.add("\"\",\"" + currentAccount.getId()  +"\",\"" + currentAccount.getName() +"\",\"" + currentAccount.getPassword() +"\",\"" + url +"\",\"" + currentAccount.getComment()+"\"");
 				}
 			}	
 			
