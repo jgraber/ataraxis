@@ -1,6 +1,6 @@
 # Changelog
 
-## AtaraxiS 1.8.0 (xx. x. 2018)
+## AtaraxiS 1.8.0 (15. 2. 2019)
 Aktualisierungen:
 * Exportmöglichkeit für Passwörter 
  
