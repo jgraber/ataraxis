@@ -1,5 +1,4 @@
 language: java
-install: ant deps
 jdk:
 # JMockit problem JDK > 8  
   - openjdk14
@@ -20,4 +19,5 @@ before_install:
 #    - "ls -la $JAVA_HOME/jre/lib/security"
 #    - "export DISPLAY=:99.0"
 #    - "sh -e /etc/init.d/xvfb start"
+    - sudo yum install ant-junit
 after_failure: "cat test/report/TEST-ataraxis.AtaraxisTestSuite.xml"
