@@ -20,5 +20,5 @@ before_install:
 #    - "export DISPLAY=:99.0"
 #    - "sh -e /etc/init.d/xvfb start"
     - sudo apt-get install ant-optional
-    - exportDISPLAY=:1
+    - export DISPLAY=:0.0
 after_failure: "cat test/report/TEST-ataraxis.AtaraxisTestSuite.xml"
