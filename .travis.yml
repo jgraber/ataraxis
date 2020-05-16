@@ -1,4 +1,5 @@
 language: java
+install: ant deps
 jdk:
 # JMockit problem JDK > 8  
   - openjdk14
