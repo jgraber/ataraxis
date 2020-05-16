@@ -53,7 +53,7 @@ import ataraxis.util.FileListTest;
 		GroupEntryTest.class,AccountEntryTest.class,AtaraxisHeaderParserTest.class,
 		FileCopyTest.class,FileListTest.class,ACEncryptOutputStreamTest.class,
 		ACDecryptInputStreamTest.class, ResourceBundleTest.class, 
-		AtaraxisHelperTest.class, AtaraxisBackupTest.class})
+		AtaraxisHelperTest.class})
 public class AtaraxisTestSuite {
 
 }
