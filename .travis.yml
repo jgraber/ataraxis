@@ -19,5 +19,5 @@ before_install:
 #    - "ls -la $JAVA_HOME/jre/lib/security"
 #    - "export DISPLAY=:99.0"
 #    - "sh -e /etc/init.d/xvfb start"
-    - sudo yum install ant-junit
+    - sudo apt-get install ant-optional
 after_failure: "cat test/report/TEST-ataraxis.AtaraxisTestSuite.xml"
