@@ -1,6 +1,9 @@
 language: java
 jdk:
 # JMockit problem JDK > 8  
+  - openjdk14
+  - openjdk13
+  - openjdk12
   - openjdk11
   - oraclejdk9
   - oraclejdk11
