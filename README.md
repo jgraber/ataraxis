@@ -65,7 +65,7 @@ Um AtaraxiS selber weiterzuentwickeln gibt es diese Voraussetzungen
 ### Verwendete Komponenten
 * [Bouncy Castle](http://www.bouncycastle.org/): Copyright (c) The Legion Of The Bouncy Castle
 * [JDom](http://www.jdom.org/): Copyright (c) Jason Hunter & Brett McLaughlin. All rights reserved.
-* [Jaxen](http://jaxen.codehaus.org/releases.html): Copyright (c) The Werken Company. All Rights Reserved.
+* [Jaxen](http://www.cafeconleche.org/jaxen/): Copyright (c) The Werken Company. All Rights Reserved.
 * [The JMockit Testing Toolkit](http://jmockit.github.io/): Copyright (c) Rogério Liesenfeld
 * [Log4J](http://logging.apache.org/log4j/): Copyright (c) Apache Software Foundation is licensed under Apache 2.0
 * [SWT](http://eclipse.org/swt/): Copyright (c) The Eclipse Foundation licensed under Eclipse Public License - Version 1.0
