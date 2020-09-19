@@ -327,14 +327,6 @@
         </copy>
     	<copy todir="distGeneric" file="${jar.file}"/>
 		<copy todir="distGeneric" file="distribution_data/autostart.bat"/>
-		<copy todir="distGeneric" file="distribution_data/startWin_LocalJava.bat"/>
-		<copy todir="distGeneric" file="distribution_data/startWin.bat"/>
-		<copy todir="distGeneric" file="distribution_data/Backup_Windows.bat"/>
-		<copy todir="distGeneric" file="distribution_data/PasswordExport_Windows.bat"/>
-		<copy todir="distGeneric" file="distribution_data/startLinux.sh"/>
-		<copy todir="distGeneric" file="distribution_data/startLinux_LocalJava.sh"/>
-		<copy todir="distGeneric" file="distribution_data/Backup_Linux.sh"/>
-		<copy todir="distGeneric" file="distribution_data/PasswordExport_Linux.sh"/>
 		<copy todir="distGeneric" file="distribution_data/startWin_LocalJava_64bit.bat"/>
 		<copy todir="distGeneric" file="distribution_data/startWin_64bit.bat"/>
 		<copy todir="distGeneric" file="distribution_data/Backup_Windows_64bit.bat"/>
