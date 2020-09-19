@@ -76,8 +76,8 @@ public class AtaraxisLoginGUI {
 	private static int s_lang = 0;
 	
 	//	component constants:
-	private static final int COMPOSITE_WIDTH = 250;
-	private static final int COMPOSITE_HEIGHT= 230;
+	private static final int COMPOSITE_WIDTH = 350;
+	private static final int COMPOSITE_HEIGHT= 250;
 	private static final int LABEL_WIDTH = 94;
 	private static final int BUTTON_WIDTH = 92;
 	private static final int BUTTON_BIG_WIDTH = 189;
@@ -150,7 +150,7 @@ public class AtaraxisLoginGUI {
 	 */
 	protected void createContents()
 	{
-		s_shell = new Shell(SWT.CLOSE | SWT.TITLE | SWT.MIN);
+		s_shell = new Shell(SWT.CLOSE | SWT.TITLE | SWT.MIN | SWT.RESIZE);
 
 		guiHelper = new GUIHelper(s_shell);
 		// Use only primary Monitor - important if 2 Displays
