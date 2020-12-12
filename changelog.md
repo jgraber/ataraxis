@@ -1,5 +1,16 @@
 # Changelog
 
+## AtaraxiS 1.9.0 (15. 12. 2020)
+Aktualisierungen:
+* Kleine UI Anpassung für Linux 
+ 
+Aktualisierte Hilfsbibliotheken:
+* SWT auf 4.17
+* Bouncycastle auf 1.67
+* Log4J auf 2.13.3
+* Jaxen auf 1.2.0
+
+
 ## AtaraxiS 1.8.0 (15. 2. 2019)
 Aktualisierungen:
 * Exportmöglichkeit für Passwörter 
