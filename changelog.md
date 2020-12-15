@@ -2,7 +2,8 @@
 
 ## AtaraxiS 1.9.0 (15. 12. 2020)
 Aktualisierungen:
-* Kleine UI Anpassung für Linux 
+* Kleine UI Anpassung für Linux
+* **Achtung**: AtaraxiS läuft wegen SWT nur noch auf 64bit Umgebungen
  
 Aktualisierte Hilfsbibliotheken:
 * SWT auf 4.17
