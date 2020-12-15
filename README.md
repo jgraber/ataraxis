@@ -11,7 +11,7 @@ Download kompilierter Version bieten wir als [Zip](https://jgraber.ch/AtaraxiS/A
 und als [Tar](https://jgraber.ch/AtaraxiS/AtaraxiS_180.tar.gz) (für Linux/Mac) an. Der Source Code 
 ist unter der EUPL v1.1 lizenziert und auf [GitHub](https://github.com/jgraber/ataraxis) zu finden.
 
-* AtaraxiS v1.8.0 (15. Februar 2019) [*.zip](https://jgraber.ch/AtaraxiS/AtaraxiS_180.zip) / [*.tar.gz](https://jgraber.ch/AtaraxiS/AtaraxiS_180.tar.gz)
+* AtaraxiS v1.9.0 (15. Dezember 2020) [*.zip](https://jgraber.ch/AtaraxiS/AtaraxiS_190.zip) / [*.tar.gz](https://jgraber.ch/AtaraxiS/AtaraxiS_190.tar.gz)
 
 ## Update auf neuste Version
 Um die neue Version von AtaraxiS einzusetzen, können Sie so vorgehen:
@@ -19,9 +19,13 @@ Um die neue Version von AtaraxiS einzusetzen, können Sie so vorgehen:
  * Entpacken Sie die neue Version von AtaraxiS
  * Kopieren Sie den Inhalt des Ordners ''AtaraxiS_alt\user_data\'' in den Ordner ''AtaraxiS\user_data\''.
 
+## Exportieren von Passwörtern
+Sie können ihre Passwörter mit den PasswordExport_* Programmen in eine CSV Datei exportieren, um diese in einem anderen Passwortmanager zu verwenden. Eine kurze Anleitung finden Sie [hier](https://graberj.wordpress.com/2019/02/15/ataraxis-1-8-veroffentlicht/).
 
 
 ## Ältere Versionen
+* AtaraxiS v1.8.0 (15. Februar 2019) [*.zip](https://jgraber.ch/AtaraxiS/AtaraxiS_180.zip) / [*.tar.gz](https://jgraber.ch/AtaraxiS/AtaraxiS_180.tar.gz)
+
 * AtaraxiS v1.7.0 (27. Februar 2016) [*.zip](https://jgraber.ch/AtaraxiS/AtaraxiS_170.zip) / [*.tar.gz](https://jgraber.ch/AtaraxiS/AtaraxiS_170.tar.gz)
 
 * AtaraxiS v1.6.0 (22. Februar 2015) [*.zip](https://jgraber.ch/AtaraxiS/AtaraxiS_160.zip) / [*.tar.gz](https://jgraber.ch/AtaraxiS/AtaraxiS_160.tar.gz)
