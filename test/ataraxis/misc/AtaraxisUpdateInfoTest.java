@@ -110,7 +110,7 @@ public class AtaraxisUpdateInfoTest
 	{
 		Properties configuration = new Properties();
 		configuration.load(new FileInputStream(networkConfigFile));
-		configuration.setProperty("ATARAXIS.NETWORK.UPDATEURL", "http://jgraber.ch/AtaraxiS/updateinfo.php_dontExist");
+		configuration.setProperty("ATARAXIS.NETWORK.UPDATEURL", "https://jgraber.ch/AtaraxiS/updateinfo.php_dontExist");
 		AtaraxisUpdateInfo updateInfo = new AtaraxisUpdateInfo(new NetworkUpdateCheck(configuration));
 		
 		updateInfo.existNewerVersion(nextMajorVersion);
