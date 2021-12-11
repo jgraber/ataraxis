@@ -228,7 +228,7 @@ public final class AtaraxisCrypter {
 		{
 			// Load dynamic class and execute Method createKeyStore
 			final Class<?> ksCreatorHelp = Class.forName(ksCreator);
-			final Object ksCratorObject = ksCreatorHelp.newInstance();
+			final Object ksCratorObject = ksCreatorHelp.getDeclaredConstructor().newInstance();
 			final KeyStoreCreator ksCrator = (KeyStoreCreator) ksCratorObject;
 			ksCrator.createKeyStore(keyStoreFile, keyStorePassword);
 		}

@@ -63,7 +63,7 @@ public class PerformanceTest
     /**
      * Number of loops the cryptPerformance() does.
      */
-    private static final int LOOPS = new Integer(System.getProperty("ATARAXIS.LOOPS", "10"));
+    private static final int LOOPS = Integer.valueOf(System.getProperty("ATARAXIS.LOOPS", "10"));
     
     
     /* ############################################
