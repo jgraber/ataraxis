@@ -154,7 +154,7 @@
     <target name="build" depends="clean-bin" description="builds classes">
 		<mkdir dir="${bin.dir}"/>
         <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac includeantruntime="false" debug="true" destdir="${bin.dir}" target="1.7" source="1.7">
+        <javac includeantruntime="false" debug="true" destdir="${bin.dir}" deprecation="true" target="1.7" source="1.7">
             <src path="${src.dir}"/>
             <classpath refid="ataraxis.classpath"/>
         	<exclude name="*.png,*.xml"/>
@@ -170,7 +170,7 @@
 		<echo message="[AtaraxiS] Building test classes"/>
 		<mkdir dir="${bin.dir}"/>
 	    <echo message="${ant.project.name}: ${ant.file}"/>
-	    <javac debug="true" destdir="${bin.dir}">
+	    <javac debug="true" deprecation="true"  destdir="${bin.dir}">
 	    	<src path="${test.src.dir}"/>
 	    	<classpath refid="ataraxis.classpath"/>
 	        <classpath refid="test.classpath"/>
