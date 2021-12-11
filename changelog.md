@@ -1,5 +1,11 @@
 # Changelog
 
+## AtaraxiS 1.9.1 (11. 12. 2021)
+Aktualisierte Hilfsbibliotheken:
+* Log4J auf 2.15.0
+* Bouncycastle auf 1.70
+
+
 ## AtaraxiS 1.9.0 (15. 12. 2020)
 Aktualisierungen:
 * Kleine UI Anpassung für Linux
