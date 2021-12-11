@@ -7,11 +7,11 @@ FH Biel und wird seit 2007 [weiterentwickelt](https://github.com/jgraber/ataraxi
 ![Create new password](https://jgraber.ch/AtaraxiS/wiki/Ataraxis_PasswortErzeugen.png)
 
 ## Download
-Download kompilierter Version bieten wir als [Zip](https://jgraber.ch/AtaraxiS/AtaraxiS_190.zip) (für Windows) 
-und als [Tar](https://jgraber.ch/AtaraxiS/AtaraxiS_190.tar.gz) (für Linux/Mac) an. Der Source Code 
+Download kompilierter Version bieten wir als [Zip](https://jgraber.ch/AtaraxiS/AtaraxiS_191.zip) (für Windows) 
+und als [Tar](https://jgraber.ch/AtaraxiS/AtaraxiS_191.tar.gz) (für Linux/Mac) an. Der Source Code 
 ist unter der EUPL v1.1 lizenziert und auf [GitHub](https://github.com/jgraber/ataraxis) zu finden.
 
-* AtaraxiS v1.9.0 (15. Dezember 2020) [*.zip](https://jgraber.ch/AtaraxiS/AtaraxiS_190.zip) / [*.tar.gz](https://jgraber.ch/AtaraxiS/AtaraxiS_190.tar.gz)
+* AtaraxiS v1.9.1 (11. Dezember 2021) [*.zip](https://jgraber.ch/AtaraxiS/AtaraxiS_191.zip) / [*.tar.gz](https://jgraber.ch/AtaraxiS/AtaraxiS_191.tar.gz)
 
 ## Update auf neuste Version
 Um die neue Version von AtaraxiS einzusetzen, können Sie so vorgehen:
@@ -24,6 +24,8 @@ Sie können ihre Passwörter mit den PasswordExport_* Programmen in eine CSV Dat
 
 
 ## Ältere Versionen
+* AtaraxiS v1.9.0 (15. Dezember 2020) [*.zip](https://jgraber.ch/AtaraxiS/AtaraxiS_190.zip) / [*.tar.gz](https://jgraber.ch/AtaraxiS/AtaraxiS_190.tar.gz)
+
 * AtaraxiS v1.8.0 (15. Februar 2019) [*.zip](https://jgraber.ch/AtaraxiS/AtaraxiS_180.zip) / [*.tar.gz](https://jgraber.ch/AtaraxiS/AtaraxiS_180.tar.gz)
 
 * AtaraxiS v1.7.0 (27. Februar 2016) [*.zip](https://jgraber.ch/AtaraxiS/AtaraxiS_170.zip) / [*.tar.gz](https://jgraber.ch/AtaraxiS/AtaraxiS_170.tar.gz)
