@@ -1,2 +1,2 @@
 #!/bin/bash
-java -classpath lib/swt_linux_64.jar:AtaraxiS.jar:lib/log4j-1.2-api-2.15.0.jar:lib/log4j-api-2.15.0.jar:lib/log4j-core-2.15.0.jar -Dlog4j.configurationFile=application_data/config/log4j2.xml ataraxis.misc.AtaraxisPasswordExport
+java -classpath lib/swt_linux_64.jar:AtaraxiS.jar:lib/log4j-1.2-api-2.16.0.jar:lib/log4j-api-2.16.0.jar:lib/log4j-core-2.16.0.jar -Dlog4j.configurationFile=application_data/config/log4j2.xml ataraxis.misc.AtaraxisPasswordExport

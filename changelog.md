@@ -1,5 +1,10 @@
 # Changelog
 
+## AtaraxiS 1.9.2 (17. 12. 2021)
+Aktualisierte Hilfsbibliotheken:
+* Log4J auf 2.16.0
+
+
 ## AtaraxiS 1.9.1 (11. 12. 2021)
 Aktualisierte Hilfsbibliotheken:
 * Log4J auf 2.15.0
