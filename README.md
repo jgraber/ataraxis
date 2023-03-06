@@ -1,8 +1,11 @@
-# ![AtaraxiS](https://jgraber.ch/AtaraxiS/wiki/Info_Ataraxis.png) AtaraxiS [![Build Status](https://travis-ci.org/jgraber/ataraxis.svg?branch=master)](https://travis-ci.org/jgraber/ataraxis)
+# ![AtaraxiS](https://jgraber.ch/AtaraxiS/wiki/Info_Ataraxis.png) AtaraxiS [![Build Status](https://travis-ci.org/jgraber/ataraxis.svg?branch=master)](https://travis-ci.org/jgraber/ataraxis) [ARCHIVIERT]
 
 AtaraxiS dient zum sicheren Speichern von Passwörtern und dem Verschlüsseln von Dateien (mittels AES 256).
 AtaraxiS entstand als Diplomarbeit von Johnny Graber und Andreas Müdespacher an der 
-FH Biel und wird seit 2007 [weiterentwickelt](https://github.com/jgraber/ataraxis/blob/master/changelog.md). 
+FH Biel und wurde zwischen 2006 bis 2021 [gepflegt](https://github.com/jgraber/ataraxis/blob/master/changelog.md). 
+
+**ACHTUNG: Die Anwendung wird nicht weiterentwickelt**  
+Zum Export der Daten siehe [Hinweis zur Exportfunktion](https://graberj.wordpress.com/2019/02/15/ataraxis-1-8-veroffentlicht/)
 
 ![Create new password](https://jgraber.ch/AtaraxiS/wiki/Ataraxis_PasswortErzeugen.png)
 
